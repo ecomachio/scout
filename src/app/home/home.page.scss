@@ -1,0 +1,70 @@
+.welcome-card img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+.ballPossessionImg{
+  
+}
+
+ion-card {
+  margin: 2px;
+}
+
+.ballPossessionCard{
+  min-height: 160px;
+}
+
+.cardImg{
+  height: 30%;
+  width: 30%;
+}
+
+.ballPossessionCardContent{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.ballPossessionCardHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ballPossessionImgContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;  
+}
+
+.ballPossessionCardHeader .ballPossessionImgContainer ion-img{
+  width: 5em;
+  padding: 5px;
+}
+
+.gameTimeContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameTimeImg{
+  width: 50px;
+  margin: 15px;
+}
+
+.ballPossessionCardHeader .gameTimeContainer{
+  display: inline-flex
+}
+
+.ballPossessionCardContent .gameTimeContainer .gameTimeImg{
+  width: 2em;
+  margin: 5px 10px 5px 5px; 
+}
+
+.moduleContent{
+  display: flex;
+  justify-content: center;
+}

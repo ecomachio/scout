@@ -1,0 +1,19 @@
+.playerCardContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.playerCard{
+    width: 20%;
+    flex: 0 0 16%; /* explanation below */
+    margin: 3px;
+}
+
+.centerText{
+    text-align: center;
+}
+
+.playerNumber{
+    
+    font-size: 6em
+}
