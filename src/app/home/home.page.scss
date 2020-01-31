@@ -44,7 +44,7 @@ ion-card {
   padding: 5px;
 }
 
-.gameTimeContainer{
+.gameTimeContainer, .gameStats{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,11 +55,17 @@ ion-card {
   margin: 15px;
 }
 
-.ballPossessionCardHeader .gameTimeContainer{
-  display: inline-flex
+.ballPossessionCardContent .gameStatsContainer{
+  display: flex;
+  align-items: center;  
+  width: 70%;
 }
 
-.ballPossessionCardContent .gameTimeContainer .gameTimeImg{
+.gameStats{
+  padding-right: 3em;
+}
+
+.ballPossessionCardContent .gameStatsContainer .gameStats .gameTimeImg{
   width: 2em;
   margin: 5px 10px 5px 5px; 
 }

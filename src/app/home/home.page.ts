@@ -25,31 +25,35 @@ export class HomePage {
 
   startGame() {
     this.game.startGame();
-    this.homeTeam.ballPossessionTimer.start();
+    this.gameTime = '00:00:00';
+    this.homeTeam = new Team();
+    this.awayTeam = new Team();
+    this.homeTeam.ballPossessionTimer.start({ precision: 'secondTenths' });
     this.homeTeam.hasPossession = true;
 
     this.gameIntervalId = setInterval(() => {
       this.gameTime = this.game.currentTime();
-      this.homeTeam.refresh();
-      this.awayTeam.refresh();
-    }, 100);
+
+      this.homeTeam.refresh(this.game);
+      this.awayTeam.refresh(this.game);
+
+    }, 10);
 
     console.log('startGame', this.gameTime);
   }
 
   stopGame() {
     this.game = new Game();
-    this.homeTeam = new Team();
-    this.awayTeam = new Team();
     this.resetGameTime();
   }
 
   resetGameTime() {
-    this.gameTime = '00:00:00';
     clearInterval(this.gameIntervalId);
   }
 
   setBallPossession(team: string) {
+    let t0 = performance.now();
+
     if (team === 'home') {
       this.homeTeam.toogleBallPossession();
       this.awayTeam.pauseBallPossession();
@@ -57,6 +61,9 @@ export class HomePage {
       this.awayTeam.toogleBallPossession();
       this.homeTeam.pauseBallPossession();
     }
+
+    let t1 = performance.now();
+    console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
   }
 
 

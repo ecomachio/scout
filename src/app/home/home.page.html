@@ -17,21 +17,27 @@
           <ion-card-header class="ballPossessionCardHeader">
             <div>
               <ion-card-subtitle>Posse</ion-card-subtitle>
-              <ion-card-title>Time da Casa</ion-card-title>             
+              <ion-card-title>Time da Casa</ion-card-title>
             </div>
             <div class="ballPossessionImgContainer">
               <ion-img class="ballPossessionImg" src="assets/play-button.png"></ion-img>
             </div>
           </ion-card-header>
           <ion-card-content class="ballPossessionCardContent">
-              <div class="gameTimeContainer">
+            <div class="gameStatsContainer">
+              <div class="gameStats">
                 <ion-img class="gameTimeImg" src="assets/clock.png"></ion-img>
-                <h2>{{homeTeam.ballPossession}}</h2>
+                <h2>{{homeTeam.ballPossessionTime}}</h2>
               </div>
-              <ion-chip *ngIf="homeTeam.hasPossession" color="success">
-                <ion-label color="success">Está com a bola</ion-label>
-              </ion-chip>
-            </ion-card-content>
+              <div class="gameStats">
+                <ion-img class="gameTimeImg" src="assets/018-football-1.png"></ion-img>
+                <h2>{{homeTeam.ballPossessionRate}}%</h2>
+              </div>
+            </div>
+            <ion-chip *ngIf="homeTeam.hasPossession" color="success">
+              <ion-label color="success">Está com a bola</ion-label>
+            </ion-chip>
+          </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col>
@@ -46,16 +52,22 @@
               <ion-img class="ballPossessionImg" src="assets/play-button.png"></ion-img>
 
             </div>
-          </ion-card-header>          
+          </ion-card-header>
           <ion-card-content class="ballPossessionCardContent">
-              <div class="gameTimeContainer">
+            <div class="gameStatsContainer">
+              <div class="gameStats">
                 <ion-img class="gameTimeImg" src="assets/clock.png"></ion-img>
-                <h2>{{awayTeam.ballPossession}}</h2>
+                <h2>{{awayTeam.ballPossessionTime}}</h2>
               </div>
-              <ion-chip *ngIf="awayTeam.hasPossession" color="success">
-                <ion-label color="success">Está com a bola</ion-label>
-              </ion-chip>
-            </ion-card-content>
+              <div class="gameStats">
+                <ion-img class="gameTimeImg" src="assets/018-football-1.png"></ion-img>
+                <h2>{{awayTeam.ballPossessionRate}}%</h2>
+              </div>
+            </div>
+            <ion-chip *ngIf="awayTeam.hasPossession" color="success">
+              <ion-label color="success">Está com a bola</ion-label>
+            </ion-chip>
+          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>

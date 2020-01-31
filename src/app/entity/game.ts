@@ -5,17 +5,25 @@ export class Game {
 
     public time: number;
     public hasStarted: boolean;
-    public timer: any;
+    public timer: Timer;
 
     constructor() { }
 
     startGame() {
         this.hasStarted = true;
         this.timer = new Timer();
-        this.timer.start();
+        this.timer.start({ precision: 'secondTenths' });
     }
 
     currentTime(): string {
-        return this.timer.getTimeValues().toString();
+        return this.timer.getTimeValues().toString(['hours', 'minutes', 'seconds', 'secondTenths']);
+    }
+
+    totalSeconds() {
+        return this.timer.getTotalTimeValues().seconds;
+    }
+
+    totalSecondTenths() {
+        return this.timer.getTotalTimeValues().secondTenths;
     }
 }
