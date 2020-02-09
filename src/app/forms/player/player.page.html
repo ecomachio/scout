@@ -72,7 +72,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Pé preferencial</ion-label>
-            <ion-input [(ngModel)]="player.preferredFoot"></ion-input>
+            <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>            
           </ion-item>
         </div>
       </ion-col>

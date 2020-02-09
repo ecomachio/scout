@@ -19,7 +19,7 @@ export class Player {
     class: Class;
     shirtNumber: number;
     position: string;
-    preferredFoot: FootEnum;
+    preferredFoot: string;
     picture: Blob;
 
     constructor() { }

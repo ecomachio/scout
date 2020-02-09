@@ -3,6 +3,7 @@ import { Player } from 'src/app/entity/player';
 import { PickerController } from '@ionic/angular';
 import { PickerOptions, PickerColumnOption } from '@ionic/core';
 import { PositionEnum } from 'src/app/enum/Position.enum';
+import { PreferredFootEnum } from 'src/app/enum/preferredFoot.enum';
 
 @Component({
   selector: 'app-player',
@@ -17,6 +18,26 @@ export class PlayerPage implements OnInit {
 
   ngOnInit() {
     this.player = new Player();
+  }
+
+  async showPreferredFootPicker() {
+    const pickerOptions: PickerOptions = {
+      buttons: [{ text: 'Pronto' }],
+      columns: [
+        {
+          name: 'PreferredFoot',
+          options: Object.keys(PreferredFootEnum).map(o => ({ value: o, text: PreferredFootEnum[o] }))
+        }
+      ]
+    };
+
+    const picker = await this.pickerController.create(pickerOptions);
+    picker.present();
+
+    picker.onDidDismiss().then(async () => {
+      const col = await picker.getColumn('PreferredFoot');
+      this.player.preferredFoot = PreferredFootEnum[col.options[col.selectedIndex].value];
+    });
   }
 
   async showPositionPicker() {
