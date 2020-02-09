@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Partida</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <div class="formface">
+          <!-- todo -->
+          <div class="formfaceContent">
+            <img src="assets/pague.png" alt="">
+            <div class="formfaceText">
+              <h1>Partida</h1>
+              <p></p>
+            </div>
+            <ion-button class="formfaceButton">Pronto</ion-button>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="7" align-self-center>
+        <ion-row>
+          <div class="fields">
+            <ion-item>
+              <ion-label position="floating">Time da casa</ion-label>
+              <ion-input [(ngModel)]="match.homeTeam" inputmode="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Time visitante</ion-label>
+              <ion-input [(ngModel)]="match.awayTeam" inputmode="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Local</ion-label>
+              <ion-input [(ngModel)]="match.location" inputmode="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Data</ion-label>
+              <ion-datetime [(ngModel)]="match.end" displayFormat="DD/MM/YYYY"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Notas</ion-label>
+              <ion-input [(ngModel)]="match.notes" inputmode="text"></ion-input>
+            </ion-item>
+          </div>
+        </ion-row>
+
+        <ion-row class="scoreWrapper">
+          <ion-item-divider>
+            <ion-label>Placar</ion-label>
+          </ion-item-divider>
+          <div class="score">
+            <div class="homeTeam">
+              <h4>{{match.homeTeam}} </h4>
+            </div>
+            <div class="fixedScore">
+              <h3>{{match.score.home}} x {{match.score.away}}</h3>
+            </div>
+            <div class="awayTeam">
+              <h4> {{match.awayTeam}}</h4>
+            </div>
+          </div>
+        </ion-row>
+        <ion-row class="scoreWrapper">
+          <ion-item-divider>
+            <ion-label>Destaque</ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="assets/jogador-de-futebol.png">
+            </ion-avatar>
+            <ion-label>{{match.playerOfTheMatch}}</ion-label>
+          </ion-item>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
