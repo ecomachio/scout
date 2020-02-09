@@ -13,35 +13,31 @@ export class PlayerPage implements OnInit {
 
   player: Player;
 
-  pickerOptions: PickerOptions;
-
   constructor(private pickerController: PickerController) { }
-
-
 
   ngOnInit() {
     this.player = new Player();
-    console.log(PositionEnum);
-    console.log(Object.keys(PositionEnum));
-    console.log(Object.values(PositionEnum));
-    this.pickerOptions = {
-      buttons: [],
+  }
+
+  async showPositionPicker() {
+
+    const pickerOptions: PickerOptions = {
+      buttons: [{ text: 'Pronto' }],
       columns: [
         {
-          name: 'Posição',
-          options: [
-            {
-              text: 'adb',
-              value: 1
-            },
-            {
-              text: 'adb',
-              value: 1
-            },
-          ]
+          name: 'Position',
+          options: Object.keys(PositionEnum).map(o => ({ value: o, text: PositionEnum[o] }))
         }
       ]
     };
+
+    const picker = await this.pickerController.create(pickerOptions);
+    picker.present();
+
+    picker.onDidDismiss().then(async () => {
+      const col = await picker.getColumn('Position');
+      this.player.position = PositionEnum[col.options[col.selectedIndex].value];
+    });
   }
 
 
