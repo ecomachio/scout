@@ -1,6 +1,7 @@
 import { Statistic } from './statistic';
 import { Class } from './class';
 import { Category } from './category';
+import { PositionEnum } from '../enum/Position.enum';
 
 export class Player {
 
@@ -17,8 +18,8 @@ export class Player {
     category: Category;
     class: Class;
     shirtNumber: number;
-    position: PositionEnum;
-    preferredFoot: FootEnum;
+    position: string;
+    preferredFoot: string;
     picture: Blob;
 
     constructor() { }

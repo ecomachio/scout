@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>player</ion-title>
+    <ion-title>Jogador</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,17 +10,25 @@
       <ion-col size="5">
         <div class="formface">
           <!-- todo -->
+          <div class="formfaceContent">
+            <img src="assets/avatar.png" alt="">
+            <div class="formfaceText">
+              <h1>Cadastro de Jogadores</h1>
+              <p>Descreva o próximo astro do futebol</p>
+            </div>
+            <ion-button class="formfaceButton">Pronto</ion-button>
+          </div>
         </div>
       </ion-col>
       <ion-col size="7">
         <div class="fields">
           <ion-item>
             <ion-label position="floating">Nome</ion-label>
-            <ion-input [(ngModel)]="player.name"></ion-input>
+            <ion-input [(ngModel)]="player.name" inputmode="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Sobrenome</ion-label>
-            <ion-input [(ngModel)]="player.lastname"></ion-input>
+            <ion-input [(ngModel)]="player.lastname" inputmode="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Endereço</ion-label>
@@ -32,7 +40,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Documento identificação</ion-label>
-            <ion-input [(ngModel)]="player.document"></ion-input>
+            <ion-input [(ngModel)]="player.document" inputmode="number"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Telefone</ion-label>
@@ -56,15 +64,15 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Número da camisa</ion-label>
-            <ion-input [(ngModel)]="player.shirtNumber"></ion-input>
+            <ion-input [(ngModel)]="player.shirtNumber" inputmode="number" type="number" max="999" min="0"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Posição</ion-label>
-            <ion-input [(ngModel)]="player.position"></ion-input>
+            <ion-input readonly [(ngModel)]="player.position" (click)='showPositionPicker()'></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Pé preferencial</ion-label>
-            <ion-input [(ngModel)]="player.preferredFoot"></ion-input>
+            <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>            
           </ion-item>
         </div>
       </ion-col>
