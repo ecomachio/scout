@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Competição</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <div class="formface">
+          <!-- todo -->
+          <div class="formfaceContent">
+            <img src="assets/pague.png" alt="">
+            <div class="formfaceText">
+              <h1>Cadastro de Competições</h1>
+              <p>Descreva a competição</p>
+            </div>
+            <ion-button class="formfaceButton">Pronto</ion-button>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="7" align-self-center>
+        <div class="fields">
+          <ion-item>
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input [(ngModel)]="competition.name" inputmode="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Descrição</ion-label>
+            <ion-input [(ngModel)]="competition.description" inputmode="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Cidade</ion-label>
+            <ion-input [(ngModel)]="competition.city" inputmode="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Início</ion-label>
+            <ion-datetime [(ngModel)]="competition.start" displayFormat="DD/MM/YYYY"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Fim</ion-label>
+            <ion-datetime [(ngModel)]="competition.end" displayFormat="DD/MM/YYYY"></ion-datetime>
+          </ion-item>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
