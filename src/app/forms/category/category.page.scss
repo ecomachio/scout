@@ -16,6 +16,10 @@ ion-content {
     display: flex;
 }
 
+ion-grid, ion-row {
+    height: 90%;
+}
+
 .formface {
     position: fixed;
     top:0;
