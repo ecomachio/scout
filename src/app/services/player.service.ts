@@ -8,14 +8,14 @@ import { Player } from '../entity/player';
     providedIn: 'root'
 })
 export class PlayerService {
-    private todosCollection: AngularFirestoreCollection<Player>;
 
-    private todos: Observable<Player[]>;
+    private playersCollection: AngularFirestoreCollection<Player>;
+    private players: Observable<Player[]>;
 
     constructor(db: AngularFirestore) {
-        this.todosCollection = db.collection<Player>('players');
+        this.playersCollection = db.collection<Player>('players');
 
-        this.todos = this.todosCollection.snapshotChanges().pipe(
+        this.players = this.playersCollection.snapshotChanges().pipe(
             map(actions => {
                 return actions.map(a => {
                     const data = a.payload.doc.data();
@@ -27,22 +27,22 @@ export class PlayerService {
     }
 
     getPlayers() {
-        return this.todos;
+        return this.players;
     }
 
     getPlayer(id) {
-        return this.todosCollection.doc<Player>(id).valueChanges();
+        return this.playersCollection.doc<Player>(id).valueChanges();
     }
 
     updatePlayer(todo: Player, id: string) {
-        return this.todosCollection.doc(id).update(todo);
+        return this.playersCollection.doc(id).update(todo);
     }
 
     addPlayer(todo: Player) {
-        return this.todosCollection.add({...todo});
+        return this.playersCollection.add({ ...todo });
     }
 
     removePlayer(id) {
-        return this.todosCollection.doc(id).delete();
+        return this.playersCollection.doc(id).delete();
     }
 }
