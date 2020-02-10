@@ -5,7 +5,7 @@ import { PositionEnum } from '../enum/Position.enum';
 
 export class Player {
 
-    id: number;
+    id: string;
     nane: string;
     lastname: string;
     address: string;

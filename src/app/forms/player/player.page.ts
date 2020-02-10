@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/entity/player';
-import { PickerController } from '@ionic/angular';
+import { PickerController, NavController, LoadingController, ToastController } from '@ionic/angular';
 import { PickerOptions, PickerColumnOption } from '@ionic/core';
 import { PositionEnum } from 'src/app/enum/Position.enum';
 import { PreferredFootEnum } from 'src/app/enum/preferredFoot.enum';
 import { PlayerService } from 'src/app/services/player.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-player',
@@ -17,16 +18,44 @@ export class PlayerPage implements OnInit {
 
   constructor(
     private pickerController: PickerController,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private route: ActivatedRoute,
+    private nav: NavController,
+    private loadingController: LoadingController,
+    private toastController: ToastController,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.player = new Player();
+    const playerId = this.route.snapshot.params.id;
+    if (playerId) {
+      this.loadPlayer(playerId);
+    }
   }
 
-  done() {
-    console.log(this.player);
-    this.playerService.addPlayer(this.player);
+  async loadPlayer(playerId) {
+    const loading = await this.loadingController.create({
+      message: 'Loading Player..'
+    });
+    await loading.present();
+
+    this.playerService.getPlayer(playerId).subscribe(res => {
+      loading.dismiss();
+      console.log(res);
+      this.player = res;
+      this.player.id = playerId;
+    });
+  }
+
+  async done() {
+    if (this.player.id) {
+      await this.playerService.updatePlayer(this.player, this.player.id);
+    } else {
+      await this.playerService.addPlayer(this.player);
+    }
+    this.showToast('Pronto');
+    this.router.navigateByUrl('/players');
   }
 
   async showPreferredFootPicker() {
@@ -70,6 +99,11 @@ export class PlayerPage implements OnInit {
     });
   }
 
-
+  showToast(msg) {
+    this.toastController.create({
+      message: msg,
+      duration: 2000
+    }).then(toast => toast.present());
+  }
 
 }
