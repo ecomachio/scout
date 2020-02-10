@@ -4,6 +4,7 @@ import { PickerController } from '@ionic/angular';
 import { PickerOptions, PickerColumnOption } from '@ionic/core';
 import { PositionEnum } from 'src/app/enum/Position.enum';
 import { PreferredFootEnum } from 'src/app/enum/preferredFoot.enum';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-player',
@@ -14,10 +15,18 @@ export class PlayerPage implements OnInit {
 
   player: Player;
 
-  constructor(private pickerController: PickerController) { }
+  constructor(
+    private pickerController: PickerController,
+    private playerService: PlayerService
+  ) { }
 
   ngOnInit() {
     this.player = new Player();
+  }
+
+  done() {
+    console.log(this.player);
+    this.playerService.addPlayer(this.player);
   }
 
   async showPreferredFootPicker() {
