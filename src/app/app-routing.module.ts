@@ -18,9 +18,11 @@ const routes: Routes = [
   { path: 'choose-players', loadChildren: './choose-players/choose-players.module#ChoosePlayersPageModule' },
   { path: 'statistics', loadChildren: './statistics/statistics.module#StatisticsPageModule' },
   { path: 'player', loadChildren: './forms/player/player.module#PlayerPageModule' },
-  { path: 'category', loadChildren: './forms/category/category.module#CategoryPageModule' },  { path: 'competition', loadChildren: './forms/competition/competition.module#CompetitionPageModule' },
+  { path: 'player/:id', loadChildren: './forms/player/player.module#PlayerPageModule' },
+  { path: 'players', loadChildren: './list/players/players.module#PlayersPageModule' },
+  { path: 'category', loadChildren: './forms/category/category.module#CategoryPageModule' },
+  { path: 'competition', loadChildren: './forms/competition/competition.module#CompetitionPageModule' },
   { path: 'match', loadChildren: './forms/match/match.module#MatchPageModule' }
-
 ];
 
 @NgModule({
