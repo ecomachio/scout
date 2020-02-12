@@ -7,9 +7,7 @@ export class Player {
 
     id: string;
     nane: string;
-    lastname: string;
-    address: string;
-    cpf: number;
+    address: string;    
     document: string;
     phone: number;
     birthdate: Date;

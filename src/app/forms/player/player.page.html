@@ -13,10 +13,12 @@
           <div class="formfaceContent">
             <img src="assets/avatar.png" alt="">
             <div class="formfaceText">
-              <h1>Cadastro de Jogadores</h1>
-              <p>Descreva o próximo astro do futebol</p>
+              <h1>&nbsp;{{player.name}}&nbsp;</h1>
+              <p *ngIf="!player.id">Descreva o próximo astro do futebol</p>
             </div>
-            <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
+            <div class="formfaceButtons">
+              <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
+            </div>
           </div>
         </div>
       </ion-col>
@@ -24,27 +26,15 @@
         <div class="fields">
           <ion-item>
             <ion-label position="floating">Nome</ion-label>
-            <ion-input [(ngModel)]="player.name" inputmode="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Sobrenome</ion-label>
-            <ion-input [(ngModel)]="player.lastname" inputmode="text"></ion-input>
+            <ion-input [(ngModel)]="player.name" required inputmode="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Endereço</ion-label>
             <ion-input [(ngModel)]="player.address"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Cpf</ion-label>
-            <ion-input [(ngModel)]="player.cpf"></ion-input>
-          </ion-item>
-          <ion-item>
             <ion-label position="floating">Documento identificação</ion-label>
             <ion-input [(ngModel)]="player.document" inputmode="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Telefone</ion-label>
-            <ion-input [(ngModel)]="player.phone"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Data de nascimento</ion-label>
@@ -53,6 +43,10 @@
           <ion-item>
             <ion-label position="floating">Responsável</ion-label>
             <ion-input [(ngModel)]="player.responsible"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Telefone</ion-label>
+            <ion-input [(ngModel)]="player.phone"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Telefone Residencial</ion-label>
@@ -72,9 +66,12 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Pé preferencial</ion-label>
-            <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>            
+            <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>
           </ion-item>
-        </div>
+        </div>        
+        <ion-button *ngIf="player.id" class="deleteButton" color="danger" expand="block" (click)="removePlayer()">
+            Excluir 
+        </ion-button>        
       </ion-col>
     </ion-row>
   </ion-grid>

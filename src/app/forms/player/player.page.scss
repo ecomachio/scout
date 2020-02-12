@@ -41,9 +41,18 @@ ion-content {
         }
 
         img, .formfaceText, .formfaceButton {
-            margin: 7%;
+            margin: 5%;
         }
-    }
 
-    
+        .formfaceButtons {
+            .formfaceButton {
+            
+            }
+        }
+    }    
+}
+
+.deleteButton {
+    margin: 5% auto;
+    width: 40%;
 }
