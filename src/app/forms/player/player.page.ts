@@ -107,11 +107,5 @@ export class PlayerPage implements OnInit {
     });
   }
 
-  showToast(msg) {
-    this.toastController.create({
-      message: msg,
-      duration: 2000
-    }).then(toast => toast.present());
-  }
 
 }
