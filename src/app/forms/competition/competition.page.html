@@ -13,10 +13,12 @@
           <div class="formfaceContent">
             <img src="assets/premio.png" alt="">
             <div class="formfaceText">
-              <h1>Cadastro de Competições</h1>
-              <p>Descreva a competição</p>
+              <h1>&nbsp;{{competition.name}}&nbsp;</h1>
+              <p *ngIf="!competition.id">Descreva o próximo astro do futebol</p>
             </div>
-            <ion-button class="formfaceButton">Pronto</ion-button>
+            <div class="formfaceButtons">
+              <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
+            </div>
           </div>
         </div>
       </ion-col>
@@ -42,8 +44,8 @@
             <ion-label position="floating">Fim</ion-label>
             <ion-datetime [(ngModel)]="competition.end" displayFormat="DD/MM/YYYY"></ion-datetime>
           </ion-item>
-          <ion-button class="matchesButton" [routerLink]="['/match']" >Partidas</ion-button>    
-        </div>         
+          <ion-button class="matchesButton"  (click)="navToMatchs()">Partidas</ion-button>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

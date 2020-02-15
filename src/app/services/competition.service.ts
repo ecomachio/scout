@@ -32,7 +32,7 @@ export class CompetitionService {
     }
 
     getCompetition(id) {
-        return this.competitionsCollection.doc<Competition>(id).valueChanges();
+        return this.competitionsCollection.doc<Competition>(id).get();
     }
 
     updateCompetition(competition: Competition, id: string) {

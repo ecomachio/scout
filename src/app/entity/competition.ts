@@ -1,3 +1,5 @@
+import { Match } from './match';
+
 export class Competition {
 
     id: string;
@@ -5,7 +7,10 @@ export class Competition {
     city: string;
     start: Date;
     end: Date;
+    matchs: Array<string> = new Array<string>();
 
-    constructor() { }
+    constructor() {
+        this.matchs = ['a', 'b', 'c'];
+    }
 
 }
