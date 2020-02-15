@@ -1,6 +1,6 @@
 export class Competition {
 
-    id: number;
+    id: string;
     name: string;
     city: string;
     start: Date;

@@ -2,7 +2,7 @@ import { Player } from './player';
 
 export class Match {
 
-    id: number;
+    id: string;
     homeTeam: string; //team maybe
     awayTeam: string; //team maybe
 
