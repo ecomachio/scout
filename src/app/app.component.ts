@@ -31,8 +31,7 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private toastController: ToastController
+    private statusBar: StatusBar,    
   ) {
     this.initializeApp();
   }
@@ -44,10 +43,4 @@ export class AppComponent {
     });
   }
 
-  showToast(msg) {
-    this.toastController.create({
-      message: msg,
-      duration: 2000
-    }).then(toast => toast.present());
-  }
 }

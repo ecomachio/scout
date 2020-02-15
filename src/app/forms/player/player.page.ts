@@ -6,6 +6,7 @@ import { PositionEnum } from 'src/app/enum/Position.enum';
 import { PreferredFootEnum } from 'src/app/enum/preferredFoot.enum';
 import { PlayerService } from 'src/app/services/player.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-player',
@@ -22,7 +23,7 @@ export class PlayerPage implements OnInit {
     private route: ActivatedRoute,
     private nav: NavController,
     private loadingController: LoadingController,
-    private toastController: ToastController,
+    private utilsService: UtilsService,
     private router: Router
   ) { }
 
@@ -52,7 +53,7 @@ export class PlayerPage implements OnInit {
     if (this.player.id) {
       await this.playerService.removePlayer(this.player.id);
     }
-    this.showToast('Aluno excluído');
+    this.utilsService.showToast('Aluno excluído');
     this.router.navigateByUrl('/players');
   }
 
@@ -62,7 +63,7 @@ export class PlayerPage implements OnInit {
     } else {
       await this.playerService.addPlayer(this.player);
     }
-    this.showToast('Pronto');
+    this.utilsService.showToast('Pronto');
     this.router.navigateByUrl('/players');
   }
 

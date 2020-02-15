@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Match } from 'src/app/entity/match';
-import { PickerController, NavController, LoadingController, ToastController } from '@ionic/angular';
+import { PickerController, NavController, LoadingController } from '@ionic/angular';
 import { MatchService } from 'src/app/services/match.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-match',
@@ -19,7 +20,7 @@ export class MatchPage implements OnInit {
     private route: ActivatedRoute,
     private nav: NavController,
     private loadingController: LoadingController,
-    private toastController: ToastController,
+    private utilsService: UtilsService,
     private router: Router
   ) { }
 
@@ -49,7 +50,7 @@ export class MatchPage implements OnInit {
     if (this.match.id) {
       await this.matchService.removeMatch(this.match.id);
     }
-    this.showToast('Aluno excluído');
+    this.utilsService.showToast('Aluno excluído');
     this.router.navigateByUrl('/matchs');
   }
 
@@ -59,7 +60,7 @@ export class MatchPage implements OnInit {
     } else {
       await this.matchService.addMatch(this.match);
     }
-    this.showToast('Pronto');
+    this.utilsService.showToast('Pronto');
     this.router.navigateByUrl('/matchs');
   }
 
