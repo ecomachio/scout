@@ -14,17 +14,10 @@ export class MatchService {
 
     constructor(db: AngularFirestore) {
         this.matchsCollection = db.collection<Match>('matchs');
+    }
 
-        this.matchs = this.matchsCollection.snapshotChanges().pipe(
-            map(actions => {
-                return actions.map(a => {
-                    const data = a.payload.doc.data();
-                    const id = a.payload.doc.id;
-                    console.log({ id, ...data });
-                    return { id, ...data };
-                });
-            })
-        );
+    getCompetitionMatches(competitionId: string) {
+        return this.matchsCollection.ref.where('id', '==', competitionId).get();
     }
 
     getMatchs() {

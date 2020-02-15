@@ -7,10 +7,10 @@ export class Competition {
     city: string;
     start: Date;
     end: Date;
-    matchs: Array<string> = new Array<string>();
+    matchs: Array<Match> = new Array<Match>();
 
     constructor() {
-        this.matchs = ['a', 'b', 'c'];
+               
     }
 
 }
