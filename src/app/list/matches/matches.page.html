@@ -11,7 +11,7 @@
     </ion-list-header>
 
     <ion-item-sliding *ngFor="let match of matches">
-      <ion-item lines="inset" button [routerLink]="['/match', match.competitionId ,match.id]">
+      <ion-item class="listItem" lines="inset" button [routerLink]="['/match', match.competitionId ,match.id]">
         <ion-avatar slot="start">
           <img src="assets/pague.png">
         </ion-avatar>

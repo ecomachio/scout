@@ -11,8 +11,8 @@
     </ion-list-header>
 
     <ion-item-sliding *ngFor="let competitions of competitions">
-      <ion-item lines="inset" button [routerLink]="['/competition', competitions.id]">
-        <ion-avatar slot="start">
+      <ion-item class="listItem" lines="inset" button [routerLink]="['/competition', competitions.id]">
+        <ion-avatar class="listItemAvatar" slot="start">
           <img src="assets/premio.png">
         </ion-avatar>
         <ion-label>

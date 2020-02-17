@@ -11,7 +11,7 @@
     </ion-list-header>
 
     <ion-item-sliding *ngFor="let player of players">
-      <ion-item lines="inset" button [routerLink]="['/player', player.id]">
+      <ion-item class="listItem" lines="inset" button [routerLink]="['/player', player.id]">
         <ion-avatar slot="start">
           <img src="assets/avatar.png">
         </ion-avatar>
