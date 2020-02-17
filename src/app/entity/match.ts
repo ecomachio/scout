@@ -5,6 +5,7 @@ export class Match {
     id: string;
     homeTeam: string; //team maybe
     awayTeam: string; //team maybe
+    competitionId: string;
 
     score: Score = new Score();
     location: string;

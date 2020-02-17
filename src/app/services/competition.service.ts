@@ -27,16 +27,20 @@ export class CompetitionService {
         );
     }
 
+    getCompetitionsCollection() {
+        return this.competitionsCollection;
+    }
+
     getCompetitions() {
         return this.competitions;
     }
 
     getCompetition(id) {
-        return this.competitionsCollection.doc<Competition>(id).valueChanges();
+        return this.competitionsCollection.doc<Competition>(id).get();
     }
 
     updateCompetition(competition: Competition, id: string) {
-        return this.competitionsCollection.doc(id).update(competition);
+        return this.competitionsCollection.doc<Competition>(id).update(competition);
     }
 
     addCompetition(competition: Competition) {

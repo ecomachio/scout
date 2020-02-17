@@ -4,6 +4,8 @@ import { PickerController, NavController, LoadingController } from '@ionic/angul
 import { MatchService } from 'src/app/services/match.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
+import { CompetitionService } from 'src/app/services/competition.service';
+import { Competition } from 'src/app/entity/competition';
 
 @Component({
   selector: 'app-match',
@@ -13,10 +15,13 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class MatchPage implements OnInit {
 
   match: Match;
+  competition: Competition;
+  competitionId: string;
 
   constructor(
     private pickerController: PickerController,
     private matchService: MatchService,
+    private competitionService: CompetitionService,
     private route: ActivatedRoute,
     private nav: NavController,
     private loadingController: LoadingController,
@@ -27,6 +32,7 @@ export class MatchPage implements OnInit {
   ngOnInit() {
     this.match = new Match();
     const matchId = this.route.snapshot.params.id;
+    this.match.competitionId = this.route.snapshot.params.competitionId;
     if (matchId) {
       this.loadMatch(matchId);
     }
@@ -51,7 +57,7 @@ export class MatchPage implements OnInit {
       await this.matchService.removeMatch(this.match.id);
     }
     this.utilsService.showToast('Aluno excluído');
-    this.router.navigateByUrl('/matchs');
+    this.router.navigateByUrl('/matches');
   }
 
   async done() {
@@ -61,7 +67,7 @@ export class MatchPage implements OnInit {
       await this.matchService.addMatch(this.match);
     }
     this.utilsService.showToast('Pronto');
-    this.router.navigateByUrl('/matchs');
+    this.router.navigateByUrl(`/matches/${this.match.competitionId}`);
   }
 
 }

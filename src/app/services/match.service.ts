@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Match } from '../entity/match';
+import { UtilsService } from './utils.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,10 @@ export class MatchService {
     private matchsCollection: AngularFirestoreCollection<Match>;
     private matchs: Observable<Match[]>;
 
-    constructor(db: AngularFirestore) {
+    constructor(
+        db: AngularFirestore,
+        private utilsService: UtilsService,
+    ) {
         this.matchsCollection = db.collection<Match>('matchs');
 
         this.matchs = this.matchsCollection.snapshotChanges().pipe(
@@ -31,6 +35,11 @@ export class MatchService {
         return this.matchs;
     }
 
+    getMatchesByCompetition(competitionId: string): any {
+        console.log(competitionId);
+        return this.matchsCollection.ref.where('competitionId', '==', competitionId).get();
+    }
+
     getMatch(id) {
         return this.matchsCollection.doc<Match>(id).valueChanges();
     }
@@ -40,7 +49,7 @@ export class MatchService {
     }
 
     addMatch(match: Match) {
-        return this.matchsCollection.add({ ...match });
+        return this.matchsCollection.add(this.utilsService.toPlainObject(match));
     }
 
     removeMatch(id) {

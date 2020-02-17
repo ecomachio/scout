@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Competições</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Competições
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let competitions of competitions">
+      <ion-item lines="inset" button [routerLink]="['/competition', competitions.id]">
+        <ion-avatar slot="start">
+          <img src="assets/avatar.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{competitions.name}}</h2>
+          <h3>{{competitions.position}}</h3>
+          <p>{{competitions.responsable}}</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option (click)="remove(item)" color="secondary">
+          Check
+          <ion-icon name="checkmark" slot="end"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add" [routerLink]="['/competition']" ></ion-icon>
+    </ion-fab-button>    
+  </ion-fab>
+
+</ion-content>
