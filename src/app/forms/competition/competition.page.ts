@@ -53,7 +53,7 @@ export class CompetitionPage implements OnInit {
       await this.competitionService.removeCompetition(this.competition.id);
     }
     this.utilsService.showToast('Aluno excluído');
-    this.router.navigateByUrl('/matchs');
+    this.router.navigateByUrl('/matches');
   }
 
   async done() {
@@ -63,11 +63,11 @@ export class CompetitionPage implements OnInit {
       await this.competitionService.addCompetition(this.competition);
     }
     this.utilsService.showToast('Pronto');
-    this.router.navigateByUrl('/matchs');
+    this.router.navigateByUrl('/matches');
   }
 
   navToMatchs() {
-    this.router.navigateByUrl(`/matchs/${this.competition.id}`);
+    this.router.navigateByUrl(`/matches/${this.competition.id}`);
   }
 
 }

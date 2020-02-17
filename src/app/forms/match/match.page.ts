@@ -16,6 +16,7 @@ export class MatchPage implements OnInit {
 
   match: Match;
   competition: Competition;
+  competitionId: string;
 
   constructor(
     private pickerController: PickerController,
@@ -31,22 +32,17 @@ export class MatchPage implements OnInit {
   ngOnInit() {
     this.match = new Match();
     const matchId = this.route.snapshot.params.id;
-    const competitionId = this.route.snapshot.params.competitionId;
+    this.match.competitionId = this.route.snapshot.params.competitionId;
     if (matchId) {
-      this.loadMatch(matchId, competitionId);
+      this.loadMatch(matchId);
     }
   }
 
-  async loadMatch(matchId, competitionId) {
+  async loadMatch(matchId) {
     const loading = await this.loadingController.create({
       message: 'Loading Match..'
     });
     await loading.present();
-    this.competitionService.getCompetition(competitionId).subscribe(res => {
-      loading.dismiss();
-      console.log(res);
-      this.competition = res.data() as Competition;
-    });
 
     this.matchService.getMatch(matchId).subscribe(res => {
       loading.dismiss();
@@ -61,7 +57,7 @@ export class MatchPage implements OnInit {
       await this.matchService.removeMatch(this.match.id);
     }
     this.utilsService.showToast('Aluno excluído');
-    this.router.navigateByUrl('/matchs');
+    this.router.navigateByUrl('/matches');
   }
 
   async done() {
@@ -71,7 +67,7 @@ export class MatchPage implements OnInit {
       await this.matchService.addMatch(this.match);
     }
     this.utilsService.showToast('Pronto');
-    this.router.navigateByUrl('/matchs');
+    this.router.navigateByUrl(`/matches/${this.match.competitionId}`);
   }
 
 }

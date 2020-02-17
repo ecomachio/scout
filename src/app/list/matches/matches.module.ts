@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MatchsPage } from './matchs.page';
+import { MatchsPage } from './matches.page';
 
 const routes: Routes = [
   {

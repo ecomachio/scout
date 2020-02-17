@@ -60,12 +60,12 @@ const routes: Routes = [
     loadChildren: './forms/match/match.module#MatchPageModule'
   },
   {
-    path: 'matchs',
-    loadChildren: './list/matchs/matchs.module#MatchsPageModule'
+    path: 'matches',
+    loadChildren: './list/matches/matches.module#MatchsPageModule'
   },
   {
-    path: 'matchs/:competitionId',
-    loadChildren: './list/matchs/matchs.module#MatchsPageModule'
+    path: 'matches/:competitionId',
+    loadChildren: './list/matches/matches.module#MatchsPageModule'
   },
 ];
 

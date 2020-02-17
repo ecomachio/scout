@@ -27,6 +27,10 @@ export class CompetitionService {
         );
     }
 
+    getCompetitionsCollection() {
+        return this.competitionsCollection;
+    }
+
     getCompetitions() {
         return this.competitions;
     }
@@ -36,7 +40,7 @@ export class CompetitionService {
     }
 
     updateCompetition(competition: Competition, id: string) {
-        return this.competitionsCollection.doc(id).update(competition);
+        return this.competitionsCollection.doc<Competition>(id).update(competition);
     }
 
     addCompetition(competition: Competition) {

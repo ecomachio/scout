@@ -16,4 +16,8 @@ export class UtilsService {
             duration: 2000
         }).then(toast => toast.present());
     }
+
+    toPlainObject(obj) {
+        return JSON.parse(JSON.stringify(obj));
+    }
 }
