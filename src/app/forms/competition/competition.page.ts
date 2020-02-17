@@ -57,16 +57,21 @@ export class CompetitionPage implements OnInit {
   }
 
   async done() {
+    this.save();
+    this.router.navigateByUrl('/competitions');
+  }
+
+  async save() {
     if (this.competition.id) {
       await this.competitionService.updateCompetition(this.competition, this.competition.id);
     } else {
       await this.competitionService.addCompetition(this.competition);
     }
     this.utilsService.showToast('Pronto');
-    this.router.navigateByUrl('/matches');
   }
 
   navToMatchs() {
+    this.save();
     this.router.navigateByUrl(`/matches/${this.competition.id}`);
   }
 
