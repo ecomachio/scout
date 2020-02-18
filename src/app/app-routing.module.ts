@@ -40,6 +40,14 @@ const routes: Routes = [
     loadChildren: './forms/category/category.module#CategoryPageModule'
   },
   {
+    path: 'category/:id',
+    loadChildren: './forms/category/category.module#CategoryPageModule'
+  },
+  {
+    path: 'categories',
+    loadChildren: './list/categories/categories.module#CategoriesPageModule'
+  },
+  {
     path: 'competition',
     loadChildren: './forms/competition/competition.module#CompetitionPageModule'
   },

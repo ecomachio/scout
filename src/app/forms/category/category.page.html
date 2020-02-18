@@ -11,12 +11,13 @@
         <div class="formface">
           <!-- todo -->
           <div class="formfaceContent">
-            <img src="assets/estadio.png" alt="">
+            <img src="assets/boneca.png" alt="">
             <div class="formfaceText">
-              <h1>Cadastro de Categorias</h1>
-              <p>Descreva as categorias</p>
+              <h1>&nbsp;{{category.name}}&nbsp;</h1>              
             </div>
-            <ion-button class="formfaceButton">Pronto</ion-button>
+            <div class="formfaceButtons">
+              <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
+            </div>
           </div>
         </div>
       </ion-col>
