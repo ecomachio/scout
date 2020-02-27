@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>Jogadores</ion-title>
   </ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
 </ion-header>
 
 <ion-content>
@@ -32,8 +35,8 @@
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button>
-      <ion-icon name="add" [routerLink]="['/player']" ></ion-icon>
-    </ion-fab-button>    
+      <ion-icon name="add" [routerLink]="['/player']"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 
 </ion-content>

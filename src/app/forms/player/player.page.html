@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>Jogador</ion-title>
   </ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
 </ion-header>
 
 <ion-content>
@@ -68,10 +71,10 @@
             <ion-label position="floating">Pé preferencial</ion-label>
             <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>
           </ion-item>
-        </div>        
+        </div>
         <ion-button *ngIf="player.id" class="deleteButton" color="danger" expand="block" (click)="removePlayer()">
-            Excluir 
-        </ion-button>        
+          Excluir
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

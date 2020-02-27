@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>Category</ion-title>
   </ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
 </ion-header>
 
 <ion-content>
@@ -13,7 +16,7 @@
           <div class="formfaceContent">
             <img src="assets/boneca.png" alt="">
             <div class="formfaceText">
-              <h1>&nbsp;{{category.name}}&nbsp;</h1>              
+              <h1>&nbsp;{{category.name}}&nbsp;</h1>
             </div>
             <div class="formfaceButtons">
               <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>

@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>Categorias</ion-title>
   </ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
 </ion-header>
 
 <ion-content>
@@ -17,7 +20,7 @@
         </ion-avatar>
         <ion-label>
           <h2>{{category.name}}</h2>
-          <h3>{{category.description}}</h3>          
+          <h3>{{category.description}}</h3>
         </ion-label>
       </ion-item>
 
@@ -31,8 +34,8 @@
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button>
-      <ion-icon name="add" [routerLink]="['/category']" ></ion-icon>
-    </ion-fab-button>    
+      <ion-icon name="add" [routerLink]="['/category']"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 
 </ion-content>
