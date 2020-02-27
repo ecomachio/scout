@@ -1,20 +1,23 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>choose-players</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="playerCardContainer centerText">
-  <ion-card class="playerCard" button="true" *ngFor="let player of players" (click)='onPlayerChoose(player)'>
-    <ion-card-header>
-      <div>        
-        <ion-card-title>{{player.name}}</ion-card-title>
-      </div>     
-    </ion-card-header>
-    <ion-card-content class="playerNumber centerText"> 
-      {{player.number}}
-    </ion-card-content>
-  </ion-card>
-</div>
+    <ion-card class="playerCard" button="true" *ngFor="let player of players" (click)='onPlayerChoose(player)'>
+      <ion-card-header>
+        <div>
+          <ion-card-title>{{player.name}}</ion-card-title>
+        </div>
+      </ion-card-header>
+      <ion-card-content class="playerNumber centerText">
+        {{player.number}}
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
