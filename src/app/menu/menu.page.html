@@ -5,8 +5,56 @@
 </ion-header>
 
 <ion-content>
-  <ion-button [routerLink]="['/players']">Jogadores</ion-button>
-  <ion-button [routerLink]="['/competitions']">Competições</ion-button>
-  <ion-button [routerLink]="['/categories']">Categorias</ion-button>  
-  <ion-button [routerLink]="['/home']">Home</ion-button>  
+  <h1 class="mainTitle">Diprima Scout</h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card button="true" [routerLink]="['/home']"> 
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/014-match.png"></ion-img>
+            <h1>Jogo</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card button="true" [routerLink]="['/home']">
+          <ion-card-content class="moduleContent">
+
+            <ion-img class="cardImg" src="assets/035-strategy.png"></ion-img>
+            <h1>Relatórios</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card button="true" [routerLink]="['/players']">
+          <ion-card-content class="moduleContent">
+
+            <ion-img class="cardImg" src="assets/012-team-bench.png"></ion-img>
+            <h1>Jogadores</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card button="true" [routerLink]="['/competitions']">
+          <ion-card-content class="moduleContent">
+
+            <ion-img class="cardImg" src="assets/019-schedule.png"></ion-img>
+            <h1>Competições</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card button="true" [routerLink]="['/categories']">
+          <ion-card-content class="moduleContent">
+
+            <ion-img class="cardImg" src="assets/008-matryoshka.png"></ion-img>
+            <h1>Categorias</h1>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    
+  </ion-grid>
 </ion-content>

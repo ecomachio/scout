@@ -25,6 +25,13 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@font-face {
+    font-family: 'Keypass';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./assets/fonts/Keypass Demo.ttf');
+}
+
 .listItem > ion-avatar {
     height: 100%;
     width: 7%;
