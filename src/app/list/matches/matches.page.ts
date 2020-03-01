@@ -6,6 +6,7 @@ import { CompetitionService } from 'src/app/services/competition.service';
 import { Competition } from 'src/app/entity/competition';
 import { QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { LoadingController } from '@ionic/angular';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-matches',
@@ -21,6 +22,7 @@ export class MatchsPage implements OnInit {
     private matchService: MatchService,
     private route: ActivatedRoute,
     private loadingController: LoadingController,
+    private utilsService: UtilsService,
   ) { }
 
   ngOnInit() { }
@@ -46,6 +48,17 @@ export class MatchsPage implements OnInit {
       });
       loading.dismiss();
     });
+  }
+
+  async remove(item) {
+    try {
+      await this.matchService.removeMatch(item.id);
+      this.loadMatches();
+      this.utilsService.showToast('Partida excluída');
+    } catch (error) {
+      this.utilsService.showToast(`Opa! algo de errado ${error}`);
+    }
+
   }
 
 }

@@ -63,15 +63,21 @@ export class CompetitionPage implements OnInit {
 
   async save() {
     if (this.competition.id) {
-      await this.competitionService.updateCompetition(this.competition, this.competition.id);
+      return await this.competitionService.updateCompetition(this.competition, this.competition.id);
     } else {
-      await this.competitionService.addCompetition(this.competition);
+      return await this.competitionService.addCompetition(this.competition);
     }
     this.utilsService.showToast('Pronto');
   }
 
-  navToMatchs() {
-    this.save();
+  async navToMatchs() {
+    const res = await this.save();
+
+    if (!this.competition.id) {
+      this.competition.id = res.id;
+    }
+
+    console.log(this.competition);
     this.router.navigateByUrl(`/matches/${this.competition.id}`);
   }
 

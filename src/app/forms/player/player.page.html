@@ -72,10 +72,7 @@
             <ion-label position="floating">Pé preferencial</ion-label>
             <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>
           </ion-item>
-        </div>
-        <ion-button *ngIf="player.id" class="deleteButton" color="danger" expand="block" (click)="removePlayer()">
-          Excluir
-        </ion-button>
+        </div>        
       </ion-col>
     </ion-row>
   </ion-grid>

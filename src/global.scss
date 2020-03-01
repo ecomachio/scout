@@ -32,7 +32,22 @@
     src: url('./assets/fonts/Keypass Demo.ttf');
 }
 
-.listItem > ion-avatar {
+.deleteButton {
+    margin: 5% auto;
+    width: 40%;
+}
+
+.deleteIcon{
+    font-size: 1.7em;
+    padding: 0 10px;
+}
+
+.slidingIcon{
+    color: #0000004a;
+    font-size: 1.2em;
+}
+
+/*.listItem > ion-avatar {
     height: 100%;
     width: 7%;
-}
+}*/

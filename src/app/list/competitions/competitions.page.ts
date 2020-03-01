@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompetitionService } from 'src/app/services/competition.service';
 import { Competition } from 'src/app/entity/competition';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-competitions',
@@ -11,7 +12,10 @@ export class CompetitionsPage implements OnInit {
 
   competitions: Array<Competition>;
 
-  constructor(private competitionsService: CompetitionService) { }
+  constructor(
+    private competitionsService: CompetitionService,
+    private utilsService: UtilsService
+  ) { }
 
   ngOnInit() {
     this.competitionsService.getCompetitions().subscribe(res => {
@@ -19,5 +23,16 @@ export class CompetitionsPage implements OnInit {
       this.competitions = res;
     });
   }
+
+  async remove(item) {
+    try {
+      await this.competitionsService.removeCompetition(item.id);
+      this.utilsService.showToast('Competição excluída');
+    } catch (error) {
+      this.utilsService.showToast(`Opa! algo de errado ${error}`);
+    }
+    
+  }
+
 
 }

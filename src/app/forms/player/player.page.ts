@@ -49,14 +49,6 @@ export class PlayerPage implements OnInit {
     });
   }
 
-  async removePlayer() {
-    if (this.player.id) {
-      await this.playerService.removePlayer(this.player.id);
-    }
-    this.utilsService.showToast('Aluno excluído');
-    this.router.navigateByUrl('/players');
-  }
-
   async done() {
     if (this.player.id) {
       await this.playerService.updatePlayer(this.player, this.player.id);
