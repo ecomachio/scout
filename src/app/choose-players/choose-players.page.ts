@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Team } from '../entity/team';
+import { GameTeam } from '../entity/gameTeam';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class ChoosePlayersPage implements OnInit {
     this.router.navigate(['statistics'], { state: { selectedPlayer: e } } as NavigationExtras);
   }
 
-  public getPlayers(team: Team) {
+  public getPlayers(team: GameTeam) {
     console.log("oaishdoihasdhiosa");
     return [
       { name: 'Joao', number: 1 },

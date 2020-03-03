@@ -71,7 +71,7 @@ export class CompetitionPage implements OnInit {
   }
 
   async navToMatchs() {
-    const res = await this.save();
+    const res = await this.save() as any;
 
     if (!this.competition.id) {
       this.competition.id = res.id;

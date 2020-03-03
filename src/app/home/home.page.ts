@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Game } from '../entity/game';
-import { Team } from '../entity/team';
+import { GameTeam } from '../entity/gameTeam';
 
 @Component({
   selector: 'app-home',
@@ -12,22 +12,22 @@ export class HomePage {
   game: Game;
   gameTime = '00:00:00';
 
-  homeTeam: Team;
-  awayTeam: Team;
+  homeTeam: GameTeam;
+  awayTeam: GameTeam;
 
   gameIntervalId;
 
   constructor() {
-    this.homeTeam = new Team();
-    this.awayTeam = new Team();
+    this.homeTeam = new GameTeam();
+    this.awayTeam = new GameTeam();
     this.game = new Game();
   }
 
   startGame() {
     this.game.startGame();
     this.gameTime = '00:00:00';
-    this.homeTeam = new Team();
-    this.awayTeam = new Team();
+    this.homeTeam = new GameTeam();
+    this.awayTeam = new GameTeam();
     this.homeTeam.ballPossessionTimer.start({ precision: 'secondTenths' });
     this.homeTeam.hasPossession = true;
 

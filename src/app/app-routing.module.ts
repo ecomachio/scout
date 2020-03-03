@@ -74,7 +74,20 @@ const routes: Routes = [
   {
     path: 'matches/:competitionId',
     loadChildren: './list/matches/matches.module#MatchsPageModule'
-  },  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
+  },
+  {
+    path: 'team',
+    loadChildren: './forms/team/team.module#TeamPageModule'
+  },
+  {
+    path: 'team/:id',
+    loadChildren: './forms/team/team.module#TeamPageModule'
+  },
+  {
+    path: 'teams',
+    loadChildren: './list/teams/teams.module#TeamsPageModule'
+  },
+  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
 
 ];
 

@@ -2,7 +2,7 @@
     font-family: Keypass, Courier, monospace;
     text-align: center;
     font-size: 7em;
-    padding: 4%;    
+    padding: 6% 4%;    
 }
 
 .moduleContent {
@@ -21,3 +21,18 @@ h1 {
     width: 10em;    
     padding: 2em;
   }
+
+ion-grid ion-row:first-child ion-card{
+    padding:2% 0;
+    
+    .cardImg{
+        height: 30%;
+        width: 12em;    
+        padding: 2em;
+    }
+
+    h1 {
+        font-size: 2.7em;
+    }
+}
+
