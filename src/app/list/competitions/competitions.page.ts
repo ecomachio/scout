@@ -31,7 +31,7 @@ export class CompetitionsPage implements OnInit {
     } catch (error) {
       this.utilsService.showToast(`Opa! algo de errado ${error}`);
     }
-    
+
   }
 
 
