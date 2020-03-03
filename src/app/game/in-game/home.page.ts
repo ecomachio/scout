@@ -52,7 +52,6 @@ export class HomePage {
   }
 
   setBallPossession(team: string) {
-    let t0 = performance.now();
 
     if (team === 'home') {
       this.homeTeam.toogleBallPossession();
@@ -62,8 +61,6 @@ export class HomePage {
       this.homeTeam.pauseBallPossession();
     }
 
-    let t1 = performance.now();
-    console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
   }
 
 
