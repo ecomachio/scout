@@ -1,0 +1,38 @@
+
+.cardWrapper {
+    margin: 5%;
+    overflow: auto;
+    max-height: 65%;
+}
+
+.moduleContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+h1 {
+    font-size: 2.3em;
+}
+
+.cardImg{
+    height: 30%;
+    width: 10em;    
+    padding: 2em;
+  }
+
+ion-grid ion-row:first-child ion-card{
+    padding:2% 0;
+    
+    .cardImg{
+        height: 30%;
+        width: 12em;    
+        padding: 2em;
+    }
+
+    h1 {
+        font-size: 2.7em;
+    }
+}
+

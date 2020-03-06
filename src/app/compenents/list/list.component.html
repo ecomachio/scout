@@ -1,0 +1,22 @@
+<ion-list>
+  <ion-list-header>
+    Competições
+  </ion-list-header>
+  <ion-item-sliding *ngFor="let thing of things">
+    <ion-item class="listItem" lines="inset" button [routerLink]="['/thing', thing.id]">
+      <ion-avatar class="listItemAvatar" slot="start">
+        <img src="assets/premio.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{thing.name}}</h2>
+      </ion-label>
+      <ion-icon class="slidingIcon" name="arrow-back"></ion-icon>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option (click)="remove(thing)" slot="icon-only" color="danger">
+        <ion-icon class="deleteIcon" name="trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>

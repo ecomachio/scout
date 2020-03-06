@@ -8,8 +8,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    path: 'game',
+    loadChildren: () => import('./game//in-game/game.module').then(m => m.GamePageModule)
   },
   {
     path: 'choose-players',
@@ -84,6 +84,8 @@ const routes: Routes = [
     loadChildren: './list/teams/teams.module#TeamsPageModule'
   },
   { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
+  { path: 'before-game', loadChildren: './game/before-game/before-game.module#BeforeGamePageModule' },
+
 
 ];
 

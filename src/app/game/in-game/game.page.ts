@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { Game } from '../entity/game';
-import { GameTeam } from '../entity/gameTeam';
+import { Game } from '../../entity/game';
+import { GameTeam } from '../../entity/gameTeam';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-game',
+  templateUrl: 'game.page.html',
+  styleUrls: ['game.page.scss'],
 })
-export class HomePage {
+export class GamePage {
 
   game: Game;
   gameTime = '00:00:00';

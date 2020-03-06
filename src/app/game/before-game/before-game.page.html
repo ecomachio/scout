@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>before-game</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>escolha a competição</h1>
+  <ion-list class="cardWrapper">
+    <ion-card button="true" *ngFor="let competition of competitions">
+      <ion-card-content class="moduleContent">
+        <ion-img class="cardImg" src="assets/premio.png"></ion-img>
+        <h1>{{competition.name}}</h1>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+</ion-content>
