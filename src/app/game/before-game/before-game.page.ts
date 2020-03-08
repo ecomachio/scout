@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Competition } from 'src/app/entity/competition';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CompetitionService } from 'src/app/services/competition.service';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './before-game.page.html',
   styleUrls: ['./before-game.page.scss'],
 })
-export class BeforeGamePage implements OnInit {
+export class BeforeGamePage implements OnInit, OnDestroy {
 
   @ViewChild('beforeGameSlider', { static: true }) slides: IonSlides;
 
@@ -88,8 +88,19 @@ export class BeforeGamePage implements OnInit {
         return { id, ...m.data() } as Match;
       });
     });
-    console.log(matches);
-    return matches.filter((m: Match) => m.category.id === category.id);
+
+    return matches.filter((m: Match) => {
+      if (m.category) {
+        return m.category.id === category.id;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+
+
   }
 
 }
