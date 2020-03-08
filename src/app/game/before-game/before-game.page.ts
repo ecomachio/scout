@@ -23,6 +23,10 @@ export class BeforeGamePage implements OnInit {
   categories: Array<Category> = new Array();
   matches: Array<Match> = new Array();
 
+  selectedCompetition: Competition;
+  selectedCategory: Category;
+  selectedMatch: Match;
+
   slideOpts = {
     initialSlide: 0,
     speed: 400,
@@ -39,28 +43,43 @@ export class BeforeGamePage implements OnInit {
   ngOnInit() {
     this.competitionsService.getCompetitions().subscribe(comp => this.competitions = comp);
     this.categoryService.getCategories().subscribe(cat => this.categories = cat);
-    this.matchService.getMatchs().subscribe(mat => this.matches = mat);
-    /* this.matchService.getMatchs().subscribe((res: any) => {
-      if (!res) {
-        this.matches = [];
-      }
-      this.matches = res.docs.map((m: QueryDocumentSnapshot<Match>) => {
-        const id = m.id;
-        return { id, ...m.data() } as Match;
-      });
-    });
-    this.slides.lockSwipeToNext(true); */
+    this.slides.lockSwipeToNext(true);
   }
 
   ionSlideWillChange(e) {
     this.slides.lockSwipeToNext(true);
   }
 
-  async nextSlide() {
+  async nextSlide(selectedEntity) {
     if (await this.slides.isEnd()) {
       this.router.navigateByUrl(`/game`);
     }
 
+    switch (await this.slides.getActiveIndex()) {
+      case 0:
+        this.selectedCompetition = selectedEntity as Competition;
+        break;
+      case 1:
+        this.selectedCategory = selectedEntity as Category;
+        break;
+      case 2:
+        this.selectedMatch = selectedEntity as Match;
+        break;
+      default:
+        break;
+    }
+
+    if (this.selectedCompetition.id) {
+      this.matchService.getMatchesByCompetition(this.selectedCompetition.id).then((res: any) => {
+        if (!res) {
+          this.matches = [];
+        }
+        this.matches = res.docs.map((m: QueryDocumentSnapshot<Match>) => {
+          const id = m.id;
+          return { id, ...m.data() } as Match;
+        });
+      });
+    }
     await this.slides.lockSwipeToNext(false);
     await this.slides.slideNext();
   }

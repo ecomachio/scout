@@ -12,7 +12,7 @@
           <h1>Escolha a competição...</h1>
         </ion-text>
         <ion-list class="cardWrapper">
-          <ion-card button="true" (click)="nextSlide()" *ngFor="let competition of competitions">
+          <ion-card button="true" (click)="nextSlide(competition)" *ngFor="let competition of competitions">
             <ion-card-content class="moduleContent">
               <ion-img class="cardImg" src="assets/premio.png"></ion-img>
               <h1>{{competition.name}}</h1>
@@ -27,7 +27,7 @@
           <h1>A categoria...</h1>
         </ion-text>
         <ion-list class="cardWrapper">
-          <ion-card button="true" (click)="nextSlide()" *ngFor="let category of categories">
+          <ion-card button="true" (click)="nextSlide(category)" *ngFor="let category of categories">
             <ion-card-content class="moduleContent">
               <ion-img class="cardImg" src="assets/boneca.png"></ion-img>
               <h1>{{category.name}}</h1>
@@ -42,7 +42,7 @@
           <h1>E agora a partida...</h1>
         </ion-text>
         <ion-list class="cardWrapper">
-          <ion-card button="true" (click)="nextSlide()" *ngFor="let match of matches">
+          <ion-card button="true" (click)="nextSlide(match)" *ngFor="let match of matches">
             <ion-card-content class="moduleContent">
               <ion-img class="cardImg" src="assets/pague.png"></ion-img>
               <h1>{{match.description}}</h1>
