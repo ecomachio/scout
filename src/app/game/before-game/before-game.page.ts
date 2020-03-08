@@ -2,13 +2,15 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Competition } from 'src/app/entity/competition';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CompetitionService } from 'src/app/services/competition.service';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, LoadingController } from '@ionic/angular';
 import { Category } from 'src/app/entity/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { Match } from 'src/app/entity/match';
 import { MatchService } from 'src/app/services/match.service';
 import { QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-before-game',
@@ -16,6 +18,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./before-game.page.scss'],
 })
 export class BeforeGamePage implements OnInit, OnDestroy {
+
+  unsubscribe$: Subject<void> = new Subject<void>();
 
   @ViewChild('beforeGameSlider', { static: true }) slides: IonSlides;
 
@@ -27,6 +31,8 @@ export class BeforeGamePage implements OnInit, OnDestroy {
   selectedCategory: Category;
   selectedMatch: Match;
 
+  isLoaded: boolean;
+
   slideOpts = {
     initialSlide: 0,
     speed: 400,
@@ -36,14 +42,26 @@ export class BeforeGamePage implements OnInit, OnDestroy {
     private competitionsService: CompetitionService,
     private categoryService: CategoryService,
     private matchService: MatchService,
+    private loadingController: LoadingController,
     private utilsService: UtilsService,
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.competitionsService.getCompetitions().subscribe(comp => this.competitions = comp);
-    this.categoryService.getCategories().subscribe(cat => this.categories = cat);
-    this.slides.lockSwipeToNext(true);
+  async ngOnInit() {
+
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    this.competitionsService.getCompetitions().pipe(takeUntil(this.unsubscribe$)).subscribe(comp => {
+        this.competitions = comp;
+
+        this.categoryService.getCategories().pipe(takeUntil(this.unsubscribe$)).subscribe(cat => this.categories = cat);
+
+        this.slides.lockSwipeToNext(true);
+
+        loading.dismiss();
+
+      });
   }
 
   ionSlideWillChange(e) {
@@ -99,8 +117,8 @@ export class BeforeGamePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
-
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }
