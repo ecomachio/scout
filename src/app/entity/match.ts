@@ -1,4 +1,5 @@
 import { Player } from './player';
+import { Category } from './category';
 
 export class Match {
 
@@ -14,6 +15,7 @@ export class Match {
     playerOfTheMatch: Player;
     notes: string;
 
+    category: Category;
 }
 
 class Score {

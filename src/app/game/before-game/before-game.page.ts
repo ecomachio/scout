@@ -61,6 +61,11 @@ export class BeforeGamePage implements OnInit {
         break;
       case 1:
         this.selectedCategory = selectedEntity as Category;
+
+        if (this.selectedCompetition && this.selectedCategory) {
+          this.matches = await this.filterMatches(this.selectedCompetition, this.selectedCategory);
+        }
+
         break;
       case 2:
         this.selectedMatch = selectedEntity as Match;
@@ -68,20 +73,23 @@ export class BeforeGamePage implements OnInit {
       default:
         break;
     }
-
-    if (this.selectedCompetition.id) {
-      this.matchService.getMatchesByCompetition(this.selectedCompetition.id).then((res: any) => {
-        if (!res) {
-          this.matches = [];
-        }
-        this.matches = res.docs.map((m: QueryDocumentSnapshot<Match>) => {
-          const id = m.id;
-          return { id, ...m.data() } as Match;
-        });
-      });
-    }
     await this.slides.lockSwipeToNext(false);
     await this.slides.slideNext();
+  }
+
+  async filterMatches(competition, category) {
+    let matches;
+    matches = await this.matchService.getMatchesByCompetition(competition.id).then((res: any) => {
+      if (!res) {
+        this.matches = [];
+      }
+      return matches = res.docs.map((m: QueryDocumentSnapshot<Match>) => {
+        const id = m.id;
+        return { id, ...m.data() } as Match;
+      });
+    });
+    console.log(matches);
+    return matches.filter((m: Match) => m.category.id === category.id);
   }
 
 }

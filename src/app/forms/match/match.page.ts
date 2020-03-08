@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CompetitionService } from 'src/app/services/competition.service';
 import { Competition } from 'src/app/entity/competition';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/entity/category';
 
 @Component({
   selector: 'app-match',
@@ -14,14 +16,16 @@ import { Competition } from 'src/app/entity/competition';
 })
 export class MatchPage implements OnInit {
 
+  categories: Array<Category>;
   match: Match;
   competition: Competition;
   competitionId: string;
+  compareWith;
 
   constructor(
     private pickerController: PickerController,
     private matchService: MatchService,
-    private competitionService: CompetitionService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private nav: NavController,
     private loadingController: LoadingController,
@@ -36,6 +40,8 @@ export class MatchPage implements OnInit {
     if (matchId) {
       this.loadMatch(matchId);
     }
+
+    this.compareWith = this.compareWithFn;
   }
 
   async loadMatch(matchId) {
@@ -43,7 +49,7 @@ export class MatchPage implements OnInit {
       message: 'Loading Match..'
     });
     await loading.present();
-
+    this.categoryService.getCategories().subscribe(cat => this.categories = cat);
     this.matchService.getMatch(matchId).subscribe(res => {
       loading.dismiss();
       console.log(res);
@@ -71,5 +77,15 @@ export class MatchPage implements OnInit {
     this.utilsService.showToast('Pronto');
     this.router.navigateByUrl(`/matches/${this.match.competitionId}`);
   }
+
+  updateMatchCategory(e) {
+    console.log(e, this.match);
+  }
+
+  compareWithFn = (o1, o2) => {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  }
+
+
 
 }
