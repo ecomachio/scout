@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Competition } from 'src/app/entity/competition';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CompetitionService } from 'src/app/services/competition.service';
+import { IonSlides } from '@ionic/angular';
+import { Category } from 'src/app/entity/category';
+import { CategoryService } from 'src/app/services/category.service';
+import { Match } from 'src/app/entity/match';
+import { MatchService } from 'src/app/services/match.service';
+import { QueryDocumentSnapshot } from 'angularfire2/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-before-game',
@@ -10,15 +17,52 @@ import { CompetitionService } from 'src/app/services/competition.service';
 })
 export class BeforeGamePage implements OnInit {
 
-  competitions: Array<Competition>;
+  @ViewChild('beforeGameSlider', { static: true }) slides: IonSlides;
+
+  competitions: Array<Competition> = new Array();
+  categories: Array<Category> = new Array();
+  matches: Array<Match> = new Array();
+
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+  };
 
   constructor(
     private competitionsService: CompetitionService,
-    private utilsService: UtilsService
+    private categoryService: CategoryService,
+    private matchService: MatchService,
+    private utilsService: UtilsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.competitionsService.getCompetitions().subscribe(res => this.competitions = res);
+    this.competitionsService.getCompetitions().subscribe(comp => this.competitions = comp);
+    this.categoryService.getCategories().subscribe(cat => this.categories = cat);
+    this.matchService.getMatchs().subscribe(mat => this.matches = mat);
+    /* this.matchService.getMatchs().subscribe((res: any) => {
+      if (!res) {
+        this.matches = [];
+      }
+      this.matches = res.docs.map((m: QueryDocumentSnapshot<Match>) => {
+        const id = m.id;
+        return { id, ...m.data() } as Match;
+      });
+    });
+    this.slides.lockSwipeToNext(true); */
+  }
+
+  ionSlideWillChange(e) {
+    this.slides.lockSwipeToNext(true);
+  }
+
+  async nextSlide() {
+    if (await this.slides.isEnd()) {
+      this.router.navigateByUrl(`/game`);
+    }
+
+    await this.slides.lockSwipeToNext(false);
+    await this.slides.slideNext();
   }
 
 }

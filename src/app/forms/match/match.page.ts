@@ -61,6 +61,8 @@ export class MatchPage implements OnInit {
   }
 
   async done() {
+    this.match.description = `${this.match.homeTeam} vs ${this.match.awayTeam}`;
+
     if (this.match.id) {
       await this.matchService.updateMatch(this.match, this.match.id);
     } else {

@@ -1,8 +1,8 @@
 
 .cardWrapper {
-    margin: 5%;
-    overflow: auto;
-    max-height: 65%;
+    margin: 2% 5%;
+    overflow: auto;    
+    height: 60vh;
 }
 
 .moduleContent {
@@ -12,8 +12,18 @@
     
 }
 
-h1 {
+.slideWrapper h1 {
     font-size: 2.3em;
+    padding: 4% 4% 0 4%;
+}
+
+ion-button{
+    margin: 2% 0 0 88%;
+}
+
+.slideWrapper{
+    width: 100%;
+    text-align: left;
 }
 
 .cardImg{
