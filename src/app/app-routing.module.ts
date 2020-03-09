@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: './game/choose-players/choose-players.module#ChoosePlayersPageModule'
   },
   {
-    path: 'choose-players/:matchId',
+    path: 'choose-players/:categoryId',
     loadChildren: './game/choose-players/choose-players.module#ChoosePlayersPageModule'
   },
   {
