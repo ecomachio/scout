@@ -58,7 +58,10 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Categoria</ion-label>
-            <ion-input [(ngModel)]="player.category"></ion-input>
+            <ion-select name="category" [value]="player.category" [(ngModel)]="player.category" required cancelText="Cancelar"
+              [okText]="Pronto">
+              <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Número da camisa</ion-label>
@@ -72,7 +75,7 @@
             <ion-label position="floating">Pé preferencial</ion-label>
             <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>
           </ion-item>
-        </div>        
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

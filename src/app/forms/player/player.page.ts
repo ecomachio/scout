@@ -7,6 +7,8 @@ import { PreferredFootEnum } from 'src/app/enum/preferredFoot.enum';
 import { PlayerService } from 'src/app/services/player.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
+import { CategoryService } from 'src/app/services/category.service';
+import { Category } from 'src/app/entity/category';
 
 @Component({
   selector: 'app-player',
@@ -16,10 +18,12 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class PlayerPage implements OnInit {
 
   player: Player;
+  categories: Array<Category>;
 
   constructor(
     private pickerController: PickerController,
     private playerService: PlayerService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private nav: NavController,
     private loadingController: LoadingController,
@@ -42,6 +46,7 @@ export class PlayerPage implements OnInit {
     await loading.present();
 
     this.playerService.getPlayer(playerId).subscribe(res => {
+      this.categoryService.getCategories().subscribe(cat => this.categories = cat);
       loading.dismiss();
       console.log(res);
       this.player = res;
