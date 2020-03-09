@@ -44,6 +44,10 @@ export class MatchService {
         return this.matchsCollection.doc<Match>(id).valueChanges();
     }
 
+    getMatchPromise(id) {
+        return this.matchsCollection.doc<Match>(id).get().toPromise();
+    }
+
     updateMatch(match: Match, id: string) {
         return this.matchsCollection.doc(id).update(match);
     }

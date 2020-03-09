@@ -6,6 +6,7 @@ import { Player } from 'src/app/entity/player';
 import { MatchService } from 'src/app/services/match.service';
 import { Match } from 'src/app/entity/match';
 import { QueryDocumentSnapshot } from 'angularfire2/firestore';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-choose-players',
@@ -20,31 +21,29 @@ export class ChoosePlayersPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private playerService: PlayerService,
-    private matchService: MatchService
+    private matchService: MatchService,
+    private gameService: GameService
   ) { }
 
   async ngOnInit() {
     const categoryId = this.route.snapshot.params.categoryId;
 
-    /* todo unsubscribe when game is over */
-    /* get QueryDocumentSnapshot of players from firebase by category */
-    const ps = await this.playerService.getPlayersByCategory(categoryId);
+    this.players = this.gameService.players;
 
-    /* maps the QueryDocumentSnapshot array to players */
-    this.players = ps.docs.map((m: QueryDocumentSnapshot<Player>) => {
-      const id = m.id;
-      return { id, ...m.data() } as Player;
-    });
-
+    console.log(this.players);
+    console.log(this.gameService.match);
 
   }
 
-  onPlayerChoose(e) {
-    this.router.navigate(['statistics'], { state: { selectedPlayer: e } } as NavigationExtras);
+  onPlayerChoose(e: Player) {
+    // this.router.navigate(['statistics'], { state: { selectedPlayer: e } } as NavigationExtras);
+    let p = this.players.find(p => p.id === e.id);
+    p.shirtNumber = 99;
+
   }
 
   public getPlayers(team: GameTeam) {
-    console.log("oaishdoihasdhiosa");
+
     return [
       { name: 'Joao', number: 1 },
       { name: 'Ricardo', number: 2 },

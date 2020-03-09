@@ -7,6 +7,7 @@ import { Match } from 'src/app/entity/match';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { match } from 'minimatch';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-game',
@@ -30,7 +31,8 @@ export class GamePage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private matchService: MatchService
+    private matchService: MatchService,
+    private gameService: GameService
   ) {
     this.homeTeam = new GameTeam();
     this.awayTeam = new GameTeam();
@@ -39,16 +41,18 @@ export class GamePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
-    this.matchService.getMatch(matchId).pipe(takeUntil(this.unsubscribe$)).subscribe(match => {
-      this.match = match;
 
-      this.setupMatch();
 
-      this.startGame();
-    });
+    this.setupMatch(matchId);
+    this.startGame();
+
   }
 
-  setupMatch() {
+  async setupMatch(matchId) {
+
+    await this.gameService.initialize(matchId);
+    this.match = this.gameService.match;
+
     this.match.isStarted = true;
     this.match.score.home = 0;
     this.match.score.away = 0;
@@ -96,6 +100,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   choosePlayers() {
+    console.log(this.gameService.getMatch());
     this.router.navigateByUrl(`choose-players/${this.match.category.id}`);
   }
 
