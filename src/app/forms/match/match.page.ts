@@ -77,15 +77,4 @@ export class MatchPage implements OnInit {
     this.utilsService.showToast('Pronto');
     this.router.navigateByUrl(`/matches/${this.match.competitionId}`);
   }
-
-  updateMatchCategory(e) {
-    console.log(e, this.match);
-  }
-
-  compareWithFn = (o1, o2) => {
-    return o1 && o2 ? o1.id === o2.id : o1 === o2;
-  }
-
-
-
 }
