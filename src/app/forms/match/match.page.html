@@ -31,8 +31,8 @@
           <div class="fields">
             <ion-item>
               <ion-label position="floating">Categoria</ion-label>
-              <ion-select name="category" [value]="match.category" [(ngModel)]="match.category" required cancelText="Cancelar"
-                [okText]="Pronto">
+              <ion-select name="category" [value]="match.category" [(ngModel)]="match.category"
+                required cancelText="Cancelar" [okText]="Pronto" [compareWith]="compareWith">
                 <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}</ion-select-option>
               </ion-select>
             </ion-item>

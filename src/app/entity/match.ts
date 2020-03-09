@@ -16,6 +16,9 @@ export class Match {
     notes: string;
 
     category: Category;
+
+    // game controls
+    isStarted: boolean;
 }
 
 class Score {

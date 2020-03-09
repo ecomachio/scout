@@ -19,6 +19,7 @@ export class PlayerPage implements OnInit {
 
   player: Player;
   categories: Array<Category>;
+  compareWith;
 
   constructor(
     private pickerController: PickerController,
@@ -37,6 +38,7 @@ export class PlayerPage implements OnInit {
     if (playerId) {
       this.loadPlayer(playerId);
     }
+    this.compareWith = this.compareWithFn;
   }
 
   async loadPlayer(playerId) {
@@ -105,5 +107,8 @@ export class PlayerPage implements OnInit {
     });
   }
 
+  compareWithFn = (o1, o2) => {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  }
 
 }

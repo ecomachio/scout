@@ -52,7 +52,7 @@ export class MatchPage implements OnInit {
     this.categoryService.getCategories().subscribe(cat => this.categories = cat);
     this.matchService.getMatch(matchId).subscribe(res => {
       loading.dismiss();
-      console.log(res);
+      (res);
       this.match = res;
       this.match.id = matchId;
     });
@@ -77,4 +77,11 @@ export class MatchPage implements OnInit {
     this.utilsService.showToast('Pronto');
     this.router.navigateByUrl(`/matches/${this.match.competitionId}`);
   }
+
+  compareWithFn = (o1, o2) => {
+    return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  }
+
+
+
 }

@@ -69,8 +69,8 @@ export class BeforeGamePage implements OnInit, OnDestroy {
   }
 
   async nextSlide(selectedEntity) {
-    if (await this.slides.isEnd()) {
-      this.router.navigateByUrl(`/game`);
+    if (await this.slides.isEnd() && this.selectedMatch) {
+      this.router.navigateByUrl(`/game/${this.selectedMatch.id}`);
     }
 
     switch (await this.slides.getActiveIndex()) {

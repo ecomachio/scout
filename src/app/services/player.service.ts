@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot, DocumentData } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Player } from '../entity/player';
@@ -29,6 +29,10 @@ export class PlayerService {
 
     getPlayers() {
         return this.players;
+    }
+
+    getPlayersByCategory(categoryId): Promise<QuerySnapshot<DocumentData>> {
+        return this.playersCollection.ref.where('category.id', '==', categoryId).get();
     }
 
     getPlayer(id) {
