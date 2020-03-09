@@ -9,11 +9,19 @@ const routes: Routes = [
   },
   {
     path: 'game',
-    loadChildren: () => import('./game//in-game/game.module').then(m => m.GamePageModule)
+    loadChildren: () => import('./game/in-game/game.module').then(m => m.GamePageModule)
+  },
+  {
+    path: 'game/:matchId',
+    loadChildren: () => import('./game/in-game/game.module').then(m => m.GamePageModule)
   },
   {
     path: 'choose-players',
-    loadChildren: './choose-players/choose-players.module#ChoosePlayersPageModule'
+    loadChildren: './game/choose-players/choose-players.module#ChoosePlayersPageModule'
+  },
+  {
+    path: 'choose-players/:matchId',
+    loadChildren: './game/choose-players/choose-players.module#ChoosePlayersPageModule'
   },
   {
     path: 'statistics',
