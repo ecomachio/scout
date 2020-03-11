@@ -89,6 +89,8 @@ export class GamePage implements OnInit, OnDestroy {
 
   setBallPossession(team: string) {
 
+    console.log(this.gameService.players);
+
     if (team === 'home') {
       this.homeTeam.toogleBallPossession();
       this.awayTeam.pauseBallPossession();
@@ -99,9 +101,10 @@ export class GamePage implements OnInit, OnDestroy {
 
   }
 
-  choosePlayers() {
+  choosePlayers(action) {
     console.log(this.gameService.getMatch());
-    this.router.navigateByUrl(`choose-players/${this.match.category.id}`);
+    console.log(action);
+    this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action } } );
   }
 
   ngOnDestroy() {

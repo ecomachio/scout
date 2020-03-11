@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="playerCardContainer centerText">
+  <div *ngIf="!confirmationStep" class="playerCardContainer centerText">
     <ion-card class="playerCard" button="true" *ngFor="let player of players" (click)='onPlayerChoose(player)'>
       <ion-card-header>
         <div>
@@ -20,4 +20,17 @@
       </ion-card-content>
     </ion-card>
   </div>
+  <div *ngIf="confirmationStep" class="statisticsCardContainer">
+      <h1>{{selectedPlayer.name}}</h1>
+      <ion-card button="true" color="success" (click)="onConfirmed(true)">
+        <ion-card-content class="statisticsCardContent">
+          <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
+        </ion-card-content>
+      </ion-card>
+      <ion-card button="true" color="danger" (click)="onConfirmed(false)">
+        <ion-card-content class="statisticsCardContent">
+          <ion-icon class="statisticsButton" name="close"></ion-icon>
+        </ion-card-content>
+      </ion-card>
+    </div>
 </ion-content>

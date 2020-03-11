@@ -52,7 +52,7 @@ export class MatchPage implements OnInit {
     this.categoryService.getCategories().subscribe(cat => this.categories = cat);
     this.matchService.getMatch(matchId).subscribe(res => {
       loading.dismiss();
-      (res);
+      console.log(res);
       this.match = res;
       this.match.id = matchId;
     });
