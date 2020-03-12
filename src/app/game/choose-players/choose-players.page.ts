@@ -9,6 +9,7 @@ import { QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { GameService } from 'src/app/services/game.service';
 import { Location } from '@angular/common';
 import { Action } from 'src/app/entity/action';
+import { ActionService } from 'src/app/services/action.service';
 
 @Component({
   selector: 'app-choose-players',
@@ -25,16 +26,17 @@ export class ChoosePlayersPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private playerService: PlayerService,
-    private matchService: MatchService,
     private gameService: GameService,
+    private actionService: ActionService,
     private location: Location
   ) { }
 
   async ngOnInit() {
     const categoryId = this.route.snapshot.params.categoryId;
-    this.selectedAction = new Action(this.route.snapshot.queryParamMap.get('action'));
+
+    const qpAction = this.route.snapshot.queryParamMap.get('action');
+
+    this.selectedAction = new Action(qpAction, this.actionService.getActionDescription(qpAction));
     this.players = this.gameService.players;
 
     console.log(this.players);
@@ -64,28 +66,4 @@ export class ChoosePlayersPage implements OnInit {
   hideConfirmationStep() {
     this.confirmationStep = false;
   }
-
-  public getPlayers(team: GameTeam) {
-
-    return [
-      { name: 'Joao', number: 1 },
-      { name: 'Ricardo', number: 2 },
-      { name: 'Paulo', number: 3 },
-      { name: 'Lucas', number: 4 },
-      { name: 'Tiago', number: 5 },
-      { name: 'Rafael', number: 6 },
-      { name: 'Paulo', number: 13 },
-      { name: 'Lucas', number: 14 },
-      { name: 'Tiago', number: 25 },
-      { name: 'Rafael', number: 46 },
-      { name: 'Willian', number: 57 },
-      { name: 'Bruno Dias', number: 48 },
-      { name: 'Fernando', number: 79 },
-      { name: 'Rafael', number: 46 },
-      { name: 'Willian', number: 7 },
-      { name: 'Bruno', number: 8 },
-      { name: 'Cascavel', number: 9 },
-    ]
-  }
-
 }

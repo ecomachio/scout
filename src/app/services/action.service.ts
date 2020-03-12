@@ -46,4 +46,23 @@ export class ActionService {
     removeAction(id) {
         return this.actionsCollection.doc(id).delete();
     }
+
+    getActionDescription(action?) {
+        switch (action) {
+            case 'finish':
+                return 'Finalização';
+            case 'tackle':
+                return 'Desarme';
+            case 'pass':
+                return 'Passe';
+            case 'foul':
+                return 'Falta';
+            case 'corner':
+                return 'Escanteio';
+            case 'card':
+                return 'Cartão';
+            default:
+                break;
+        }
+    }
 }

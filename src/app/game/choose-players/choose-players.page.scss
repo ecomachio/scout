@@ -17,3 +17,25 @@
     
     font-size: 6em
 }
+
+.statisticsCardContent{
+   height: 100%;
+}
+
+.statisticsCardContainer{
+    height: 100%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;     
+}
+
+.statisticsCardContainer ion-card{
+    height: 100%;
+    display: flex;
+    margin: 5px;
+}
+
+.statisticsButton{
+    font-size: 17em;
+}

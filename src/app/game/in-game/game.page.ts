@@ -42,14 +42,12 @@ export class GamePage implements OnInit, OnDestroy {
   ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
 
-
     this.setupMatch(matchId);
     this.startGame();
 
   }
 
   async setupMatch(matchId) {
-
     await this.gameService.initialize(matchId);
     this.match = this.gameService.match;
 
@@ -59,7 +57,6 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   startGame() {
-
     this.game.startGame();
     this.gameTime = '00:00:00';
     this.homeTeam = new GameTeam();
@@ -79,6 +76,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   stopGame() {
+    this.validateAction();
 
     this.gameService.save();
 
@@ -86,12 +84,19 @@ export class GamePage implements OnInit, OnDestroy {
     this.resetGameTime();
   }
 
+  validateAction() {
+    if (!this.game.hasStarted) {
+      throw new Error('gameNotStartedException');
+    }
+
+  }
+
   resetGameTime() {
     clearInterval(this.gameIntervalId);
   }
 
   setBallPossession(team: string) {
-
+    this.validateAction();
     console.log(this.gameService.players);
 
     if (team === 'home') {
@@ -105,9 +110,10 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   choosePlayers(action) {
+    this.validateAction();
     console.log(this.gameService.getMatch());
     console.log(action);
-    this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action } } );
+    this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action } });
   }
 
   ngOnDestroy() {
