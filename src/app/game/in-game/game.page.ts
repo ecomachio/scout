@@ -79,6 +79,9 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   stopGame() {
+
+    this.gameService.save();
+
     this.game = new Game();
     this.resetGameTime();
   }

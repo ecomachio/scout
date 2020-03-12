@@ -44,22 +44,16 @@ export class ChoosePlayersPage implements OnInit {
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
-
-
-
     this.showConfirmationStep();
   }
 
   onConfirmed(decision: boolean) {
 
     this.selectedAction.decision = decision;
+    this.selectedAction.player = this.selectedPlayer;
 
-    const teste = {
-      player: this.selectedPlayer,
-      action: this.selectedAction
-    };
+    this.gameService.addAction(this.selectedAction);
 
-    console.log(teste);
     this.location.back();
   }
 

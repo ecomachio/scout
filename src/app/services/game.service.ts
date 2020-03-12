@@ -3,7 +3,9 @@ import { Match } from '../entity/match';
 import { Player } from '../entity/player';
 import { MatchService } from './match.service';
 import { PlayerService } from './player.service';
-import { QueryDocumentSnapshot } from 'angularfire2/firestore';
+import { QueryDocumentSnapshot, AngularFirestore } from 'angularfire2/firestore';
+import { Action } from '../entity/action';
+import { ActionService } from './action.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,12 @@ export class GameService {
 
   match: Match;
   players: Array<Player>;
+  gameActions: Array<Action> = new Array();
 
   constructor(
     private matchService: MatchService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private actionService: ActionService,
   ) {
 
   }
@@ -42,8 +46,13 @@ export class GameService {
     return this.players;
   }
 
+  addAction(action: Action) {
+    action.match = this.match;
+    this.gameActions.push(action);
+  }
+
   save() {
-    console.log(this.match);
+    this.gameActions.forEach(a => this.actionService.addAction(a));
     console.log(this.players);
   }
 
