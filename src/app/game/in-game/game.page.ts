@@ -79,9 +79,7 @@ export class GamePage implements OnInit, OnDestroy {
     this.validateAction();
 
     this.gameService.save();
-
-    this.game = new Game();
-    this.resetGameTime();
+    this.router.navigateByUrl(`after-game/${this.match.id}`);
   }
 
   validateAction() {

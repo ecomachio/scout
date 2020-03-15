@@ -31,6 +31,10 @@ export class ActionService {
         return this.actions;
     }
 
+    getActionsByMatch(matchId){
+        return this.actionsCollection.ref.where('match.id', '==', matchId).get();
+    }
+
     getAction(id) {
         return this.actionsCollection.doc<Action>(id).valueChanges();
     }

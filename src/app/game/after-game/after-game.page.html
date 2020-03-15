@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>after-game</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card button="true" (click)="nextSlide(category)" *ngFor="let action of actions">
+
+    {{action.description}}
+    {{action.decision}}
+    {{action.player.name}}
+  </ion-card>
+</ion-content>
