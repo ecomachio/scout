@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { match } from 'minimatch';
 import { GameService } from 'src/app/services/game.service';
+import { ActionEnum } from 'src/app/enum/action.enum';
 
 @Component({
   selector: 'app-game',
@@ -27,6 +28,8 @@ export class GamePage implements OnInit, OnDestroy {
   awayTeam: GameTeam;
 
   gameIntervalId;
+
+  get actionEnum() { return ActionEnum; }
 
   constructor(
     private router: Router,
@@ -108,15 +111,25 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   choosePlayers(action) {
+    let step;
+
     this.validateAction();
-    console.log(this.gameService.getMatch());
-    console.log(action);
-    this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action } });
+
+    if (action == ActionEnum.TACKLE) {
+      step = 1;
+      this.setBallPossession('home');
+    }
+    else step = 2;
+
+    this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action, step } });
   }
 
   ngOnDestroy() {
     /* this.unsubscribe$.next();
     this.unsubscribe$.unsubscribe(); */
   }
+
+  
+
 
 }

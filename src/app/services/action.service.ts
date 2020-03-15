@@ -39,34 +39,15 @@ export class ActionService {
         return this.actionsCollection.doc<Action>(id).valueChanges();
     }
 
-    updateAction(todo: Action, id: string) {
-        return this.actionsCollection.doc(id).update(todo);
+    updateAction(action: Action, id: string) {
+        return this.actionsCollection.doc(id).update(action);
     }
 
-    addAction(todo: Action) {
-        return this.actionsCollection.add({ ...todo });
+    addAction(action: Action) {        
+        return this.actionsCollection.add({ ...action });
     }
 
     removeAction(id) {
         return this.actionsCollection.doc(id).delete();
-    }
-
-    getActionDescription(action?) {
-        switch (action) {
-            case 'finish':
-                return 'Finalização';
-            case 'tackle':
-                return 'Desarme';
-            case 'pass':
-                return 'Passe';
-            case 'foul':
-                return 'Falta';
-            case 'corner':
-                return 'Escanteio';
-            case 'card':
-                return 'Cartão';
-            default:
-                break;
-        }
-    }
+    }    
 }

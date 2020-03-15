@@ -10,6 +10,7 @@ import { GameService } from 'src/app/services/game.service';
 import { Location } from '@angular/common';
 import { Action } from 'src/app/entity/action';
 import { ActionService } from 'src/app/services/action.service';
+import { ActionEnum } from 'src/app/enum/action.enum';
 
 @Component({
   selector: 'app-choose-players',
@@ -23,6 +24,7 @@ export class ChoosePlayersPage implements OnInit {
   players: Array<Player>;
   selectedPlayer: Player;
   selectedAction: Action;
+  steps: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,8 +37,9 @@ export class ChoosePlayersPage implements OnInit {
     const categoryId = this.route.snapshot.params.categoryId;
 
     const qpAction = this.route.snapshot.queryParamMap.get('action');
+    this.steps = parseInt(this.route.snapshot.queryParamMap.get('step'));
 
-    this.selectedAction = new Action(qpAction, this.actionService.getActionDescription(qpAction));
+    this.selectedAction = new Action(qpAction);
     this.players = this.gameService.players;
 
     console.log(this.players);
@@ -46,12 +49,18 @@ export class ChoosePlayersPage implements OnInit {
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
-    this.showConfirmationStep();
+    if(this.steps == 2)
+      this.showConfirmationStep();
+    else this.done();
   }
 
   onConfirmed(decision: boolean) {
+    this.done(decision);
+  }
 
-    this.selectedAction.decision = decision;
+  done(decision?: boolean) {
+    this.selectedAction.steps = this.steps;
+    this.selectedAction.decision = decision || true;
     this.selectedAction.player = this.selectedPlayer;
 
     this.gameService.addAction(this.selectedAction);

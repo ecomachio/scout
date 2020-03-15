@@ -1,5 +1,6 @@
 import { Player } from './player';
 import { Match } from './match';
+import { ActionEnum } from '../enum/action.enum';
 
 export class Action {
 
@@ -9,10 +10,10 @@ export class Action {
     decision: boolean;
     player: Player;
     match: Match;
+    steps: number;
 
-    constructor(name?: string, description?: string) {
-        this.id = null;
-        this.name = name;
+    constructor(description?: string) {
+        this.id = null;       
         this.description = description;
         this.decision = null;
     }

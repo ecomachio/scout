@@ -52,6 +52,7 @@ export class GameService {
   }
 
   save() {
+    console.log(this.gameActions)
     this.gameActions.forEach(a => this.actionService.addAction(a));
     console.log(this.players);
   }
