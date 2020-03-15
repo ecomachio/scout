@@ -1,14 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>after-game</ion-title>
+    <ion-title>Resumo da partida</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card button="true" (click)="nextSlide(category)" *ngFor="let action of actions">
+  <div *ngIf="match" class="matchSummary">
+    
+    <h1>{{match.homeTeam}} 2 x 0 {{match.awayTeam}}</h1>    
+    
+    <p>Finalizaçoes - {{stats.finishes}}</p>
+    <p>Passes - {{stats.passes}}</p>
+    <p>Desarme - {{stats.tackles}}</p>
 
-    {{action.description}}
-    {{action.decision}}
-    {{action.player.name}}
-  </ion-card>
+  </div>
 </ion-content>

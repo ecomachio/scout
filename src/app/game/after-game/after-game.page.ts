@@ -6,6 +6,7 @@ import { Match } from 'src/app/entity/match';
 import { ActionService } from 'src/app/services/action.service';
 import { QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { Action } from 'src/app/entity/action';
+import { ActionEnum } from 'src/app/enum/action.enum';
 
 @Component({
   selector: 'app-after-game',
@@ -15,7 +16,9 @@ import { Action } from 'src/app/entity/action';
 export class AfterGamePage implements OnInit {
 
   match: Match;
-  actions;
+  actions: Array<Action> = [];
+  modules: Array<{}>;
+  stats = {};
 
   constructor(
     private router: Router,
@@ -27,16 +30,27 @@ export class AfterGamePage implements OnInit {
 
   async ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
-    console.log(matchId);
-    this.actions = await this.actionService.getActionsByMatch(matchId).then((res: any) => {
-      if (!res) {
-        this.actions = [];
-      }
+   
+    this.match =  (await this.matchService.getMatchPromise(matchId)).data() as Match; 
+    console.log(this.match);
+    this.actions = await this.actionService.getActionsByMatch(matchId).then((res: any) => {      
       return res.docs.map((a: QueryDocumentSnapshot<Action>) => {
         const id = a.id;
         return { id, ...a.data() } as Action;
       });
     });
+
+    this.modules = Object.keys(ActionEnum).map(e => ({description: ActionEnum[e], name: e}));
+
+    let tackles = this.actions.filter(n => n.description == ActionEnum.TACKLE).length; 
+    let finishes = this.actions.filter(n => n.description == ActionEnum.FINISH).length; 
+    let passes = this.actions.filter(n => n.description == ActionEnum.PASS).length; 
+    
+    this.stats = {
+      tackles,
+      finishes,
+      passes,
+    };
     console.log(this.actions);
   }
 
