@@ -11,6 +11,8 @@ import { Location } from '@angular/common';
 import { Action } from 'src/app/entity/action';
 import { ActionService } from 'src/app/services/action.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
+import { ThrowStmt } from '@angular/compiler';
+import { PositionEnum } from 'src/app/enum/Position.enum';
 
 @Component({
   selector: 'app-choose-players',
@@ -42,6 +44,10 @@ export class ChoosePlayersPage implements OnInit {
     this.selectedAction = new Action(qpAction);
     this.players = this.gameService.players;
 
+    if (this.selectedAction.description === ActionEnum.GOALKEEPERSAVE) {
+      this.players = this.players.filter(p => p.position === PositionEnum.GK);
+    }
+    
     console.log(this.players);
     console.log(this.gameService.match);
 
@@ -49,7 +55,7 @@ export class ChoosePlayersPage implements OnInit {
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
-    if(this.steps == 2)
+    if (this.steps == 2)
       this.showConfirmationStep();
     else this.done();
   }

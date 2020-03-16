@@ -111,16 +111,27 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   choosePlayers(action) {
-    let step;
+    let step;   
 
     this.validateAction();
 
-    if (action == ActionEnum.TACKLE) {
-      step = 1;
-      this.setBallPossession('home');
+    switch (action) {
+      case ActionEnum.TACKLE:
+        step = 1;
+        this.setBallPossession('home');
+        break;
+      case ActionEnum.PASS:
+        step = 1;
+        this.setBallPossession('away');
+        break;
+      case ActionEnum.GOALKEEPERSAVE:
+        step = 1;
+        break;
+      default:
+        step = 2;
+        break;
     }
-    else step = 2;
-
+    
     this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action, step } });
   }
 
@@ -129,7 +140,7 @@ export class GamePage implements OnInit, OnDestroy {
     this.unsubscribe$.unsubscribe(); */
   }
 
-  
+
 
 
 }

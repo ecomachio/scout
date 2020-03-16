@@ -42,14 +42,18 @@ export class AfterGamePage implements OnInit {
 
     this.modules = Object.keys(ActionEnum).map(e => ({description: ActionEnum[e], name: e}));
 
-    let tackles = this.actions.filter(n => n.description == ActionEnum.TACKLE).length; 
-    let finishes = this.actions.filter(n => n.description == ActionEnum.FINISH).length; 
-    let passes = this.actions.filter(n => n.description == ActionEnum.PASS).length; 
-    
+    const tackles = this.actions.filter(n => n.description == ActionEnum.TACKLE).length; 
+    const finishes = this.actions.filter(n => n.description == ActionEnum.FINISH).length; 
+    const passes = this.actions.filter(n => n.description == ActionEnum.PASS).length; 
+    const fouls = this.actions.filter(n => n.description == ActionEnum.FOUL).length; 
+    const goalkeeperSaves = this.actions.filter(n => n.description == ActionEnum.GOALKEEPERSAVE).length
+
     this.stats = {
       tackles,
       finishes,
       passes,
+      fouls,
+      goalkeeperSaves
     };
     console.log(this.actions);
   }

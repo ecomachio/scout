@@ -74,3 +74,21 @@ ion-card {
   display: flex;
   justify-content: center;
 }
+
+.module{
+  text-align: center; 
+
+  ion-card-content{
+    ion-img{
+      width: 30%;
+      
+    }
+  }
+  ion-card-header{
+    ion-card-subtitle{
+      font-size: 2em;
+      color: #000 ;     
+    }
+  }
+}
+

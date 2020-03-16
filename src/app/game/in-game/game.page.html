@@ -84,7 +84,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-card button="true" color="secondary" (click)="choosePlayers(actionEnum.TACKLE)">
+        <ion-card class="module" button="true" color="secondary" (click)="choosePlayers(actionEnum.TACKLE)">
           <ion-card-header>
             <ion-card-subtitle>Desarme</ion-card-subtitle>
           </ion-card-header>
@@ -94,7 +94,7 @@
         </ion-card>
       </ion-col>
       <ion-col>
-        <ion-card button="true" color="primary" (click)="choosePlayers(actionEnum.FINISH)">
+        <ion-card class="module" button="true" color="primary" (click)="choosePlayers(actionEnum.FINISH)">
           <ion-card-header>
             <ion-card-subtitle>Finalização</ion-card-subtitle>
           </ion-card-header>
@@ -103,21 +103,31 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      
       <ion-col>
-        <ion-card button="true" color="success" (click)="choosePlayers('pass')">
+        <ion-card class="module" button="true" color="success" (click)="choosePlayers(actionEnum.PASS)">
           <ion-card-header>
-            <ion-card-subtitle>Passe</ion-card-subtitle>
+            <ion-card-subtitle>Passe Errado</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="moduleContent">
             <ion-img class="cardImg" src="assets/043-strategy.png"></ion-img>
           </ion-card-content>
+          
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-card button="true" color="warning" (click)="choosePlayers('foul')">
+        <ion-card class="module" button="true" color="danger" (click)="choosePlayers(actionEnum.GOALKEEPERSAVE)">
+          <ion-card-header>
+            <ion-card-subtitle>Defesas do Goleiro</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/002-goalie.png"></ion-img>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="module" button="true" color="warning" (click)="choosePlayers(actionEnum.FOUL)">
           <ion-card-header>
             <ion-card-subtitle>Faltas</ion-card-subtitle>
           </ion-card-header>
@@ -126,19 +136,8 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-
       <ion-col>
-        <ion-card button="true" color="danger" (click)="choosePlayers('corner')">
-          <ion-card-header>
-            <ion-card-subtitle>Escanteios</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="moduleContent">
-            <ion-img class="cardImg" src="assets/046-corner.png"></ion-img>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card button="true" color="medium" (click)="choosePlayers('card')">
+        <ion-card class="module" button="true" color="medium" (click)="choosePlayers('card')">
           <ion-card-header>
             <ion-card-subtitle>Cartões1</ion-card-subtitle>
           </ion-card-header>
