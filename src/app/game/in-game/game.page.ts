@@ -135,6 +135,10 @@ export class GamePage implements OnInit, OnDestroy {
     this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action, step } });
   }
 
+  otherModules() {
+    
+  }
+
   ngOnDestroy() {
     /* this.unsubscribe$.next();
     this.unsubscribe$.unsubscribe(); */
