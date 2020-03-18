@@ -47,13 +47,21 @@ export class AfterGamePage implements OnInit {
     const passes = this.actions.filter(n => n.description == ActionEnum.PASS).length; 
     const fouls = this.actions.filter(n => n.description == ActionEnum.FOUL).length; 
     const goalkeeperSaves = this.actions.filter(n => n.description == ActionEnum.GOALKEEPERSAVE).length
+    const goal = this.actions.filter(n => n.description == ActionEnum.GOAL).length
+    const redCard = this.actions.filter(n => n.description == ActionEnum.REDCARD).length
+    const yellowCard = this.actions.filter(n => n.description == ActionEnum.YELLOWCARD).length
+    const manOfTheMatch = this.actions.filter(n => n.description == ActionEnum.MANOFTHEMATCH).length
 
     this.stats = {
       tackles,
       finishes,
       passes,
       fouls,
-      goalkeeperSaves
+      goalkeeperSaves,
+      goal,
+      redCard,
+      yellowCard,
+      manOfTheMatch,
     };
     console.log(this.actions);
   }
