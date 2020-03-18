@@ -1,0 +1,39 @@
+
+ion-card {
+    margin: 2px;
+}
+
+.ballPossessionCard{
+    min-height: 160px;
+}
+
+.cardImg{
+    height: 30%;
+    width: 10em;
+}
+
+.moduleContent{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .module{
+    text-align: center; 
+  
+    ion-card-content{
+      ion-img{
+        width: 26%;
+        
+      }
+    }
+    ion-card-header{
+      ion-card-subtitle{
+        font-size: 2em;
+        color: #000 ;     
+      }
+    }
+  }
+  
+
+  
+  

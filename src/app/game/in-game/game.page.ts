@@ -9,6 +9,8 @@ import { Subject } from 'rxjs';
 import { match } from 'minimatch';
 import { GameService } from 'src/app/services/game.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
+import { ModalController } from '@ionic/angular';
+import { OtherModulesComponent } from 'src/app/compenents/other-modules/other-modules.component';
 
 @Component({
   selector: 'app-game',
@@ -35,7 +37,8 @@ export class GamePage implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private matchService: MatchService,
-    private gameService: GameService
+    private gameService: GameService,
+    private modalController: ModalController,
   ) {
     this.homeTeam = new GameTeam();
     this.awayTeam = new GameTeam();
@@ -111,7 +114,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   choosePlayers(action) {
-    let step;   
+    let step;
 
     this.validateAction();
 
@@ -131,12 +134,19 @@ export class GamePage implements OnInit, OnDestroy {
         step = 2;
         break;
     }
-    
+
     this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action, step } });
   }
 
-  otherModules() {
-    
+  async otherModules() {
+    const modal = await this.modalController.create({
+      component: OtherModulesComponent,
+      componentProps: {
+        match: this.match
+      },
+      animated: true
+    });
+    await modal.present();
   }
 
   ngOnDestroy() {

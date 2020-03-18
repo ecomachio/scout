@@ -5,5 +5,9 @@ export enum ActionEnum {
     FOUL = 'Falta',
     CORNER = 'Escanteio',
     GOALKEEPERSAVE = 'Escanteio',
-    CARD = 'Cartão',
+    REDCARD = 'Cartão Vermelho',
+    YELLOWCARD = 'Cartão Amarelo',
+    GOAL = 'Gol',
+    MANOFTHEMATCH = 'Destaque',
+    NOTES = 'Notas',
 }

@@ -12,11 +12,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { OtherModulesComponent } from './compenents/other-modules/other-modules.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, OtherModulesComponent],
+  entryComponents: [OtherModulesComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
