@@ -49,7 +49,7 @@ export class GamePage implements OnInit, OnDestroy {
     const matchId = this.route.snapshot.params.matchId;
 
     this.setupMatch(matchId);
-    this.startGame();
+    this.startGame();    
 
   }
 
@@ -83,6 +83,11 @@ export class GamePage implements OnInit, OnDestroy {
 
   stopGame() {
     this.validateAction();
+    
+    this.game.stopGame();
+    this.homeTeam.ballPossessionTimer.pause();
+    this.awayTeam.ballPossessionTimer.pause();
+    this.game.timer.pause();
 
     this.gameService.save();
     this.router.navigateByUrl(`after-game/${this.match.id}`);
@@ -92,7 +97,9 @@ export class GamePage implements OnInit, OnDestroy {
     if (!this.game.hasStarted) {
       throw new Error('gameNotStartedException');
     }
-
+    if (this.game.hasFinished) {
+      throw new Error('gameHasFinishedException');
+    }
   }
 
   resetGameTime() {

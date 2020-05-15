@@ -78,8 +78,11 @@
           <h2>{{gameTime}}</h2>
         </div>
         <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>
-        <ion-button *ngIf="game.hasStarted" expand="block" color="danger" size="large" (click)="stopGame()">Encerrar
-          jogo</ion-button>
+        <ion-button *ngIf="game.hasStarted && !game.hasFinished" expand="block" color="danger" size="large" 
+                    (click)="stopGame()">
+                    Encerrar jogo
+        </ion-button>
+        <ion-button *ngIf="game.hasStarted && game.hasFinished" disabled expand="block" size="large">Jogo Encerrado</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>

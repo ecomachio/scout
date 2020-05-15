@@ -5,6 +5,7 @@ export class Game {
 
     public time: number;
     public hasStarted: boolean;
+    public hasFinished: boolean;
     public timer: Timer;
 
     constructor() { }
@@ -13,6 +14,10 @@ export class Game {
         this.hasStarted = true;
         this.timer = new Timer();
         this.timer.start({ precision: 'secondTenths' });
+    }
+
+    stopGame(){
+        this.hasFinished = true;        
     }
 
     currentTime(): string {
