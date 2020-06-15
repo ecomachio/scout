@@ -34,6 +34,7 @@ export class PlayerPage implements OnInit {
 
   ngOnInit() {
     this.player = new Player();
+    this.categoryService.getCategories().subscribe(cat => this.categories = cat);
     const playerId = this.route.snapshot.params.id;
     if (playerId) {
       this.loadPlayer(playerId);
@@ -48,7 +49,7 @@ export class PlayerPage implements OnInit {
     await loading.present();
 
     this.playerService.getPlayer(playerId).subscribe(res => {
-      this.categoryService.getCategories().subscribe(cat => this.categories = cat);
+      
       loading.dismiss();
       console.log(res);
       this.player = res;

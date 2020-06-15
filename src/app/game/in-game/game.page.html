@@ -78,11 +78,12 @@
           <h2>{{gameTime}}</h2>
         </div>
         <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>
-        <ion-button *ngIf="game.hasStarted && !game.hasFinished" expand="block" color="danger" size="large" 
-                    (click)="stopGame()">
-                    Encerrar jogo
+        <ion-button *ngIf="game.hasStarted && !game.hasFinished" expand="block" color="danger" size="large"
+          (click)="stopGame()">
+          Encerrar jogo
         </ion-button>
-        <ion-button *ngIf="game.hasStarted && game.hasFinished" disabled expand="block" size="large">Jogo Encerrado</ion-button>
+        <ion-button *ngIf="game.hasStarted && game.hasFinished" disabled expand="block" size="large">Jogo Encerrado
+        </ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -114,21 +115,11 @@
           <ion-card-content class="moduleContent">
             <ion-img class="cardImg" src="assets/043-strategy.png"></ion-img>
           </ion-card-content>
-          
+
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col>
-        <ion-card class="module" button="true" color="danger" (click)="choosePlayers(actionEnum.GOALKEEPERSAVE)">
-          <ion-card-header>
-            <ion-card-subtitle>Defesas do Goleiro</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="moduleContent">
-            <ion-img class="cardImg" src="assets/002-goalie.png"></ion-img>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
       <ion-col>
         <ion-card class="module" button="true" color="warning" (click)="choosePlayers(actionEnum.FOUL)">
           <ion-card-header>
@@ -138,6 +129,17 @@
             <ion-img class="cardImg" src="assets/011-amonestation-1.png"></ion-img>
           </ion-card-content>
         </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="module" button="true" color="danger" (click)="choosePlayers(actionEnum.GOALKEEPERSAVE)">
+          <ion-card-header>
+            <ion-card-subtitle>Defesas do Goleiro</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/002-goalie.png"></ion-img>
+          </ion-card-content>
+        </ion-card>
+
       </ion-col>
       <ion-col>
         <ion-card class="module" button="true" color="medium" (click)="otherModules()">

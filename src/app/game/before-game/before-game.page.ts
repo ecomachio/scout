@@ -68,10 +68,7 @@ export class BeforeGamePage implements OnInit, OnDestroy {
     this.slides.lockSwipeToNext(true);
   }
 
-  async nextSlide(selectedEntity) {
-    if (await this.slides.isEnd() && this.selectedMatch) {
-      this.router.navigateByUrl(`/game/${this.selectedMatch.id}`);
-    }
+  async nextSlide(selectedEntity) {   
 
     switch (await this.slides.getActiveIndex()) {
       case 0:
@@ -91,6 +88,12 @@ export class BeforeGamePage implements OnInit, OnDestroy {
       default:
         break;
     }
+    
+    /* Vai para a pagina de game e começa a partida */
+    if (await this.slides.isEnd() && this.selectedMatch) {
+      this.router.navigateByUrl(`/game/${this.selectedMatch.id}`);
+    }
+
     await this.slides.lockSwipeToNext(false);
     await this.slides.slideNext();
   }
