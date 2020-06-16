@@ -1,11 +1,12 @@
 import { Player } from './player';
 import { Category } from './category';
+import { Team } from './team';
 
 export class Match {
 
     id: string;
-    homeTeam: string; // team maybe
-    awayTeam: string; // team maybe
+    homeTeam: Team = new Team();; // team maybe
+    awayTeam: Team = new Team();; // team maybe
     competitionId: string;
     description: string;
 
@@ -18,7 +19,7 @@ export class Match {
     category: Category;
 
     // game controls
-    isStarted: boolean;
+    isStarted: boolean;    
 }
 
 class Score {
@@ -30,5 +31,4 @@ class Score {
         this.home = 0;
         this.away = 0;
     }
-
 }

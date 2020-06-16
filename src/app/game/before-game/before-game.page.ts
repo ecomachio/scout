@@ -53,22 +53,28 @@ export class BeforeGamePage implements OnInit, OnDestroy {
     await loading.present();
 
     this.competitionsService.getCompetitions().pipe(takeUntil(this.unsubscribe$)).subscribe(comp => {
-        this.competitions = comp;
-
-        this.categoryService.getCategories().pipe(takeUntil(this.unsubscribe$)).subscribe(cat => this.categories = cat);
-
-        this.slides.lockSwipeToNext(true);
-
-        loading.dismiss();
-
+      this.competitions = comp.sort((a, b) => {
+        if (isNaN(+a.start))
+          return 1;
+        else if (isNaN(+b.start))
+          return -1;
+        return +a.start - +b.start
       });
+
+      this.categoryService.getCategories().pipe(takeUntil(this.unsubscribe$)).subscribe(cat => this.categories = cat);
+
+      this.slides.lockSwipeToNext(true);
+
+      loading.dismiss();
+
+    });
   }
 
   ionSlideWillChange(e) {
     this.slides.lockSwipeToNext(true);
   }
 
-  async nextSlide(selectedEntity) {   
+  async nextSlide(selectedEntity) {
 
     switch (await this.slides.getActiveIndex()) {
       case 0:
@@ -88,7 +94,7 @@ export class BeforeGamePage implements OnInit, OnDestroy {
       default:
         break;
     }
-    
+
     /* Vai para a pagina de game e começa a partida */
     if (await this.slides.isEnd() && this.selectedMatch) {
       this.router.navigateByUrl(`/game/${this.selectedMatch.id}`);
@@ -99,7 +105,7 @@ export class BeforeGamePage implements OnInit, OnDestroy {
   }
 
   async filterMatches(competition, category) {
-    let matches;
+    let matches:Array<Match>;
     matches = await this.matchService.getMatchesByCompetition(competition.id).then((res: any) => {
       if (!res) {
         this.matches = [];
@@ -108,6 +114,14 @@ export class BeforeGamePage implements OnInit, OnDestroy {
         const id = m.id;
         return { id, ...m.data() } as Match;
       });
+    });
+    
+    matches.sort((a, b) => {
+      if (isNaN(+a.date))
+        return 1;
+      else if (isNaN(+b.date))
+        return -1;
+      return +a.date - +b.date
     });
 
     return matches.filter((m: Match) => {

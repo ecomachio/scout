@@ -17,7 +17,7 @@ export class MatchService {
         db: AngularFirestore,
         private utilsService: UtilsService,
     ) {
-        this.matchsCollection = db.collection<Match>('matchs');
+        this.matchsCollection = db.collection<Match>('matchs', ref => ref.orderBy('name'));
 
         this.matchs = this.matchsCollection.snapshotChanges().pipe(
             map(actions => {
@@ -25,6 +25,10 @@ export class MatchService {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
                     console.log({ id, ...data });
+                    
+                    /* essa linha ficou boa kkkk */
+                    data.date = new Date(data.date);
+
                     return { id, ...data };
                 });
             })

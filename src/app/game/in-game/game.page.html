@@ -73,9 +73,15 @@
     </ion-row>
     <ion-row>
       <ion-col ion-item no-lines no-padding text-center>
-        <div class="gameTimeContainer">
-          <ion-img class="gameTimeImg" src="assets/clock.png"></ion-img>
-          <h2>{{gameTime}}</h2>
+        <div class="gameBarContainer">
+          <div class="gameStat gameTimeContainer">
+            <ion-img class="gameTimeImg" src="assets/clock.png"></ion-img>
+            <h2>{{gameTime}}</h2>
+          </div>
+          <div class="gameStat  gameTimeContainer">
+            <ion-img class="gameTimeImg" src="assets/017-football-2.png"></ion-img>
+            <h2>2 x 0</h2>
+          </div>
         </div>
         <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>
         <ion-button *ngIf="game.hasStarted && !game.hasFinished" expand="block" color="danger" size="large"

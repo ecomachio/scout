@@ -21,16 +21,29 @@
     </ion-card>
   </div>
   <div *ngIf="confirmationStep" class="statisticsCardContainer">
-      <h1>{{selectedPlayer.name}}</h1>
-      <ion-card button="true" color="success" (click)="onConfirmed(true)">
-        <ion-card-content class="statisticsCardContent">
-          <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
-        </ion-card-content>
-      </ion-card>
-      <ion-card button="true" color="danger" (click)="onConfirmed(false)">
-        <ion-card-content class="statisticsCardContent">
-          <ion-icon class="statisticsButton" name="close"></ion-icon>
-        </ion-card-content>
-      </ion-card>
-    </div>
+    <h1>{{selectedPlayer.name}}</h1>
+    <ion-card button="true" color="success" (click)="onConfirmed(true)">
+      <ion-card-content class="statisticsCardContent">
+        <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+    <ion-card button="true" color="danger" (click)="onConfirmed(false)">
+      <ion-card-content class="statisticsCardContent">
+        <ion-icon class="statisticsButton" name="close"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="goalStep" class="statisticsCardContainer">
+    <h1>{{selectedPlayer.name}}</h1>
+    <ion-card button="true" color="success" (click)="onConfirmed(true)">
+      <ion-card-content class="statisticsCardContent">
+        {{homeTeam.name}}
+      </ion-card-content>
+    </ion-card>
+    <ion-card button="true" color="danger" (click)="onConfirmed(false)">
+      <ion-card-content class="statisticsCardContent">
+        {{awayTeam.name}}
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

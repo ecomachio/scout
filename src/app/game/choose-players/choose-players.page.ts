@@ -13,6 +13,7 @@ import { ActionService } from 'src/app/services/action.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
 import { ThrowStmt } from '@angular/compiler';
 import { PositionEnum } from 'src/app/enum/Position.enum';
+import { Team } from 'src/app/entity/team';
 
 @Component({
   selector: 'app-choose-players',
@@ -22,11 +23,14 @@ import { PositionEnum } from 'src/app/enum/Position.enum';
 export class ChoosePlayersPage implements OnInit {
 
   confirmationStep: boolean;
+  goalStep: boolean;
 
-  players: Array<Player>;
+  players: Array<Player>;  
   selectedPlayer: Player;
   selectedAction: Action;
   steps: number;
+  homeTeam: Team;
+  awayTeam: Team;
 
   constructor(
     private route: ActivatedRoute,
@@ -43,9 +47,15 @@ export class ChoosePlayersPage implements OnInit {
 
     this.selectedAction = new Action(qpAction);
     this.players = this.gameService.players;
+    this.homeTeam = this.gameService.getMatch().homeTeam;
+    this.awayTeam = this.gameService.getMatch().awayTeam;
 
     if (this.selectedAction.description === ActionEnum.GOALKEEPERSAVE) {
       this.players = this.players.filter(p => p.position === PositionEnum.GK);
+    }
+
+    if (this.selectedAction.description === ActionEnum.GOAL){
+
     }
     
     console.log(this.players);

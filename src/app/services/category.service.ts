@@ -13,14 +13,14 @@ export class CategoryService {
     private categories: Observable<Category[]>;
 
     constructor(db: AngularFirestore) {
-        this.categoriesCollection = db.collection<Category>('categories');
+        this.categoriesCollection = db.collection<Category>('categories', ref => ref.orderBy('name'));
 
         this.categories = this.categoriesCollection.snapshotChanges().pipe(
             map(actions => {
                 return actions.map(a => {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
-                    console.log({ id, ...data });
+                    
                     return { id, ...data };
                 });
             })

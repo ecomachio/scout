@@ -13,13 +13,14 @@ export class PlayerService {
     private players: Observable<Player[]>;
 
     constructor(db: AngularFirestore) {
-        this.playersCollection = db.collection<Player>('players');
+        this.playersCollection = db.collection<Player>('players', ref => ref.orderBy('name'));
 
         this.players = this.playersCollection.snapshotChanges().pipe(
             map(actions => {
                 return actions.map(a => {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
+                    data.birthdate = new Date(data.birthdate);
                     console.log({ id, ...data });
                     return { id, ...data };
                 });

@@ -18,7 +18,7 @@
             <img src="assets/pague.png" alt="">
             <div class="formfaceText">
               <h1>Partida</h1>
-              <p>{{match.homeTeam}} vs {{match.awayTeam}}</p>
+              <p>{{match.homeTeam.name}} vs {{match.awayTeam.name}}</p>
             </div>
             <div class="formfaceButtons">
               <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
@@ -31,18 +31,27 @@
           <div class="fields">
             <ion-item>
               <ion-label position="floating">Categoria</ion-label>
-              <ion-select name="category" [value]="match.category" [(ngModel)]="match.category"
-                required cancelText="Cancelar" [okText]="Pronto" [compareWith]="compareWith">
-                <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}</ion-select-option>
+              <ion-select name="category" [value]="match.category" [(ngModel)]="match.category" required
+                cancelText="Cancelar" [okText]="Pronto" [compareWith]="compareWith">
+                <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}
+                </ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Time da casa</ion-label>
-              <ion-input [(ngModel)]="match.homeTeam" inputmode="text"></ion-input>
+              <ion-select name="homeTeam" [value]="match.homeTeam" [(ngModel)]="match.homeTeam" required
+                cancelText="Cancelar" [okText]="Pronto" [compareWith]="compareWith">
+                <ion-select-option [value]="homeTeam" *ngFor="let homeTeam of teams">{{homeTeam.name}}
+                </ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Time visitante</ion-label>
-              <ion-input [(ngModel)]="match.awayTeam" inputmode="text"></ion-input>
+              <ion-select name="awayTeam" [value]="match.awayTeam" [(ngModel)]="match.awayTeam" required
+                cancelText="Cancelar" [okText]="Pronto" [compareWith]="compareWith">
+                <ion-select-option [value]="awayTeam" *ngFor="let awayTeam of teams">{{awayTeam.name}}
+                </ion-select-option>
+              </ion-select>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Local</ion-label>
@@ -65,13 +74,13 @@
           </ion-item-divider>
           <div class="score">
             <div class="homeTeam">
-              <h4>{{match.homeTeam}} </h4>
+              <h4>{{match.homeTeam.name}} </h4>
             </div>
             <div class="fixedScore">
               <h3>{{match.score.home}} x {{match.score.away}}</h3>
             </div>
             <div class="awayTeam">
-              <h4> {{match.awayTeam}}</h4>
+              <h4> {{match.awayTeam.name}}</h4>
             </div>
           </div>
         </ion-row>

@@ -44,6 +44,11 @@ ion-card {
   padding: 5px;
 }
 
+.gameBarContainer{
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .gameTimeContainer, .gameStats{
   display: flex;
   align-items: center;

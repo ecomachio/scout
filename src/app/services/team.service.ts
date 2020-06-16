@@ -13,7 +13,7 @@ export class TeamService {
     private teams: Observable<Team[]>;
 
     constructor(db: AngularFirestore) {
-        this.teamsCollection = db.collection<Team>('teams');
+        this.teamsCollection = db.collection<Team>('teams', ref => ref.orderBy('name'));
 
         this.teams = this.teamsCollection.snapshotChanges().pipe(
             map(actions => {
