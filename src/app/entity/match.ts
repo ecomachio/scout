@@ -20,6 +20,7 @@ export class Match {
 
     // game controls
     isStarted: boolean;    
+
 }
 
 class Score {

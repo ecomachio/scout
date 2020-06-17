@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Team } from '../entity/team';
+import { MatchService } from './match.service';
+import { Match } from '../entity/match';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +14,10 @@ export class TeamService {
     private teamsCollection: AngularFirestoreCollection<Team>;
     private teams: Observable<Team[]>;
 
-    constructor(db: AngularFirestore) {
+    constructor(
+        db: AngularFirestore,
+        private matchService: MatchService
+    ) {
         this.teamsCollection = db.collection<Team>('teams', ref => ref.orderBy('name'));
 
         this.teams = this.teamsCollection.snapshotChanges().pipe(
@@ -39,7 +44,23 @@ export class TeamService {
         return this.teamsCollection.doc<Team>(id).get();
     }
 
-    updateTeam(team: Team, id: string) {
+    async updateTeam(team: Team, id: string) {
+        let allMatchs;
+        let matchsContainingTheTeam: Array<Match>;
+        (await this.matchService.getAllMatchs()).docs
+            .map((m: QueryDocumentSnapshot<Match>) => {
+                const id = m.id;
+                return { id, ...m.data() } as Match;
+            })
+            .filter(m => (m.homeTeam.id == id) || (m.awayTeam.id == id))
+            .forEach(m => {
+                if (id == m.awayTeam.id)
+                    m.awayTeam = team;
+                if (id == m.homeTeam.id)
+                    m.homeTeam = team;
+                this.matchService.updateMatch(m, m.id).then((res) => console.log("times atualizados dentro das partidas"));
+            })
+
         return this.teamsCollection.doc<Team>(id).update(team);
     }
 

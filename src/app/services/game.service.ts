@@ -26,8 +26,9 @@ export class GameService {
 
   /* todo unsubscribe when game is over */
   async initialize(matchId) {
+    this.match = new Match();
     this.match = (await this.matchService.getMatchPromise(matchId)).data() as Match;
-
+    console.log(this.match);
     /* get QueryDocumentSnapshot of players from firebase by category */
     const ps = await this.playerService.getPlayersByCategory(this.match.category.id);
 

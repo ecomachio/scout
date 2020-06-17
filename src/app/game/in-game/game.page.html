@@ -80,7 +80,7 @@
           </div>
           <div class="gameStat  gameTimeContainer">
             <ion-img class="gameTimeImg" src="assets/017-football-2.png"></ion-img>
-            <h2>2 x 0</h2>
+            <h2>{{match.score.home}} x {{match.score.away}}</h2>
           </div>
         </div>
         <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>

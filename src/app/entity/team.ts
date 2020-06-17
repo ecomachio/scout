@@ -3,6 +3,7 @@ export class Team {
     id: string;
     name: string;
     description: string;
-    city: string;   
+    city: string;  
+    isMainTeam: boolean; 
 
 }

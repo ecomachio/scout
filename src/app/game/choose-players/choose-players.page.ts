@@ -22,15 +22,17 @@ import { Team } from 'src/app/entity/team';
 })
 export class ChoosePlayersPage implements OnInit {
 
+  choosePlayerStep: boolean;
   confirmationStep: boolean;
   goalStep: boolean;
 
-  players: Array<Player>;  
+  players: Array<Player>;
   selectedPlayer: Player;
   selectedAction: Action;
   steps: number;
   homeTeam: Team;
   awayTeam: Team;
+  match: Match;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,19 +47,24 @@ export class ChoosePlayersPage implements OnInit {
     const qpAction = this.route.snapshot.queryParamMap.get('action');
     this.steps = parseInt(this.route.snapshot.queryParamMap.get('step'));
 
+    this.choosePlayerStep = true;
+
     this.selectedAction = new Action(qpAction);
     this.players = this.gameService.players;
+    this.match = this.gameService.getMatch();
     this.homeTeam = this.gameService.getMatch().homeTeam;
     this.awayTeam = this.gameService.getMatch().awayTeam;
+    console.log(this.homeTeam)
+    console.log(this.awayTeam)
 
     if (this.selectedAction.description === ActionEnum.GOALKEEPERSAVE) {
       this.players = this.players.filter(p => p.position === PositionEnum.GK);
     }
 
-    if (this.selectedAction.description === ActionEnum.GOAL){
-
+    if (this.selectedAction.description === ActionEnum.GOAL) {
+      this.showGoalStep();
     }
-    
+
     console.log(this.players);
     console.log(this.gameService.match);
 
@@ -84,11 +91,40 @@ export class ChoosePlayersPage implements OnInit {
     this.location.back();
   }
 
+  showGoalStep() {
+    this.choosePlayerStep = false;
+    this.goalStep = true;
+    this.confirmationStep = false;
+  }
+
+  onGoalConfirmed(team: Team) {
+    this.hideGoalStep();
+    this.setGoal(team);
+
+    if (team.isMainTeam) {
+      this.choosePlayerStep = true;
+    } else {
+      this.done();
+    }
+
+  }
+
+  setGoal(team: Team): void {
+    if (team.id == this.homeTeam.id) {
+      this.match.score.home++;
+    } else {
+      this.match.score.away++;
+    }
+  }
+
+  hideGoalStep() {
+    this.goalStep = false;
+  }
+
   showConfirmationStep() {
+    this.choosePlayerStep = false;
+    this.goalStep = false;
     this.confirmationStep = true;
   }
 
-  hideConfirmationStep() {
-    this.confirmationStep = false;
-  }
 }

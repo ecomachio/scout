@@ -25,7 +25,7 @@ export class MatchService {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
                     console.log({ id, ...data });
-                    
+
                     /* essa linha ficou boa kkkk */
                     data.date = new Date(data.date);
 
@@ -37,6 +37,10 @@ export class MatchService {
 
     getMatchs() {
         return this.matchs;
+    }
+
+    getAllMatchs() {
+        return this.matchsCollection.ref.get();
     }
 
     getMatchesByCompetition(competitionId: string): any {

@@ -17,11 +17,11 @@ import { OtherModulesComponent } from 'src/app/compenents/other-modules/other-mo
   templateUrl: 'game.page.html',
   styleUrls: ['game.page.scss'],
 })
-export class GamePage implements OnInit, OnDestroy {
+export class GamePage implements OnInit,  OnDestroy {
 
   unsubscribe$: Subject<void> = new Subject<void>();
 
-  match: Match;
+  match: Match = new Match();
 
   game: Game;
   gameTime = '00:00:00';
