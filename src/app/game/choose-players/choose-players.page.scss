@@ -13,14 +13,26 @@
     text-align: center;
 }
 
-.playerNumber{
-    
+.playerNumber{    
     font-size: 6em
 }
 
 .statisticsCardContent{
+   display: flex;
+   align-items: center;
+   justify-content: center;
    height: 100%;
+   h1{
+    font-size: 5em;
+   }
 }
+
+.homeTeamImg{
+    filter: invert(1);   
+    width: 7%;
+    margin: 0 3% 0 0;
+}
+
 
 .statisticsCardContainer{
     height: 100%;

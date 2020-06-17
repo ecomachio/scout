@@ -103,8 +103,8 @@ export class ChoosePlayersPage implements OnInit {
 
     if (team.isMainTeam) {
       this.choosePlayerStep = true;
-    } else {
-      this.done();
+    } else {      
+      this.location.back();
     }
 
   }
