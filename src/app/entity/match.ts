@@ -1,6 +1,7 @@
 import { Player } from './player';
 import { Category } from './category';
 import { Team } from './team';
+import { Action } from './action';
 
 export class Match {
 
@@ -19,7 +20,8 @@ export class Match {
     category: Category;
 
     // game controls
-    isStarted: boolean;    
+    isStarted: boolean;
+    gameActions: Array<Action>;
 
 }
 

@@ -52,9 +52,10 @@ export class GameService {
     this.gameActions.push(action);
   }
 
-  save() {
+  save(match: Match) {
     console.log(this.gameActions)
     this.gameActions.forEach(a => this.actionService.addAction(a));
+    this.matchService.updateMatch(match, match.id);
     console.log(this.players);
   }
 

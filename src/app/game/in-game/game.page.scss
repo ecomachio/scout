@@ -97,3 +97,13 @@ ion-card {
   }
 }
 
+
+.gameButtonBar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ion-button{
+    width: 100%;
+  }
+}
+

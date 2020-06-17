@@ -40,6 +40,9 @@
     text-align: center;
     flex-direction: column;
     justify-content: space-between;     
+    ion-list{
+        width: 100%;
+    }  
 }
 
 .statisticsCardContainer ion-card{

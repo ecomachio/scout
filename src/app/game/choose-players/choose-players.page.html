@@ -35,7 +35,7 @@
   </div>
   <div *ngIf="goalStep" class="statisticsCardContainer">
     <h1>Gol</h1>
-    <ion-card button="true" color="success" (click)="onGoalConfirmed(homeTeam)">     
+    <ion-card button="true" color="success" (click)="onGoalConfirmed(homeTeam)">
       <ion-card-content class="statisticsCardContent">
         <ion-img class="homeTeamImg" src="assets/027-football.png"></ion-img>
         <h1>{{homeTeam.name}}</h1>
@@ -44,6 +44,20 @@
     <ion-card button="true" color="medium" (click)="onGoalConfirmed(awayTeam)">
       <ion-card-content class="statisticsCardContent">
         <h1>{{awayTeam.name}}</h1>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="noteStep" class="statisticsCardContainer">
+    <ion-card>
+      <ion-list lines="full">
+        <ion-item>         
+          <ion-textarea [(ngModel)]="notes" rows="15" ></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-card button="true" color="primary" (click)="onNoteConfirmed()">
+      <ion-card-content class="statisticsCardContent">
+        <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
       </ion-card-content>
     </ion-card>
   </div>

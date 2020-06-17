@@ -7,6 +7,7 @@ export class Game {
     public hasStarted: boolean;
     public hasFinished: boolean;
     public timer: Timer;
+    public isPaused: boolean;
 
     constructor() { }
 
@@ -16,8 +17,8 @@ export class Game {
         this.timer.start({ precision: 'secondTenths' });
     }
 
-    stopGame(){
-        this.hasFinished = true;        
+    stopGame() {
+        this.hasFinished = true;
     }
 
     currentTime(): string {
@@ -31,4 +32,13 @@ export class Game {
     totalSecondTenths() {
         return this.timer.getTotalTimeValues().secondTenths;
     }
+
+    pause() {
+        this.isPaused = true;
+    }
+
+    unpause() {
+        this.isPaused = false;
+    }
+
 }

@@ -33,6 +33,8 @@ export class ChoosePlayersPage implements OnInit {
   homeTeam: Team;
   awayTeam: Team;
   match: Match;
+  noteStep: boolean;
+  notes: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,12 +59,16 @@ export class ChoosePlayersPage implements OnInit {
     console.log(this.homeTeam)
     console.log(this.awayTeam)
 
-    if (this.selectedAction.description === ActionEnum.GOALKEEPERSAVE) {
-      this.players = this.players.filter(p => p.position === PositionEnum.GK);
-    }
-
-    if (this.selectedAction.description === ActionEnum.GOAL) {
-      this.showGoalStep();
+    switch (this.selectedAction.description) {
+      case ActionEnum.GOALKEEPERSAVE:
+        this.players = this.players.filter(p => p.position === PositionEnum.GK);
+        break;
+      case ActionEnum.GOAL:
+        this.showGoalStep();
+        break;
+      case ActionEnum.NOTES:
+        this.showNoteStep();
+        break;
     }
 
     console.log(this.players);
@@ -103,7 +109,7 @@ export class ChoosePlayersPage implements OnInit {
 
     if (team.isMainTeam) {
       this.choosePlayerStep = true;
-    } else {      
+    } else {
       this.location.back();
     }
 
@@ -124,7 +130,24 @@ export class ChoosePlayersPage implements OnInit {
   showConfirmationStep() {
     this.choosePlayerStep = false;
     this.goalStep = false;
+    this.noteStep = false;
     this.confirmationStep = true;
+  }
+
+  showNoteStep() {
+    this.choosePlayerStep = false;
+    this.goalStep = false;
+    this.noteStep = true;
+    this.confirmationStep = false;
+  }
+
+  hideNoteStep() {
+    this.noteStep = false;
+  }
+
+  onNoteConfirmed() {
+    this.match.notes = this.notes;
+    this.location.back();
   }
 
 }

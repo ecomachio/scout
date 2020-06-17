@@ -11,13 +11,14 @@ import { GameService } from 'src/app/services/game.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
 import { ModalController } from '@ionic/angular';
 import { OtherModulesComponent } from 'src/app/compenents/other-modules/other-modules.component';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: 'game.page.html',
   styleUrls: ['game.page.scss'],
 })
-export class GamePage implements OnInit,  OnDestroy {
+export class GamePage implements OnInit, OnDestroy {
 
   unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -39,6 +40,7 @@ export class GamePage implements OnInit,  OnDestroy {
     private matchService: MatchService,
     private gameService: GameService,
     private modalController: ModalController,
+    private utilsService: UtilsService,
   ) {
     this.homeTeam = new GameTeam();
     this.awayTeam = new GameTeam();
@@ -49,7 +51,7 @@ export class GamePage implements OnInit,  OnDestroy {
     const matchId = this.route.snapshot.params.matchId;
 
     this.setupMatch(matchId);
-    this.startGame();    
+    this.startGame();
 
   }
 
@@ -83,17 +85,22 @@ export class GamePage implements OnInit,  OnDestroy {
 
   stopGame() {
     this.validateAction();
-    
+
     this.game.stopGame();
     this.homeTeam.ballPossessionTimer.pause();
     this.awayTeam.ballPossessionTimer.pause();
     this.game.timer.pause();
-
-    this.gameService.save();
+    console.log("save", this.match)
+    this.gameService.save(this.match);
     this.router.navigateByUrl(`after-game/${this.match.id}`);
   }
 
   validateAction() {
+    if (this.game.isPaused) {
+      this.utilsService.showToast('Partida pausada');
+      throw new Error('gameisPausedException');
+    }
+
     if (!this.game.hasStarted) {
       throw new Error('gameNotStartedException');
     }
@@ -146,6 +153,9 @@ export class GamePage implements OnInit,  OnDestroy {
   }
 
   async otherModules() {
+    
+    this.validateAction();
+
     const modal = await this.modalController.create({
       component: OtherModulesComponent,
       componentProps: {
@@ -161,7 +171,27 @@ export class GamePage implements OnInit,  OnDestroy {
     this.unsubscribe$.unsubscribe(); */
   }
 
+  pauseGame() {
+    if (this.homeTeam.hasPossession)
+      this.homeTeam.ballPossessionTimer.pause();
 
+    if (this.awayTeam.hasPossession)
+      this.awayTeam.ballPossessionTimer.pause();
+
+    this.game.timer.pause();
+    this.game.pause();
+  }
+
+  unpauseGame() {
+    if (this.homeTeam.hasPossession)
+      this.homeTeam.ballPossessionTimer.start();
+
+    if (this.awayTeam.hasPossession)
+      this.awayTeam.ballPossessionTimer.start();
+
+    this.game.timer.start();
+    this.game.unpause();
+  }
 
 
 }
