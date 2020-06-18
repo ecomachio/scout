@@ -21,7 +21,11 @@ ion-grid, ion-row {
 }
 
 .fields{
-    width:100%
+    width:100%;
+    ion-toggle {
+        margin-top: 20px;
+        margin-left: -10px;
+    }
 }
 
 .scoreWrapper {

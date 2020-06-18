@@ -1,13 +1,14 @@
-.matchSummary{
-   h3{
-    text-align: center;
-   }
+.matchSummary {
+    
+    h3 {
+        text-align: center;
+    }
 }
 
-.stats{
-    ion-list{
-        ion-item{
-            ion-label:nth-child(even){
+.stats {
+    ion-list {
+        ion-item {
+            ion-label:nth-child(even) {
                 text-align: right;
             }
             display: flex;
@@ -16,16 +17,35 @@
     }
 }
 
-.score{
-    height: 20vh;
+.scoreList {
+    margin: 15px auto 50px auto;
+    width: 80%;
+}
+
+.scoreItem {
     display: flex;
     justify-content: center;
     align-items: center;
-    .scoreText{
+    .scoreText {
         width: 100%;
         display: flex;
-        font-size: 3em;
-        span{
+        span {
+            flex: 1;
+        }
+        span:first-of-type {
+            text-align: left;
+            padding-right: 5px;
+        }
+        span:last-of-type {
+            padding-left: 5px;
+            text-align: right;
+        }
+    }
+    .scoreTextCenter {
+        width: 100%;
+        display: flex;
+        font-size: 2em;
+        span {
             flex: 1;
         }
         span:first-of-type {
@@ -36,27 +56,26 @@
             padding-left: 5px;
             text-align: left;
         }
-    }    
+    }
 }
 
-.cardImg{
+.cardImg {
     height: 30%;
     width: 10em;
     padding: 3%;
-}   
+}
 
-.otherStats{
+.otherStats {
     display: flex;
     padding: 5px;
-    .wrapper{
+    .wrapper {
         max-width: 75%;
     }
 }
 
-ion-card-title{
+ion-card-title {
     font-size: 2em;
 }
-
 
 .doneButton {
     position: absolute;
