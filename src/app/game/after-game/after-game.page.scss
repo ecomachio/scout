@@ -1,5 +1,7 @@
 .matchSummary{
-   
+   h3{
+    text-align: center;
+   }
 }
 
 .stats{
@@ -53,4 +55,11 @@
 
 ion-card-title{
     font-size: 2em;
+}
+
+
+.doneButton {
+    position: absolute;
+    right: 2em;
+    bottom: 2em;
 }

@@ -68,4 +68,8 @@ export class AfterGamePage implements OnInit {
     console.log(this.actions);
   }
 
+  done(){
+    this.router.navigateByUrl(`/menu`);
+  }
+
 }
