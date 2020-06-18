@@ -15,18 +15,26 @@
 }
 
 .score{
+    height: 20vh;
     display: flex;
-    span{
-        flex: 1;
-    }
-    span:first-of-type {
-        text-align: right;
-        padding-right: 5px;
-    }
-    span:last-of-type {
-        padding-left: 5px;
-        text-align: left;
-    }
+    justify-content: center;
+    align-items: center;
+    .scoreText{
+        width: 100%;
+        display: flex;
+        font-size: 3em;
+        span{
+            flex: 1;
+        }
+        span:first-of-type {
+            text-align: right;
+            padding-right: 5px;
+        }
+        span:last-of-type {
+            padding-left: 5px;
+            text-align: left;
+        }
+    }    
 }
 
 .cardImg{
@@ -37,6 +45,10 @@
 
 .otherStats{
     display: flex;
+    padding: 5px;
+    .wrapper{
+        max-width: 75%;
+    }
 }
 
 ion-card-title{

@@ -8,6 +8,6 @@ export enum ActionEnum {
     REDCARD = 'Cartão Vermelho',
     YELLOWCARD = 'Cartão Amarelo',
     GOAL = 'Gol',
-    MANOFTHEMATCH = 'Destaque',
+    PLAYEROFTHEMATCH = 'Destaque',
     NOTES = 'Notas',
 }

@@ -6,6 +6,7 @@ import { PlayerService } from './player.service';
 import { QueryDocumentSnapshot, AngularFirestore } from 'angularfire2/firestore';
 import { Action } from '../entity/action';
 import { ActionService } from './action.service';
+import { ActionEnum } from '../enum/action.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,20 @@ export class GameService {
 
   addAction(action: Action) {
     action.match = this.match;
+
+    if (action.description === ActionEnum.PLAYEROFTHEMATCH) {
+      this.updatePlayerOfTheMatch(action);
+    }
+
     this.gameActions.push(action);
+  }
+
+  updatePlayerOfTheMatch(action: Action){
+    this.gameActions.forEach((element, index) => {
+      if (element.description === ActionEnum.PLAYEROFTHEMATCH) {
+        this.gameActions[index] = action;
+      }
+    });
   }
 
   save(match: Match) {

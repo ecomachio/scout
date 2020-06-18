@@ -9,11 +9,13 @@
 
 <ion-content>
   <div *ngIf="match" class="matchSummary">
-    <h1 class="score">
-      <span>{{match.homeTeam.name}} {{match.score.home}}</span>
-      x
-      <span>{{match.score.away}} {{match.awayTeam.name}}</span>
-    </h1>
+    <div class="score">
+      <h1 class="scoreText">
+        <span>{{match.homeTeam.name}} {{match.score.home}}</span>
+        x
+        <span>{{match.score.away}} {{match.awayTeam.name}}</span>
+      </h1>
+    </div>
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -24,12 +26,10 @@
                 <ion-card-title>Destaque</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                {{match.playerOfTheMatch}}
+                <h1>{{stats.playerOfTheMatch}}</h1>
               </ion-card-content>
             </div>
           </ion-card>
-        </ion-col>
-        <ion-col>
           <ion-card class="otherStats ion-no-margin">
             <ion-img class="cardImg" src="assets/016-reporter.png"></ion-img>
             <div class="wrapper">
@@ -42,8 +42,6 @@
             </div>
           </ion-card>
         </ion-col>
-      </ion-row>
-      <ion-row>
         <ion-col>
           <ion-card class="stats ion-no-margin">
             <ion-list>
@@ -81,6 +79,7 @@
               </ion-item>
             </ion-list>
           </ion-card>
+
         </ion-col>
       </ion-row>
     </ion-grid>

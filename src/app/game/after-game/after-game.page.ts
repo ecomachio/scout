@@ -50,7 +50,9 @@ export class AfterGamePage implements OnInit {
     const goal = this.actions.filter(n => n.description == ActionEnum.GOAL).length
     const redCard = this.actions.filter(n => n.description == ActionEnum.REDCARD).length
     const yellowCard = this.actions.filter(n => n.description == ActionEnum.YELLOWCARD).length
-    const manOfTheMatch = this.actions.filter(n => n.description == ActionEnum.MANOFTHEMATCH).length
+    const playerOfTheMatch = this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0].player.name
+
+    console.log(playerOfTheMatch)
 
     this.stats = {
       tackles,
@@ -61,7 +63,7 @@ export class AfterGamePage implements OnInit {
       goal,
       redCard,
       yellowCard,
-      manOfTheMatch,
+      playerOfTheMatch,
     };
     console.log(this.actions);
   }

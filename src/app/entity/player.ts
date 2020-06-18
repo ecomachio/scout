@@ -6,7 +6,7 @@ import { PositionEnum } from '../enum/Position.enum';
 export class Player {
 
     id: string;
-    nane: string;
+    name: string;
     address: string;
     document: string;
     phone: number;
