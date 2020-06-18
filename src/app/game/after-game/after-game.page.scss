@@ -1,3 +1,44 @@
 .matchSummary{
-    text-align: center;
+   
+}
+
+.stats{
+    ion-list{
+        ion-item{
+            ion-label:nth-child(even){
+                text-align: right;
+            }
+            display: flex;
+            justify-content: stretch;
+        }
+    }
+}
+
+.score{
+    display: flex;
+    span{
+        flex: 1;
+    }
+    span:first-of-type {
+        text-align: right;
+        padding-right: 5px;
+    }
+    span:last-of-type {
+        padding-left: 5px;
+        text-align: left;
+    }
+}
+
+.cardImg{
+    height: 30%;
+    width: 10em;
+    padding: 3%;
+}   
+
+.otherStats{
+    display: flex;
+}
+
+ion-card-title{
+    font-size: 2em;
 }
