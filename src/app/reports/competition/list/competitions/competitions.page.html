@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Competições</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <div class="noRecordsWrapper" *ngIf="competitions.length === 0">
+      <ion-text color="dark">
+        <div class="noRecords">
+          <ion-img class="cardImg" src="assets/049-yellow-card.png"></ion-img>
+          <h2>Nenhuma competição encontrada :(</h2>
+        </div>
+      </ion-text>
+    </div>
+    <ion-list *ngIf="competitions.length !== 0" class="cardWrapper">
+      <ion-card button="true" [routerLink]="['/report/competition/report']" *ngFor="let competition of competitions">
+        <ion-card-content class="moduleContent">
+          <img class="cardImg" src="assets/premio.png">
+          <h1>{{competition.name}}</h1>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ion-list>
+</ion-content>
