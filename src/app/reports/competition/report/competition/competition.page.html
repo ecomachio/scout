@@ -7,9 +7,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="competition">
   <div class="title">
-    <h1>Champions</h1>
+    <h1>{{competition.name}}</h1>
   </div>
   <ion-grid>
     <ion-row>
