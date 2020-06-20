@@ -90,8 +90,10 @@ const routes: Routes = [
   { path: 'after-game', loadChildren: './game/after-game/after-game.module#AfterGamePageModule' },
   { path: 'after-game/:matchId', loadChildren: './game/after-game/after-game.module#AfterGamePageModule' },
   { path: 'reports', loadChildren: './reports/reports.module#ReportsPageModule' },
-  { path: 'report/competition/list', loadChildren: './reports/competition/list/competitions/competitions.module#CompetitionsPageModule' },
-  { path: 'report/competition/report/:id', loadChildren: './reports/competition/report/competition/competition.module#CompetitionPageModule' },
+  { path: 'report/competition/list', loadChildren: './reports/competition/list/competitions.module#CompetitionsPageModule' },
+  { path: 'report/competition/report/:id', loadChildren: './reports/competition/report/competition.module#CompetitionPageModule' },  
+  { path: 'report/match/report/:id', loadChildren: './reports/match/report/match.module#MatchPageModule' },
+
 ];
 
 @NgModule({
