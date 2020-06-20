@@ -31,8 +31,12 @@ export class ActionService {
         return this.actions;
     }
 
-    getActionsByMatch(matchId){
+    getActionsByMatch(matchId) {
         return this.actionsCollection.ref.where('match.id', '==', matchId).get();
+    }
+
+    getActionsByActionDescription(ad: string) {
+        return this.actionsCollection.ref.where('description', '==', ad).get();
     }
 
     getAction(id) {
@@ -43,11 +47,11 @@ export class ActionService {
         return this.actionsCollection.doc(id).update(action);
     }
 
-    addAction(action: Action) {        
+    addAction(action: Action) {
         return this.actionsCollection.add({ ...action });
     }
 
     removeAction(id) {
         return this.actionsCollection.doc(id).delete();
-    }    
+    }
 }
