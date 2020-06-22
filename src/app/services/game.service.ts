@@ -81,9 +81,11 @@ export class GameService {
 
   save(match: Match) {
     console.log("gameactions", this.gameActions)
+    
     this.gameActions.forEach(a => this.actionService.addAction(a));
-    this.matchService.updateMatch(match, match.id);
-    console.log(this.players);
+    
+    match.isFinished = true;    
+    this.matchService.updateMatch(match, match.id);    
   }
 
 }

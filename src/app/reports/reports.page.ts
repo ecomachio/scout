@@ -16,6 +16,9 @@ import { Team } from '../entity/team';
 import { TeamService } from '../services/team.service';
 import { MatchService } from '../services/match.service';
 import { Match } from '../entity/match';
+import { isUndefined } from 'util';
+import { ChartOptions, ChartType, ChartDataSets, ChartColor } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
 
 @Component({
   selector: 'app-reports',
@@ -25,16 +28,36 @@ import { Match } from '../entity/match';
 export class ReportsPage implements OnInit {
 
   unsubscribe$: Subject<void> = new Subject<void>();
+  topScorers: Array<TopScorer> = [];
   topScorer: TopScorer;
   competitions: Array<Competition>;
   players: Array<Player>;
   matchs: Array<Match>;
+  matchsGoals: Array<MatchGoals>;
   categories: Array<Category>;
   mainTeam: Team;
 
   allGoalsByMainTeam: Array<Action>;
   allGoalsConceded: Array<Action>;
-  ;
+
+  goalsScoredConcededRatio: number;
+
+  goalsScoredConcededRatioChartLabels: Label[] = [];
+  goalsScoredConcededRatioChartData: ChartDataSets[] = [{ data: [], label: "Razão" }];
+  goalsScoredConcededRatioChartType: ChartType = 'line';
+  goalsScoredConcededRatioChartColors: Color[] = [];
+  goalsScoredConcededRatioChartOptions: ChartOptions = {
+    responsive: true,
+  }
+
+  topScorersChartLabels: Label[] = [];
+  topScorersChartData: ChartDataSets[] = [{ data: [], label: "asd" }];
+  topScorersChartType: ChartType = 'pie';
+  topScorersChartLegend = false;
+  topScorersChartOptions: ChartOptions = {
+    responsive: true,
+  }
+
 
   constructor(
     private actionService: ActionService,
@@ -47,14 +70,72 @@ export class ReportsPage implements OnInit {
 
   async ngOnInit() {
     const allGoalsActions: Array<Action> = await this.getActions(ActionEnum.GOAL);
-    this.getTopScorer(allGoalsActions.filter(goals => goals.decision));
+    this.getTopScorers(allGoalsActions.filter(goals => goals.decision));
     this.getAllGoalsByMainTeam(allGoalsActions);
     this.getAllGoalsConceded(allGoalsActions);
     this.getCompetitions();
     this.getPlayers();
     this.getCategories();
     this.getMainTeam();
-    this.getMatchs();
+    this.getMatchs(allGoalsActions);
+  }
+
+  getGoalsScoredConcededRatioByMatch(allGoalsActions: Array<Action>) {
+
+    this.matchsGoals = this.matchs.map((m: Match) => {
+
+      const amg = allGoalsActions.filter(a => (a.match.id == m.id));
+      const goalsScored = amg.filter(a => a.decision).length;
+      const goalsConceded = amg.filter(a => !a.decision).length;
+      const ratio = goalsScored / goalsConceded;
+
+      return { ...m, goalsScored, goalsConceded, ratio } as MatchGoals;
+    });
+
+    this.setupGoalsScoredConcededRatioChart();
+  }
+
+  setupTopScorersChart() {
+    this.topScorersChartData[0].data = [];
+    this.topScorersChartLabels = [];
+
+    for (const top of this.topScorers.slice(0, 10)) {
+      this.topScorersChartData[0].data.push(top.goalsScored);
+      this.topScorersChartLabels.push(top.name);
+    }
+  }
+
+  setupGoalsScoredConcededRatioChart() {
+    this.goalsScoredConcededRatioChartData.push({ data: [], label: "Gols marcados" })
+    this.goalsScoredConcededRatioChartData.push({ data: [], label: "Gols contra" })
+
+    this.goalsScoredConcededRatioChartData[0].data = [];
+    this.goalsScoredConcededRatioChartData[1].data = [];
+    this.goalsScoredConcededRatioChartData[2].data = [];
+
+    this.goalsScoredConcededRatioChartColors.push({
+      backgroundColor: 'rgba(0,0,0,0.0)',
+      borderColor: '#3880ff',
+    })
+    this.goalsScoredConcededRatioChartColors.push(
+      {
+        backgroundColor: 'rgba(0,0,0,0.0)',
+        borderColor: '#2dd36f',
+      })
+    this.goalsScoredConcededRatioChartColors.push(
+      {
+        backgroundColor: 'rgba(0,0,0,0.0)',
+        borderColor: '#eb445a',
+      })
+
+    for (const mg of this.matchsGoals) {
+      this.goalsScoredConcededRatioChartData[0].data.push(mg.ratio);
+      this.goalsScoredConcededRatioChartData[1].data.push(mg.goalsScored);
+      this.goalsScoredConcededRatioChartData[2].data.push(mg.goalsConceded);
+      this.goalsScoredConcededRatioChartLabels.push(mg.description);
+    }
+    console.log(this.goalsScoredConcededRatio);
+
   }
 
   getAllGoalsConceded(allGoalsActions: Action[]) {
@@ -81,12 +162,15 @@ export class ReportsPage implements OnInit {
     this.playerService.getPlayers().pipe(takeUntil(this.unsubscribe$)).subscribe(p => this.players = p);
   }
 
-  async getMatchs() {
-    const docm = await this.matchService.getAllMatchs();
+  async getMatchs(allGoalsActions: Array<Action>) {
+    const docm = await this.matchService.getAllClosedMatchs();
     this.matchs = docm.docs.map((m: QueryDocumentSnapshot<Match>) => {
       const id = m.id;
       return { id, ...m.data() } as Match;
-    })
+    });
+
+    this.getGoalsScoredConcededRatioByMatch(allGoalsActions);
+
   }
 
   async getMainTeam() {
@@ -101,28 +185,36 @@ export class ReportsPage implements OnInit {
     this.categoryService.getCategories().pipe(takeUntil(this.unsubscribe$)).subscribe(c => this.categories = c);
   }
 
-  getTopScorer(allGoalsActions: Array<Action>): void {
-    let mf = 1;
-    let m = 0;
-    let item;
-    let result: TopScorer;
+  getTopScorers(allGoalsActions: Array<Action>): void {
+    let prev;
 
-    for (let i = 0; i < allGoalsActions.length; i++) {
-      for (let j = i; j < allGoalsActions.length; j++) {
-        if (allGoalsActions[i].player.id == allGoalsActions[j].player.id)
-          m++;
-        if (mf < m) {
-          mf = m;
-          item = allGoalsActions[i];
-        }
+    allGoalsActions.sort((a, b) => {
+      if (a.player.id > b.player.id) return 1;
+      if (a.player.id < b.player.id) return -1;
+      return 0;
+    })
+
+    console.log(allGoalsActions)
+    for (var i = 0; i < allGoalsActions.length; i++) {
+      if (isUndefined(prev) || (allGoalsActions[i].player.id !== prev.player.id)) {
+        this.topScorers.push({ ...allGoalsActions[i].player, goalsScored: 1 });
+      } else {
+        this.topScorers[this.topScorers.length - 1].goalsScored++
       }
-      m = 0;
+      prev = allGoalsActions[i];
     }
-    console.log(item.player.name, item + " ( " + mf + " times ) ");
-    result = item.player;
-    result.goalsScored = mf;
-    this.topScorer = result;
+
+    this.topScorers.sort((t1, t2) => t2.goalsScored - t1.goalsScored);
+    this.topScorer = this.topScorers[0];
+
+    this.setupTopScorersChart();
   }
+}
+
+class MatchGoals extends Match {
+  goalsScored: number;
+  goalsConceded: number;
+  ratio: number;
 }
 
 class TopScorer extends Player {

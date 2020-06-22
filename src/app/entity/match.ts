@@ -21,6 +21,7 @@ export class Match {
 
     // game controls
     isStarted: boolean;
+    isFinished: boolean;
     gameActions: Array<Action>;
 
 }

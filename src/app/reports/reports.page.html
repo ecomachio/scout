@@ -8,19 +8,23 @@
 </ion-header>
 
 <ion-content>
-  Informações
+
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card class="topCard" color="primary">
+        <ion-card class="topCard">
           <ion-card-header>
             <ion-card-subtitle>Artilheiro</ion-card-subtitle>
             <ion-card-title *ngIf="topScorer">{{topScorer.name}}</ion-card-title>
+            <ion-card-subtitle *ngIf="topScorer">{{topScorer.goalsScored}} gols</ion-card-subtitle>
             <ion-spinner *ngIf="!topScorer" name="crescent" color="light"></ion-spinner>
           </ion-card-header>
           <ion-card-content>
-            <ion-spinner *ngIf="!topScorer" name="crescent" color="light"></ion-spinner>
-            <p *ngIf="topScorer">{{topScorer.goalsScored}} gols</p>
+            <ion-spinner *ngIf="!topScorer" name="crescent" color="light"></ion-spinner>            
+            <p>top 10 marcadores</p>
+            <canvas *ngIf="topScorer" baseChart [datasets]="topScorersChartData" [labels]="topScorersChartLabels"
+              [chartType]="topScorersChartType" [legend]="topScorersChartLegend" [options]="topScorersChartOptions">
+            </canvas>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -53,6 +57,23 @@
     </ion-row>
     <ion-row>
       <ion-col>
+        <ion-card class="topCard">
+          <ion-card-header>           
+            <ion-card-subtitle>GF/GC</ion-card-subtitle>
+            <p>Razao entre gols marcados e gols contra por partida</p>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-spinner *ngIf="!goalsScoredConcededRatioChartData" name="crescent" color="light"></ion-spinner>
+            <canvas *ngIf="goalsScoredConcededRatioChartData" baseChart [datasets]="goalsScoredConcededRatioChartData"
+              [labels]="goalsScoredConcededRatioChartLabels" [chartType]="goalsScoredConcededRatioChartType"
+              [colors]="goalsScoredConcededRatioChartColors" [legend]="true" [options]="goalsScoredConcededRatioChartOptions">
+            </canvas>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
         <ion-card class="mediumCard" color="primary">
           <ion-card-header>
             <ion-spinner *ngIf="!matchs" name="crescent" color="light"></ion-spinner>
@@ -77,7 +98,7 @@
         </ion-card>
       </ion-col>
       <ion-col>
-        <ion-card class="mediumCard" color="medium">
+        <ion-card class="mediumCard" color="secondary">
           <ion-card-header>
             <ion-spinner *ngIf="!players" name="crescent" color="light"></ion-spinner>
             <ion-card-title *ngIf="players">{{players.length}}</ion-card-title>
@@ -88,18 +109,7 @@
             <p *ngIf="categories">Total de jogadores entre {{categories.length}} categorias</p>
           </ion-card-content>
         </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card class="mediumCard" color="medium">
-          <ion-card-header>
-            <ion-card-title>89</ion-card-title>
-            <ion-card-subtitle>Jogadores</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Total de jogadores entre x categorias</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+      </ion-col>      
     </ion-row>
     <ion-row>
       <ion-col>

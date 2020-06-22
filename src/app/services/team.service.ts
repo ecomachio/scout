@@ -25,7 +25,7 @@ export class TeamService {
                 return actions.map(a => {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
-                    console.log({ id, ...data });
+                    // console.log({ id, ...data });
                     return { id, ...data };
                 });
             })

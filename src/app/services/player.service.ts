@@ -21,7 +21,7 @@ export class PlayerService {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
                     data.birthdate = new Date(data.birthdate);
-                    console.log({ id, ...data });
+                    // console.log({ id, ...data });
                     return { id, ...data };
                 });
             })
