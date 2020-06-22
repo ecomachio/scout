@@ -46,12 +46,12 @@ export class ChoosePlayersPage implements OnInit {
   async ngOnInit() {
     const categoryId = this.route.snapshot.params.categoryId;
 
-    const qpAction = this.route.snapshot.queryParamMap.get('action');
+    const qpAction = this.route.snapshot.queryParamMap.get('action');    
     this.steps = parseInt(this.route.snapshot.queryParamMap.get('step'));
 
     this.choosePlayerStep = true;
 
-    this.selectedAction = new Action(qpAction);
+    this.selectedAction = new Action(qpAction);    
     this.players = this.gameService.players;
     this.match = this.gameService.getMatch();
     this.homeTeam = this.gameService.getMatch().homeTeam;
@@ -70,17 +70,13 @@ export class ChoosePlayersPage implements OnInit {
         this.showNoteStep();
         break;
     }
-
-    console.log(this.players);
-    console.log(this.gameService.match);
-
   }
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
     if (this.steps == 2)
       this.showConfirmationStep();
-    else this.done();
+    else this.done(true);
   }
 
   onConfirmed(decision: boolean) {
@@ -89,9 +85,11 @@ export class ChoosePlayersPage implements OnInit {
 
   done(decision?: boolean) {
     this.selectedAction.steps = this.steps;
-    this.selectedAction.decision = decision || true;
-    this.selectedAction.player = this.selectedPlayer;
-
+    this.selectedAction.decision = decision || false;
+    this.selectedAction.matchTime = this.gameService.getGameTime();
+    console.log(this.gameService.getGameTime())
+    console.log(this.gameService.getGame())
+    this.selectedAction.player = this.selectedPlayer || { ...new Player() };
     this.gameService.addAction(this.selectedAction);
 
     this.location.back();
@@ -110,7 +108,7 @@ export class ChoosePlayersPage implements OnInit {
     if (team.isMainTeam) {
       this.choosePlayerStep = true;
     } else {
-      this.location.back();
+      this.done(false);
     }
 
   }

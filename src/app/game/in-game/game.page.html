@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid *ngIf="game">
     <ion-row>
       <ion-col>
         <ion-card class="ballPossessionCard" button="true" (click)="setBallPossession('home')">

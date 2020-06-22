@@ -11,6 +11,7 @@ export class Action {
     player: Player;
     match: Match;
     steps: number;
+    matchTime: string; 
 
     constructor(description?: string) {
         this.id = null;       

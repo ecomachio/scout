@@ -20,5 +20,7 @@ export class Player {
     preferredFoot: string;
     picture: Blob;
 
-    constructor() { }
+    constructor() {
+        this.category = {...new Category()}
+     }
 }

@@ -11,7 +11,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class OtherModulesComponent implements OnInit {
 
-  @Input() match: Match;
+  @Input() match: Match;  
 
   get actionEnum() { return ActionEnum; }
 

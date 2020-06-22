@@ -64,6 +64,10 @@ export class TeamService {
         return this.teamsCollection.doc<Team>(id).update(team);
     }
 
+    getMainTeam(){
+        return this.teamsCollection.ref.where('isMainTeam', '==', true).get();
+    }
+
     addTeam(team: Team) {
         return this.teamsCollection.add({ ...team });
     }

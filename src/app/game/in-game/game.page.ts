@@ -24,13 +24,13 @@ export class GamePage implements OnInit, OnDestroy {
 
   match: Match = new Match();
 
-  game: Game;
   gameTime = '00:00:00';
 
   homeTeam: GameTeam;
   awayTeam: GameTeam;
 
   gameIntervalId;
+  game: Game;
 
   get actionEnum() { return ActionEnum; }
 
@@ -44,19 +44,18 @@ export class GamePage implements OnInit, OnDestroy {
   ) {
     this.homeTeam = new GameTeam();
     this.awayTeam = new GameTeam();
-    this.game = new Game();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
 
-    this.setupMatch(matchId);
+    await this.setupMatch(matchId);
     this.startGame();
 
   }
 
   async setupMatch(matchId) {
-    await this.gameService.initialize(matchId);
+    this.game = await this.gameService.initialize(matchId);
     this.match = this.gameService.match;
 
     this.match.isStarted = true;
@@ -129,7 +128,6 @@ export class GamePage implements OnInit, OnDestroy {
 
   choosePlayers(action) {
     let step;
-
     this.validateAction();
 
     switch (action) {
@@ -153,7 +151,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   async otherModules() {
-    
+
     this.validateAction();
 
     const modal = await this.modalController.create({

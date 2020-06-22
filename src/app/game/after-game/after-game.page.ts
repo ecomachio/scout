@@ -7,6 +7,7 @@ import { ActionService } from 'src/app/services/action.service';
 import { QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { Action } from 'src/app/entity/action';
 import { ActionEnum } from 'src/app/enum/action.enum';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-after-game',
@@ -30,27 +31,32 @@ export class AfterGamePage implements OnInit {
 
   async ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
-   
-    this.match =  (await this.matchService.getMatchPromise(matchId)).data() as Match; 
+
+    this.match = (await this.matchService.getMatchPromise(matchId)).data() as Match;
     console.log(this.match);
-    this.actions = await this.actionService.getActionsByMatch(matchId).then((res: any) => {      
+    this.actions = await this.actionService.getActionsByMatch(matchId).then((res: any) => {
       return res.docs.map((a: QueryDocumentSnapshot<Action>) => {
         const id = a.id;
         return { id, ...a.data() } as Action;
       });
     });
 
-    this.modules = Object.keys(ActionEnum).map(e => ({description: ActionEnum[e], name: e}));
+    this.modules = Object.keys(ActionEnum).map(e => ({ description: ActionEnum[e], name: e }));
 
-    const tackles = this.actions.filter(n => n.description == ActionEnum.TACKLE).length; 
-    const finishes = this.actions.filter(n => n.description == ActionEnum.FINISH).length; 
-    const passes = this.actions.filter(n => n.description == ActionEnum.PASS).length; 
-    const fouls = this.actions.filter(n => n.description == ActionEnum.FOUL).length; 
+    const tackles = this.actions.filter(n => n.description == ActionEnum.TACKLE).length;
+    const finishes = this.actions.filter(n => n.description == ActionEnum.FINISH).length;
+    const passes = this.actions.filter(n => n.description == ActionEnum.PASS).length;
+    const fouls = this.actions.filter(n => n.description == ActionEnum.FOUL).length;
     const goalkeeperSaves = this.actions.filter(n => n.description == ActionEnum.GOALKEEPERSAVE).length
     const goal = this.actions.filter(n => n.description == ActionEnum.GOAL).length
     const redCard = this.actions.filter(n => n.description == ActionEnum.REDCARD).length
     const yellowCard = this.actions.filter(n => n.description == ActionEnum.YELLOWCARD).length
-    const playerOfTheMatch = this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0].player.name    
+    const playerOfTheMatchAction = this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0];
+    let playerOfTheMatch = {};
+
+    if (!isUndefined(playerOfTheMatchAction)) {
+      playerOfTheMatch = playerOfTheMatchAction.player.name;
+    }
 
     this.stats = {
       tackles,
@@ -66,7 +72,7 @@ export class AfterGamePage implements OnInit {
     console.log(this.actions);
   }
 
-  done(){
+  done() {
     this.router.navigateByUrl(`/menu`);
   }
 

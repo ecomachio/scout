@@ -7,12 +7,14 @@ import { QueryDocumentSnapshot, AngularFirestore } from 'angularfire2/firestore'
 import { Action } from '../entity/action';
 import { ActionService } from './action.service';
 import { ActionEnum } from '../enum/action.enum';
+import { Game } from '../entity/game';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
+  game: Game;
   match: Match;
   players: Array<Player>;
   gameActions: Array<Action> = new Array();
@@ -38,6 +40,9 @@ export class GameService {
       const id = m.id;
       return { id, ...m.data() } as Player;
     });
+    this.gameActions = [];
+    this.game = new Game();
+    return this.game;
   }
 
   getMatch() {
@@ -46,6 +51,14 @@ export class GameService {
 
   getPlayers() {
     return this.players;
+  }
+
+  getGame() {
+    return this.game;
+  }
+
+  getGameTime() {
+    return this.game.currentTime();
   }
 
   addAction(action: Action) {
@@ -58,7 +71,7 @@ export class GameService {
     this.gameActions.push(action);
   }
 
-  updatePlayerOfTheMatch(action: Action){
+  updatePlayerOfTheMatch(action: Action) {
     this.gameActions.forEach((element, index) => {
       if (element.description === ActionEnum.PLAYEROFTHEMATCH) {
         this.gameActions[index] = action;
@@ -67,7 +80,7 @@ export class GameService {
   }
 
   save(match: Match) {
-    console.log(this.gameActions)
+    console.log("gameactions", this.gameActions)
     this.gameActions.forEach(a => this.actionService.addAction(a));
     this.matchService.updateMatch(match, match.id);
     console.log(this.players);

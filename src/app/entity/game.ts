@@ -3,7 +3,7 @@ import Timer from 'easytimer.js';
 
 export class Game {
 
-    public time: number;
+    public c: number;
     public hasStarted: boolean;
     public hasFinished: boolean;
     public timer: Timer;
