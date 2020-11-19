@@ -9,6 +9,7 @@ import { QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { ActionEnum } from 'src/app/enum/action.enum';
 import { ActionService } from 'src/app/services/action.service';
 import { Action } from 'src/app/entity/action';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-match',
@@ -52,7 +53,10 @@ export class MatchPage implements OnInit {
     const goal = this.actions.filter(n => n.description == ActionEnum.GOAL).length
     const redCard = this.actions.filter(n => n.description == ActionEnum.REDCARD).length
     const yellowCard = this.actions.filter(n => n.description == ActionEnum.YELLOWCARD).length
-    const playerOfTheMatch = this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0].player.name
+    let playerOfTheMatch = '';
+    if (!isNullOrUndefined(this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0])) {
+      playerOfTheMatch = this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0].player.name
+    }
 
     this.stats = {
       tackles,

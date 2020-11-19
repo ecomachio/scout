@@ -46,12 +46,12 @@ export class ChoosePlayersPage implements OnInit {
   async ngOnInit() {
     const categoryId = this.route.snapshot.params.categoryId;
 
-    const qpAction = this.route.snapshot.queryParamMap.get('action');    
+    const qpAction = this.route.snapshot.queryParamMap.get('action');
     this.steps = parseInt(this.route.snapshot.queryParamMap.get('step'));
 
     this.choosePlayerStep = true;
 
-    this.selectedAction = new Action(qpAction);    
+    this.selectedAction = new Action(qpAction);
     this.players = this.gameService.players;
     this.match = this.gameService.getMatch();
     this.homeTeam = this.gameService.getMatch().homeTeam;
@@ -116,6 +116,14 @@ export class ChoosePlayersPage implements OnInit {
   setGoal(team: Team): void {
     if (team.id == this.homeTeam.id) {
       this.match.score.home++;
+      
+      // every goal is also a shot on target
+      let shotAction: Action = new Action();
+      shotAction = { ...this.selectedAction };
+      shotAction.description = ActionEnum.FINISH;
+      shotAction.decision = true;
+      this.gameService.addAction(shotAction)
+
     } else {
       this.match.score.away++;
     }

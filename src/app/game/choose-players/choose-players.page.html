@@ -9,6 +9,7 @@
 
 <ion-content>
   <div *ngIf="choosePlayerStep" class="playerCardContainer centerText">
+    <h1 *ngIf="players.length === 0">Nenhum jogador encontrado</h1>
     <ion-card class="playerCard" button="true" *ngFor="let player of players" (click)='onPlayerChoose(player)'>
       <ion-card-header>
         <div>

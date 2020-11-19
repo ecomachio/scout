@@ -30,15 +30,19 @@ export class GameService {
   /* todo unsubscribe when game is over */
   async initialize(matchId) {
     this.match = new Match();
-    this.match = (await this.matchService.getMatchPromise(matchId)).data() as Match;
-    console.log(this.match);
+    const m = await this.matchService.getMatchPromise(matchId);
+    const id = m.id;
+    console.log(this.match, m.id, { id, ...m.data() });
+
+    this.match = { id, ...m.data() as Match } as Match;
+    
     /* get QueryDocumentSnapshot of players from firebase by category */
     const ps = await this.playerService.getPlayersByCategory(this.match.category.id);
 
     /* maps the QueryDocumentSnapshot array to players */
-    this.players = ps.docs.map((m: QueryDocumentSnapshot<Player>) => {
-      const id = m.id;
-      return { id, ...m.data() } as Player;
+    this.players = ps.docs.map((p: QueryDocumentSnapshot<Player>) => {
+      const id = p.id;
+      return { id, ...p.data() } as Player;
     });
     this.gameActions = [];
     this.game = new Game();

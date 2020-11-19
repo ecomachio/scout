@@ -53,7 +53,7 @@ export class MatchService {
     }
 
     getMatch(id) {
-        return this.matchsCollection.doc<Match>(id).valueChanges();
+        return this.matchsCollection.doc<Match>(id).get();
     }
 
     getMatchPromise(id) {

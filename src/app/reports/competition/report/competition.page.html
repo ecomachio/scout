@@ -16,8 +16,8 @@
       <ion-col>
         <ion-card class="topCard" color="primary">
           <ion-card-header>
-            <ion-card-title>123</ion-card-title>
-            <ion-card-subtitle>Partidas</ion-card-subtitle>
+            <ion-card-title>{{goals}}</ion-card-title>
+            <ion-card-subtitle>Gols</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <p>Total de partidas entre todas as competições</p>
@@ -27,8 +27,8 @@
       <ion-col>
         <ion-card class="topCard" color="tertiary">
           <ion-card-header>
-            <ion-card-title>10</ion-card-title>
-            <ion-card-subtitle>Competições</ion-card-subtitle>
+            <ion-card-title>{{matches.length}}</ion-card-title>
+            <ion-card-subtitle>Partidas</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <p>Total de competições</p>
@@ -38,11 +38,11 @@
       <ion-col>
         <ion-card class="topCard" color="medium">
           <ion-card-header>
-            <ion-card-title>89</ion-card-title>
+            <ion-card-title>{{this.players.length}}</ion-card-title>
             <ion-card-subtitle>Jogadores</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <p>Total de jogadores entre x categorias</p>
+            <p>Total de jogadores entre {{categoriesQtd}} categoria(s)</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

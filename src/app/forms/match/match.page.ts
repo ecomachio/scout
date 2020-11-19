@@ -29,7 +29,7 @@ export class MatchPage implements OnInit {
     private pickerController: PickerController,
     private matchService: MatchService,
     private categoryService: CategoryService,
-    private teamService:TeamService,
+    private teamService: TeamService,
     private route: ActivatedRoute,
     private nav: NavController,
     private loadingController: LoadingController,
@@ -39,7 +39,7 @@ export class MatchPage implements OnInit {
 
   ngOnInit() {
     this.match = new Match();
-    
+
     this.categoryService.getCategories().subscribe(cat => this.categories = cat);
     this.teamService.getTeams().subscribe(team => this.teams = team);
 
@@ -52,7 +52,7 @@ export class MatchPage implements OnInit {
     this.compareWith = this.compareWithFn;
   }
 
-  async loadMatch(matchId) {
+  async loadMatch(matchId: string) {
     const loading = await this.loadingController.create({
       message: 'Loading Match..'
     });
@@ -61,7 +61,7 @@ export class MatchPage implements OnInit {
     this.matchService.getMatch(matchId).subscribe(res => {
       loading.dismiss();
       console.log(res);
-      this.match = res;
+      this.match = res.data() as Match;
       this.match.id = matchId;
     });
   }
