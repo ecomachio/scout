@@ -49,7 +49,7 @@ export class PlayerPage implements OnInit {
     await loading.present();
 
     this.playerService.getPlayer(playerId).subscribe(res => {
-      
+
       loading.dismiss();
       console.log(res);
       this.player = res;

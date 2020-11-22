@@ -247,13 +247,14 @@ export class ReportsPage implements OnInit {
     let prev;
 
     allGoalsActions.sort((a, b) => {
-      if (a.player.id > b.player.id) return 1;
-      if (a.player.id < b.player.id) return -1;
+      if (a.player.id > b.player.id) { return 1; }
+      if (a.player.id < b.player.id) { return -1; }
       return 0;
     })
 
     console.log(allGoalsActions)
-    for (var i = 0; i < allGoalsActions.length; i++) {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < allGoalsActions.length; i++) {
       if (isUndefined(prev) || (allGoalsActions[i].player.id !== prev.player.id)) {
         this.topScorers.push({ ...allGoalsActions[i].player, goalsScored: 1 });
       } else {

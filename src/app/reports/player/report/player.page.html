@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Jogadores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="formface">
+          <!-- todo -->
+          <div class="formfaceContent">
+            <img src="assets/avatar.png" alt="">
+            <div class="formfaceText">
+              <h1>&nbsp;{{player.name}}&nbsp;</h1>
+              <p *ngIf="!player.id">Descreva o próximo astro do futebol</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="mediumCard" color="tertiary">
+          <ion-card-header>
+            <ion-spinner *ngIf="!totalGoalsScored" name="crescent" color="primary"></ion-spinner>
+            <ion-card-title *ngIf="totalGoalsScored">{{totalGoalsScored}}</ion-card-title>
+            <ion-card-subtitle>Gols</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Total de gols</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="mediumCard" color="secondary">
+          <ion-card-header>
+            <ion-spinner *ngIf="!totalMatchesPlayed" name="crescent" color="primary"></ion-spinner>
+            <ion-card-title *ngIf="totalMatchesPlayed">{{totalMatchesPlayed}}</ion-card-title>
+            <ion-card-subtitle>Partidas</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-spinner *ngIf="!totalMatchesPlayed" name="crescent" color="primary"></ion-spinner>
+            <p *ngIf="totalMatchesPlayed">Total de partidas finalizadas</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
