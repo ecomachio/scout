@@ -35,7 +35,7 @@ export class GameService {
     console.log(this.match, m.id, { id, ...m.data() });
 
     this.match = { id, ...m.data() as Match } as Match;
-    
+
     /* get QueryDocumentSnapshot of players from firebase by category */
     const ps = await this.playerService.getPlayersByCategory(this.match.category.id);
 
@@ -85,11 +85,11 @@ export class GameService {
 
   save(match: Match) {
     console.log("gameactions", this.gameActions)
-    
+
     this.gameActions.forEach(a => this.actionService.addAction(a));
-    
-    match.isFinished = true;    
-    this.matchService.updateMatch(match, match.id);    
+
+    match.isFinished = true;
+    this.matchService.updateMatch(match, match.id);
   }
 
 }

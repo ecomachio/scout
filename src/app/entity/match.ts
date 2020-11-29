@@ -16,6 +16,10 @@ export class Match {
     date: Date;
     playerOfTheMatch: Player;
     notes: string;
+    awayTeamBallPossessionRate: number;
+    homeTeamBallPossessionRate: number;
+    awayTeamballPossessionTime: string;
+    homeTeamballPossessionTime: string;
 
     category: Category;
 

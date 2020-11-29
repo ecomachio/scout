@@ -13,6 +13,8 @@ import { Match } from 'src/app/entity/match';
 import { Action } from 'src/app/entity/action';
 import { ActionEnum } from 'src/app/enum/action.enum';
 import { isNullOrUndefined } from 'util';
+import { CompetitionService } from 'src/app/services/competition.service';
+import { Competition } from 'src/app/entity/competition';
 
 
 @Component({
@@ -26,14 +28,19 @@ export class PlayerPage implements OnInit {
   categories: Array<Category>;
   player: Player;
   actions: Array<Action> = [];
+  matches: Array<Match> = [];
+  allCompetitions: Array<Competition> = [];
+  competitions: Array<Competition> = [];
 
   totalGoalsScored: number;
   totalMatchesPlayed: number;
+  totalCompetition: number;
 
   constructor(
     private pickerController: PickerController,
     private playerService: PlayerService,
     private categoryService: CategoryService,
+    private competitionService: CompetitionService,
     private route: ActivatedRoute,
     private nav: NavController,
     private loadingController: LoadingController,
@@ -53,7 +60,7 @@ export class PlayerPage implements OnInit {
   }
 
   async getPlayerActions() {
-    const matches = await this.getPlayerMatches();
+    const matches = this.matches;
     let actionPromises = [];
 
     actionPromises = matches.map(m => {
@@ -89,9 +96,7 @@ export class PlayerPage implements OnInit {
   }
 
   async getTotalMatchesPlayed() {
-    const matches = await this.getPlayerMatches();
-
-    return matches.length;
+    return this.matches.length;
   }
 
   async loadPlayer(playerId) {
@@ -107,13 +112,27 @@ export class PlayerPage implements OnInit {
       this.player = res;
       this.player.id = playerId;
 
+      this.matches = await this.getPlayerMatches();
+
       this.actions = await this.getPlayerActions();
+
+      this.competitionService.getCompetitions().subscribe(r => this.allCompetitions = r);
 
       this.totalGoalsScored = await this.getTotalGoalsScored();
       console.log(this.totalGoalsScored);
 
       this.totalMatchesPlayed = await this.getTotalMatchesPlayed();
+
+      this.totalCompetition = await this.getTotalCompetitions();
     });
+  }
+
+  async getTotalCompetitions() {
+
+    this.matches
+
+
+    return 0;
   }
 
 }

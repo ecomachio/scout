@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="match" class="matchSummary">    
+  <div *ngIf="match" class="matchSummary">
     <ion-list class="scoreList">
       <ion-item class="scoreItem">
         <h2 class="scoreTextCenter">
@@ -22,12 +22,12 @@
       </ion-item>
       <ion-item class="scoreItem">
         <h5 class="scoreText">
-          <span>{{match.score.home}}</span> Posse de bola <span>{{match.score.away}}</span>
+          <span>{{match.homeTeamBallPossessionRate}}%</span> Posse de bola <span>{{match.awayTeamBallPossessionRate}}%</span>
         </h5>
       </ion-item>
       <ion-item class="scoreItem">
         <h5 class="scoreText">
-          <span>{{match.score.home}}</span> Tempo com a bola <span>{{match.score.away}}</span>
+          <span>{{match.homeTeamballPossessionTime}}</span> Tempo com a bola <span>{{match.awayTeamballPossessionTime}}</span>
         </h5>
       </ion-item>
     </ion-list>
@@ -79,7 +79,7 @@
               <ion-item>
                 <ion-label>Defesas do Goleiro</ion-label>
                 <ion-label>{{stats.goalkeeperSaves}}</ion-label>
-              </ion-item>              
+              </ion-item>
               <ion-item>
                 <ion-label>Cartoes Vermelhos</ion-label>
                 <ion-label>{{stats.redCard}}</ion-label>

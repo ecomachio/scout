@@ -89,7 +89,13 @@ export class GamePage implements OnInit, OnDestroy {
     this.homeTeam.ballPossessionTimer.pause();
     this.awayTeam.ballPossessionTimer.pause();
     this.game.timer.pause();
-    console.log("save", this.match)
+
+    this.match.awayTeamBallPossessionRate = this.awayTeam.ballPossessionRate;
+    this.match.homeTeamBallPossessionRate = this.homeTeam.ballPossessionRate;
+
+    this.match.homeTeamballPossessionTime = this.homeTeam.ballPossessionTime;
+    this.match.awayTeamballPossessionTime = this.awayTeam.ballPossessionTime;
+
     this.gameService.save(this.match);
     this.router.navigateByUrl(`after-game/${this.match.id}`);
   }
