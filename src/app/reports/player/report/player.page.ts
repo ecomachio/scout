@@ -12,7 +12,7 @@ import { QueryDocumentSnapshot, QuerySnapshot } from 'angularfire2/firestore';
 import { Match } from 'src/app/entity/match';
 import { Action } from 'src/app/entity/action';
 import { ActionEnum } from 'src/app/enum/action.enum';
-import { isNullOrUndefined } from 'util';
+import { isNullOrUndefined, isUndefined } from 'util';
 import { CompetitionService } from 'src/app/services/competition.service';
 import { Competition } from 'src/app/entity/competition';
 
@@ -35,6 +35,8 @@ export class PlayerPage implements OnInit {
   totalGoalsScored: number;
   totalMatchesPlayed: number;
   totalCompetition: number;
+
+  stats = {};
 
   constructor(
     private pickerController: PickerController,
@@ -124,7 +126,40 @@ export class PlayerPage implements OnInit {
       this.totalMatchesPlayed = await this.getTotalMatchesPlayed();
 
       this.totalCompetition = await this.getTotalCompetitions();
+
+      this.stats = this.getPlayerStats(this.actions);
     });
+  }
+
+  getPlayerStats(actions) {
+    const tackles = actions.filter(n => n.description === ActionEnum.TACKLE).length;
+    const finishes = actions.filter(n => n.description === ActionEnum.FINISH).length;
+    const passes = actions.filter(n => n.description === ActionEnum.PASS).length;
+    const fouls = actions.filter(n => n.description === ActionEnum.FOUL).length;
+    const goalkeeperSaves = actions.filter(n => n.description === ActionEnum.GOALKEEPERSAVE).length;
+    const goal = actions.filter(n => n.description === ActionEnum.GOAL).length;
+    const redCard = actions.filter(n => n.description === ActionEnum.REDCARD).length;
+    const yellowCard = actions.filter(n => n.description === ActionEnum.YELLOWCARD).length;
+    const playerOfTheMatchAction = actions.filter(n => n.description === ActionEnum.PLAYEROFTHEMATCH)[0];
+    let playerOfTheMatch = {};
+
+    if (!isUndefined(playerOfTheMatchAction)) {
+      playerOfTheMatch = playerOfTheMatchAction.player.name;
+    }
+
+    const stats = {
+      tackles,
+      finishes,
+      passes,
+      fouls,
+      goalkeeperSaves,
+      goal,
+      redCard,
+      yellowCard,
+      playerOfTheMatch,
+    };
+
+    return stats;
   }
 
   async getTotalCompetitions() {
