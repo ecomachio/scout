@@ -6,7 +6,6 @@ import { MatchService } from 'src/app/services/match.service';
 import { Match } from 'src/app/entity/match';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { match } from 'minimatch';
 import { GameService } from 'src/app/services/game.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
 import { ModalController } from '@ionic/angular';
@@ -31,6 +30,7 @@ export class GamePage implements OnInit, OnDestroy {
 
   gameIntervalId;
   game: Game;
+  gameReady = false;
 
   get actionEnum() { return ActionEnum; }
 
@@ -42,15 +42,14 @@ export class GamePage implements OnInit, OnDestroy {
     private modalController: ModalController,
     private utilsService: UtilsService,
   ) {
-    this.homeTeam = new GameTeam();
-    this.awayTeam = new GameTeam();
+
   }
 
   async ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
 
-    await this.setupMatch(matchId);
-    this.startGame();
+    this.gameReady = await this.setupMatch(matchId);
+    await this.startGame();
 
   }
 
@@ -58,16 +57,29 @@ export class GamePage implements OnInit, OnDestroy {
     this.game = await this.gameService.initialize(matchId);
     this.match = this.gameService.match;
 
+    console.log(this.match);
+    this.awayTeam = new GameTeam();
+    Object.assign(this.awayTeam, this.match.awayTeam);
+    console.log(this.awayTeam);
+
+    console.log(this.awayTeam.name);
+
+
+    this.homeTeam = new GameTeam();
+    Object.assign(this.homeTeam, this.match.homeTeam);
+    console.log(this.homeTeam);
+    console.log(this.homeTeam.name);
+
+
     this.match.isStarted = true;
     this.match.score.home = 0;
     this.match.score.away = 0;
+    return true;
   }
 
   startGame() {
     this.game.startGame();
     this.gameTime = '00:00:00';
-    this.homeTeam = new GameTeam();
-    this.awayTeam = new GameTeam();
     this.homeTeam.ballPossessionTimer.start({ precision: 'secondTenths' });
     this.homeTeam.hasPossession = true;
 
@@ -101,10 +113,10 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   validateAction() {
-    if (this.game.isPaused) {
+    /*if (this.game.isPaused) {
       this.utilsService.showToast('Partida pausada');
       throw new Error('gameisPausedException');
-    }
+    }*/
 
     if (!this.game.hasStarted) {
       throw new Error('gameNotStartedException');
@@ -121,6 +133,11 @@ export class GamePage implements OnInit, OnDestroy {
   setBallPossession(team: string) {
     this.validateAction();
     console.log(this.gameService.players);
+
+    if (this.game.isPaused) {
+      this.utilsService.showToast('Partida pausada');
+      throw new Error('gameisPausedException');
+    }
 
     if (team === 'home') {
       this.homeTeam.toogleBallPossession();
@@ -163,11 +180,19 @@ export class GamePage implements OnInit, OnDestroy {
     const modal = await this.modalController.create({
       component: OtherModulesComponent,
       componentProps: {
-        match: this.match
+        match: this.match,
+        game: this.game,
       },
       animated: true
     });
     await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    if (data.isGameStoped) {
+      this.stopGame();
+    }
+
   }
 
   ngOnDestroy() {

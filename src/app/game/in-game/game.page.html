@@ -10,17 +10,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="game">
+  <ion-grid *ngIf="gameReady">
     <ion-row>
       <ion-col>
         <ion-card class="ballPossessionCard" button="true" (click)="setBallPossession('home')">
           <ion-card-header class="ballPossessionCardHeader">
             <div>
-              <ion-card-subtitle>Posse</ion-card-subtitle>
-              <ion-card-title>Time da Casa</ion-card-title>
+              <ion-card-title>
+                {{homeTeam.name}}
+              </ion-card-title>
+              <ion-card-subtitle>Posse de bola</ion-card-subtitle>
             </div>
             <div class="ballPossessionImgContainer">
-              <ion-img class="ballPossessionImg" src="assets/play-button.png"></ion-img>
+              <ion-img class="ballPossessionImg" src="assets/027-football.png"></ion-img>
             </div>
           </ion-card-header>
           <ion-card-content class="ballPossessionCardContent">
@@ -44,12 +46,12 @@
         <ion-card class="ballPossessionCard" button="true" (click)="setBallPossession('away')">
           <ion-card-header class="ballPossessionCardHeader">
             <div>
-              <ion-card-subtitle>Posse</ion-card-subtitle>
-              <ion-card-title>Time Visitante</ion-card-title>
 
+              <ion-card-title>{{awayTeam.name}}</ion-card-title>
+              <ion-card-subtitle>Posse de bola</ion-card-subtitle>
             </div>
             <div class="ballPossessionImgContainer">
-              <ion-img class="ballPossessionImg" src="assets/play-button.png"></ion-img>
+              <ion-img class="ballPossessionImg" src="assets/027-football.png"></ion-img>
 
             </div>
           </ion-card-header>
@@ -85,15 +87,15 @@
         </div>
         <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>
         <div class="gameButtonBar">
-          <ion-button *ngIf="game.hasStarted && !game.hasFinished && !game.isPaused" color="primary" size="large" (click)="pauseGame()">
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && !game.isPaused" color="secondary"
+            size="large" (click)="pauseGame()">
             Pausar
           </ion-button>
-          <ion-button *ngIf="game.hasStarted && !game.hasFinished && game.isPaused" color="primary" size="large" (click)="unpauseGame()">
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && game.isPaused" color="secondary"
+            size="large" (click)="unpauseGame()">
             Continuar
           </ion-button>
-          <ion-button *ngIf="game.hasStarted && !game.hasFinished" color="danger" size="large" (click)="stopGame()">
-            Encerrar
-          </ion-button>
+
         </div>
         <ion-button *ngIf="game.hasStarted && game.hasFinished" disabled expand="block" size="large">Jogo Encerrado
         </ion-button>

@@ -3,107 +3,110 @@
   overflow: hidden;
 }
 
-.ballPossessionImg{
-  
+.ballPossessionImg {
 }
 
 ion-card {
   margin: 2px;
 }
 
-.ballPossessionCard{
+.ballPossessionCard {
   min-height: 160px;
 }
 
-.cardImg{
+.cardImg {
   height: 30%;
   width: 10em;
 }
 
-.ballPossessionCardContent{
+.ballPossessionCardContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
 }
 
-.ballPossessionCardHeader{
+.ballPossessionCardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ion-card-title {
+    margin-top: -10px;
+    font-size: 2.5em;
+  }
 }
 
-.ballPossessionImgContainer{
+.ballPossessionImgContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;  
+  align-items: flex-end;
 }
 
-.ballPossessionCardHeader .ballPossessionImgContainer ion-img{
+.ballPossessionCardHeader .ballPossessionImgContainer ion-img {
   width: 5em;
   padding: 5px;
 }
 
-.gameBarContainer{
+.gameBarContainer {
   display: flex;
   justify-content: space-evenly;
 }
 
-.gameTimeContainer, .gameStats{
+.gameTimeContainer,
+.gameStats {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.gameTimeImg{
+.gameTimeImg {
   width: 50px;
   margin: 15px;
 }
 
-.ballPossessionCardContent .gameStatsContainer{
+.ballPossessionCardContent .gameStatsContainer {
   display: flex;
-  align-items: center;  
+  align-items: center;
   width: 70%;
 }
 
-.gameStats{
+.gameStats {
   padding-right: 3em;
 }
 
-.ballPossessionCardContent .gameStatsContainer .gameStats .gameTimeImg{
+.ballPossessionCardContent .gameStatsContainer .gameStats .gameTimeImg {
   width: 2em;
-  margin: 5px 10px 5px 5px; 
+  margin: 5px 10px 5px 5px;
 }
 
-.moduleContent{
+.moduleContent {
   display: flex;
   justify-content: center;
 }
 
-.module{
-  text-align: center; 
+.module {
+  text-align: center;
 
-  ion-card-content{
-    ion-img{
+  ion-card-content {
+    ion-img {
       width: 30%;
-      
     }
   }
-  ion-card-header{
-    ion-card-subtitle{
+  ion-card-header {
+    ion-card-subtitle {
       font-size: 2em;
-      color: #000 ;     
+      color: #000;
     }
   }
 }
 
-
-.gameButtonBar{
+.gameButtonBar {
   display: flex;
   justify-content: center;
   align-items: center;
-  ion-button{
+  ion-button {
     width: 100%;
+    --ion-color-contrast: #000 !important;
   }
+    
 }
-

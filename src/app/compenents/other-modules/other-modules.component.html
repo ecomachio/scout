@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Fechar</ion-button>
     </ion-buttons>
     <ion-title>Outras ações</ion-title>
   </ion-toolbar>
@@ -62,6 +62,14 @@
             <ion-img class="cardImg" src="assets/016-skills.png"></ion-img>
           </ion-card-content>
         </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" *ngIf="game.hasStarted && !game.hasFinished" color="danger" size="large"
+          (click)="stopGame()">
+          Encerrar Partida
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -3,7 +3,9 @@ export class Team {
     id: string;
     name: string;
     description: string;
-    city: string;  
-    isMainTeam: boolean; 
+    city: string;
+    isMainTeam: boolean;
+
+    constructor() { }
 
 }

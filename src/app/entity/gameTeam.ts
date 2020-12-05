@@ -1,17 +1,17 @@
 import { Player } from './player';
 import Timer from 'easytimer.js';
 import { Game } from './game';
+import { Team } from './team';
 
-export class GameTeam {
+export class GameTeam extends Team {
 
-    public name: string;
-    public players: Array<Player>;
     public ballPossessionTime: string;
     public ballPossessionRate = 0;
     public ballPossessionTimer: Timer;
     public hasPossession: boolean;
 
     constructor() {
+        super();
         this.ballPossessionTimer = new Timer();
         this.ballPossessionTime = '00:00:00';
     }
