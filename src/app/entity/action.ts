@@ -11,10 +11,10 @@ export class Action {
     player: Player;
     match: Match;
     steps: number;
-    matchTime: string; 
+    matchTime: string;
 
     constructor(description?: string) {
-        this.id = null;       
+        this.id = null;
         this.description = description;
         this.decision = null;
     }

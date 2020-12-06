@@ -72,7 +72,7 @@ export class CompetitionPage implements OnInit {
 
         // remove all duplicates
         this.players = Array.from(new Set(allPLayers.map(a => a.id)))
-          .map(id => allPLayers.find(a => a.id === id))
+          .map(id => allPLayers.find(a => a.id === id));
 
       });
     });

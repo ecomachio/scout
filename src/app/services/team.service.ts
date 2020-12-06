@@ -54,17 +54,19 @@ export class TeamService {
             })
             .filter(m => (m.homeTeam.id == id) || (m.awayTeam.id == id))
             .forEach(m => {
-                if (id == m.awayTeam.id)
+                if (id == m.awayTeam.id) {
                     m.awayTeam = team;
-                if (id == m.homeTeam.id)
+                }
+                if (id == m.homeTeam.id) {
                     m.homeTeam = team;
-                this.matchService.updateMatch(m, m.id).then((res) => console.log("times atualizados dentro das partidas"));
-            })
+                }
+                this.matchService.updateMatch(m, m.id).then((res) => console.log('times atualizados dentro das partidas'));
+            });
 
         return this.teamsCollection.doc<Team>(id).update(team);
     }
 
-    getMainTeam(){
+    getMainTeam() {
         return this.teamsCollection.ref.where('isMainTeam', '==', true).get();
     }
 

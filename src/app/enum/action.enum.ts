@@ -1,4 +1,4 @@
-export enum ActionEnum {    
+export enum ActionEnum {
     FINISH = 'Finalização',
     TACKLE = 'Desarme',
     PASS = 'Passe Errado',

@@ -21,6 +21,6 @@ export class Player {
     picture: Blob;
 
     constructor() {
-        this.category = {...new Category()}
+        this.category = {...new Category()};
      }
 }

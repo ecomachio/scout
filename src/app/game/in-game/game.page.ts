@@ -207,22 +207,26 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   pauseGame() {
-    if (this.homeTeam.hasPossession)
+    if (this.homeTeam.hasPossession) {
       this.homeTeam.ballPossessionTimer.pause();
+    }
 
-    if (this.awayTeam.hasPossession)
+    if (this.awayTeam.hasPossession) {
       this.awayTeam.ballPossessionTimer.pause();
+    }
 
     this.game.timer.pause();
     this.game.pause();
   }
 
   unpauseGame() {
-    if (this.homeTeam.hasPossession)
+    if (this.homeTeam.hasPossession) {
       this.homeTeam.ballPossessionTimer.start();
+    }
 
-    if (this.awayTeam.hasPossession)
+    if (this.awayTeam.hasPossession) {
       this.awayTeam.ballPossessionTimer.start();
+    }
 
     this.game.timer.start();
     this.game.unpause();

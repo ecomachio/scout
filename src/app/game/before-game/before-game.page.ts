@@ -54,11 +54,12 @@ export class BeforeGamePage implements OnInit, OnDestroy {
 
     this.competitionsService.getCompetitions().pipe(takeUntil(this.unsubscribe$)).subscribe(comp => {
       this.competitions = comp.sort((a, b) => {
-        if (isNaN(+a.start))
+        if (isNaN(+a.start)) {
           return 1;
-        else if (isNaN(+b.start))
+        } else if (isNaN(+b.start)) {
           return -1;
-        return +a.start - +b.start
+ }
+        return +a.start - +b.start;
       });
 
       this.categoryService.getCategories().pipe(takeUntil(this.unsubscribe$)).subscribe(cat => this.categories = cat);
@@ -105,7 +106,7 @@ export class BeforeGamePage implements OnInit, OnDestroy {
   }
 
   async filterMatches(competition, category) {
-    let matches:Array<Match>;
+    let matches: Array<Match>;
     matches = await this.matchService.getMatchesByCompetition(competition.id).then((res: any) => {
       if (!res) {
         this.matches = [];
@@ -115,13 +116,14 @@ export class BeforeGamePage implements OnInit, OnDestroy {
         return { id, ...m.data() } as Match;
       });
     });
-    
+
     matches.sort((a, b) => {
-      if (isNaN(+a.date))
+      if (isNaN(+a.date)) {
         return 1;
-      else if (isNaN(+b.date))
+      } else if (isNaN(+b.date)) {
         return -1;
-      return +a.date - +b.date
+ }
+      return +a.date - +b.date;
     });
 
     return matches.filter((m: Match) => {

@@ -46,7 +46,7 @@ export class ReportsPage implements OnInit {
   goalsScoredShotsRatio: number;
 
   goalsScoredShotsRatioChartLabels: Label[] = [];
-  goalsScoredShotsRatioChartData: ChartDataSets[] = [{ data: [], label: "Gols marcados" }, { data: [], label: "Chutes a gol" }];
+  goalsScoredShotsRatioChartData: ChartDataSets[] = [{ data: [], label: 'Gols marcados' }, { data: [], label: 'Chutes a gol' }];
 
   goalsScoredShotsRatioChartType: ChartType = 'bar';
   goalsScoredShotsRatioChartColors: Color[] = [];
@@ -62,28 +62,28 @@ export class ReportsPage implements OnInit {
   };
 
   topScorersChartLabels: Label[] = [];
-  topScorersChartData: ChartDataSets[] = [{ data: [], label: "Marcadores" }];
+  topScorersChartData: ChartDataSets[] = [{ data: [], label: 'Marcadores' }];
   topScorersChartType: ChartType = 'pie';
   topScorersChartLegend = false;
   topScorersChartOptions: ChartOptions = {
     responsive: true,
-  }
+  };
 
   topScoredMatchsChartLabels: Label[] = [];
-  topScoredMatchsChartData: ChartDataSets[] = [{ data: [], label: "Partidas com mais gols" }];
+  topScoredMatchsChartData: ChartDataSets[] = [{ data: [], label: 'Partidas com mais gols' }];
   topScoredMatchsChartType: ChartType = 'pie';
   topScoredMatchsChartLegend = false;
   topScoredMatchsChartOptions: ChartOptions = {
     responsive: true,
-  }
+  };
 
   topConcededMatchsChartLabels: Label[] = [];
-  topConcededMatchsChartData: ChartDataSets[] = [{ data: [], label: "Partidas com mais gols sofridos" }];
+  topConcededMatchsChartData: ChartDataSets[] = [{ data: [], label: 'Partidas com mais gols sofridos' }];
   topConcededMatchsChartType: ChartType = 'pie';
   topConcededMatchsChartLegend = false;
   topConcededMatchsChartOptions: ChartOptions = {
     responsive: true,
-  }
+  };
 
 
   constructor(
@@ -172,7 +172,7 @@ export class ReportsPage implements OnInit {
     const actions = (await this.actionService.getActionsByActionDescription(action)).docs.map((m: QueryDocumentSnapshot<Action>) => {
       const id = m.id;
       return { id, ...m.data() } as Action;
-    })
+    });
     return actions;
   }
 
@@ -192,7 +192,7 @@ export class ReportsPage implements OnInit {
     });
 
     this.getMatchGoals(allGoalsActions);
-    this.getMatchShots(allShots)
+    this.getMatchShots(allShots);
     this.getGoalsScoredShotsRatioByMatch();
     this.getBestMatchs();
     this.getWorstMatchs();
@@ -250,15 +250,15 @@ export class ReportsPage implements OnInit {
       if (a.player.id > b.player.id) { return 1; }
       if (a.player.id < b.player.id) { return -1; }
       return 0;
-    })
+    });
 
-    console.log(allGoalsActions)
+    console.log(allGoalsActions);
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < allGoalsActions.length; i++) {
       if (isUndefined(prev) || (allGoalsActions[i].player.id !== prev.player.id)) {
         this.topScorers.push({ ...allGoalsActions[i].player, goalsScored: 1 });
       } else {
-        this.topScorers[this.topScorers.length - 1].goalsScored++
+        this.topScorers[this.topScorers.length - 1].goalsScored++;
       }
       prev = allGoalsActions[i];
     }

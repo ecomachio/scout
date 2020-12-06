@@ -10,7 +10,7 @@ export class Competition {
     matches: Array<Match> = new Array<Match>();
 
     constructor() {
-     
+
     }
 
 }

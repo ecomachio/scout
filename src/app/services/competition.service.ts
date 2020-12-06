@@ -19,7 +19,7 @@ export class CompetitionService {
             map(actions => {
                 return actions.map(a => {
                     const data = a.payload.doc.data();
-                    const id = a.payload.doc.id;                  
+                    const id = a.payload.doc.id;
 
                     data.start = new Date(data.start);
                     data.end = new Date(data.start);

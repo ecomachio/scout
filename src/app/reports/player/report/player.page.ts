@@ -162,12 +162,4 @@ export class PlayerPage implements OnInit {
     return stats;
   }
 
-  async getTotalCompetitions() {
-
-    this.matches
-
-
-    return 0;
-  }
-
 }

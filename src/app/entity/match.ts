@@ -6,8 +6,8 @@ import { Action } from './action';
 export class Match {
 
     id: string;
-    homeTeam: Team = new Team();; // team maybe
-    awayTeam: Team = new Team();; // team maybe
+    homeTeam: Team = new Team(); // team maybe
+    awayTeam: Team = new Team(); // team maybe
     competitionId: string;
     description: string;
 

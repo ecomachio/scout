@@ -124,7 +124,7 @@ export class ChoosePlayersPage implements OnInit {
       shotAction = { ...this.selectedAction };
       shotAction.description = ActionEnum.FINISH;
       shotAction.decision = true;
-      this.gameService.addAction(shotAction)
+      this.gameService.addAction(shotAction);
 
     } else {
       this.match.score.away++;
