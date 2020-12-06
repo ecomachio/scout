@@ -56,8 +56,8 @@ export class ChoosePlayersPage implements OnInit {
     this.match = this.gameService.getMatch();
     this.homeTeam = this.gameService.getMatch().homeTeam;
     this.awayTeam = this.gameService.getMatch().awayTeam;
-    console.log(this.homeTeam)
-    console.log(this.awayTeam)
+    console.log(this.homeTeam);
+    console.log(this.awayTeam);
 
     switch (this.selectedAction.description) {
       case ActionEnum.GOALKEEPERSAVE:
@@ -74,9 +74,11 @@ export class ChoosePlayersPage implements OnInit {
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
-    if (this.steps == 2)
+    if (this.steps == 2) {
       this.showConfirmationStep();
-    else this.done(true);
+    } else {
+      this.done(true);
+    }
   }
 
   onConfirmed(decision: boolean) {
@@ -87,8 +89,8 @@ export class ChoosePlayersPage implements OnInit {
     this.selectedAction.steps = this.steps;
     this.selectedAction.decision = decision || false;
     this.selectedAction.matchTime = this.gameService.getGameTime();
-    console.log(this.gameService.getGameTime())
-    console.log(this.gameService.getGame())
+    console.log(this.gameService.getGameTime());
+    console.log(this.gameService.getGame());
     this.selectedAction.player = this.selectedPlayer || { ...new Player() };
     this.gameService.addAction(this.selectedAction);
 
@@ -116,7 +118,7 @@ export class ChoosePlayersPage implements OnInit {
   setGoal(team: Team): void {
     if (team.id == this.homeTeam.id) {
       this.match.score.home++;
-      
+
       // every goal is also a shot on target
       let shotAction: Action = new Action();
       shotAction = { ...this.selectedAction };

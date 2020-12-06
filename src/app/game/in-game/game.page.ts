@@ -62,14 +62,10 @@ export class GamePage implements OnInit, OnDestroy {
     Object.assign(this.awayTeam, this.match.awayTeam);
     console.log(this.awayTeam);
 
-    console.log(this.awayTeam.name);
-
-
     this.homeTeam = new GameTeam();
     Object.assign(this.homeTeam, this.match.homeTeam);
     console.log(this.homeTeam);
     console.log(this.homeTeam.name);
-
 
     this.match.isStarted = true;
     this.match.score.home = 0;
@@ -109,6 +105,8 @@ export class GamePage implements OnInit, OnDestroy {
     this.match.awayTeamballPossessionTime = this.awayTeam.ballPossessionTime;
 
     this.gameService.save(this.match);
+    clearInterval(this.gameIntervalId);
+
     this.router.navigateByUrl(`after-game/${this.match.id}`);
   }
 
@@ -161,6 +159,14 @@ export class GamePage implements OnInit, OnDestroy {
       case ActionEnum.PASS:
         step = 1;
         this.setBallPossession('away');
+        break;
+      case ActionEnum.FOUL:
+        step = 2;
+        if (this.homeTeam.hasPossession) {
+          this.setBallPossession('away');
+        } else {
+          this.setBallPossession('home');
+        }
         break;
       case ActionEnum.GOALKEEPERSAVE:
         step = 1;

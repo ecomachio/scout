@@ -87,11 +87,11 @@
         </div>
         <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>
         <div class="gameButtonBar">
-          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && !game.isPaused" color="secondary"
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && !game.isPaused" color="light"
             size="large" (click)="pauseGame()">
             Pausar
           </ion-button>
-          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && game.isPaused" color="secondary"
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && game.isPaused" color="light"
             size="large" (click)="unpauseGame()">
             Continuar
           </ion-button>

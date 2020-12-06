@@ -45,17 +45,17 @@ export class MatchPage implements OnInit {
 
     this.modules = Object.keys(ActionEnum).map(e => ({ description: ActionEnum[e], name: e }));
 
-    const tackles = this.actions.filter(n => n.description == ActionEnum.TACKLE).length;
-    const finishes = this.actions.filter(n => n.description == ActionEnum.FINISH).length;
-    const passes = this.actions.filter(n => n.description == ActionEnum.PASS).length;
-    const fouls = this.actions.filter(n => n.description == ActionEnum.FOUL).length;
-    const goalkeeperSaves = this.actions.filter(n => n.description == ActionEnum.GOALKEEPERSAVE).length
-    const goal = this.actions.filter(n => n.description == ActionEnum.GOAL).length
-    const redCard = this.actions.filter(n => n.description == ActionEnum.REDCARD).length
-    const yellowCard = this.actions.filter(n => n.description == ActionEnum.YELLOWCARD).length
+    const tackles = this.actions.filter(n => n.description === ActionEnum.TACKLE).length;
+    const finishes = this.actions.filter(n => n.description === ActionEnum.FINISH).length;
+    const passes = this.actions.filter(n => n.description === ActionEnum.PASS).length;
+    const fouls = this.actions.filter(n => n.description === ActionEnum.FOUL).length;
+    const goalkeeperSaves = this.actions.filter(n => n.description === ActionEnum.GOALKEEPERSAVE).length;
+    const goal = this.actions.filter(n => n.description === ActionEnum.GOAL).length;
+    const redCard = this.actions.filter(n => n.description === ActionEnum.REDCARD).length;
+    const yellowCard = this.actions.filter(n => n.description === ActionEnum.YELLOWCARD).length;
     let playerOfTheMatch = '';
-    if (!isNullOrUndefined(this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0])) {
-      playerOfTheMatch = this.actions.filter(n => n.description == ActionEnum.PLAYEROFTHEMATCH)[0].player.name
+    if (!isNullOrUndefined(this.match.playerOfTheMatch)) {
+      playerOfTheMatch = this.match.playerOfTheMatch.name;
     }
 
     this.stats = {
@@ -69,7 +69,6 @@ export class MatchPage implements OnInit {
       yellowCard,
       playerOfTheMatch,
     };
-    console.log(this.actions);
   }
 
 }
