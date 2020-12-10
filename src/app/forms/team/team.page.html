@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Partida</ion-title>
+    <ion-title>Time</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -39,6 +39,10 @@
             <ion-item>
               <ion-label position="floating">Cidade</ion-label>
               <ion-input [(ngModel)]="team.city" inputmode="text"></ion-input>
+            </ion-item> 
+            <ion-item>
+              <ion-label position="floating">Principal</ion-label>              
+              <ion-toggle [(ngModel)]="team.isMainTeam"></ion-toggle>
             </ion-item>            
           </div>          
         </ion-row>

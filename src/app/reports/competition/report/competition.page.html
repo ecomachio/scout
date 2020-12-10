@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Competição</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="competition">
+  <div class="title">
+    <h1>{{competition.name}}</h1>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="topCard" color="primary">
+          <ion-card-header>
+            <ion-card-title>{{goals}}</ion-card-title>
+            <ion-card-subtitle>Gols</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Total de partidas entre todas as competições</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="topCard" color="tertiary">
+          <ion-card-header>
+            <ion-card-title>{{matches.length}}</ion-card-title>
+            <ion-card-subtitle>Partidas</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Total de competições</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="topCard" color="medium">
+          <ion-card-header>
+            <ion-card-title>{{this.players.length}}</ion-card-title>
+            <ion-card-subtitle>Jogadores</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Total de jogadores entre {{categoriesQtd}} categoria(s)</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="title">
+          <h2>Partidas</h2>
+        </div>
+        <div class="noRecordsWrapper" *ngIf="matches.length === 0">
+          <ion-text color="dark">
+            <div class="noRecords">
+              <ion-img class="cardImg" src="assets/049-yellow-card.png"></ion-img>
+              <h2>Nenhuma partida encontrada :(</h2>
+            </div>
+          </ion-text>
+        </div>
+        <ion-list *ngIf="matches.length !== 0" class="cardWrapper">
+          <ion-card button="true" [routerLink]="['/report/match/report', match.id]" *ngFor="let match of matches">
+            <ion-card-content class="moduleContent">
+              <ion-img class="cardImg" src="assets/pague.png"></ion-img>
+              <h1>{{match.description}}</h1>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

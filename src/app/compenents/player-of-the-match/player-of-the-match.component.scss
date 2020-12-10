@@ -1,0 +1,56 @@
+.playerCardContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.playerCard{
+    width: 20%;
+    flex: 0 0 16%; /* explanation below */
+    margin: 3px;
+}
+
+.centerText{
+    text-align: center;
+}
+
+.playerNumber{    
+    font-size: 6em
+}
+
+.statisticsCardContent{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   h1{
+    font-size: 5em;
+   }
+}
+
+.mainTeamImg{
+    filter: invert(1);   
+    width: 7%;
+    margin: 0 3% 0 0;
+}
+
+
+.statisticsCardContainer{
+    height: 100%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;     
+    ion-list{
+        width: 100%;
+    }  
+}
+
+.statisticsCardContainer ion-card{
+    height: 100%;
+    display: flex;
+    margin: 5px;
+}
+
+.statisticsButton{
+    font-size: 17em;
+}

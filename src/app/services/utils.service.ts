@@ -20,4 +20,11 @@ export class UtilsService {
     toPlainObject(obj) {
         return JSON.parse(JSON.stringify(obj));
     }
+
+    orderListByProperty(list: Array<any>, property: string): Array<any> {
+        return list.sort((a, b) => {
+            return a[property] - b[property];
+        });
+    }
+
 }

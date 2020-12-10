@@ -6,8 +6,8 @@ import { PositionEnum } from '../enum/Position.enum';
 export class Player {
 
     id: string;
-    nane: string;
-    address: string;    
+    name: string;
+    address: string;
     document: string;
     phone: number;
     birthdate: Date;
@@ -20,5 +20,7 @@ export class Player {
     preferredFoot: string;
     picture: Blob;
 
-    constructor() { }
+    constructor() {
+        this.category = {...new Category()};
+     }
 }

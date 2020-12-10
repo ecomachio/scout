@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Partida encerrada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="step === 1" class="playerCardContainer centerText">
+    <ion-card class="playerCard" button="true" *ngFor="let player of players" (click)='onPlayerChoose(player)'>
+      <ion-card-header>
+        <div>
+          <ion-card-title>{{player.name}}</ion-card-title>
+        </div>
+      </ion-card-header>
+      <ion-card-content class="playerNumber centerText">
+        {{player.shirtNumber}}
+      </ion-card-content>
+    </ion-card>
+  </div>  
+  <div *ngIf="step === 2" class="statisticsCardContainer">
+    <ion-card>
+      <ion-list lines="full">
+        <ion-item>         
+          <ion-textarea [(ngModel)]="notes" rows="15" ></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-card button="true" color="primary" (click)="onNoteConfirmed()">
+      <ion-card-content class="statisticsCardContent">
+        <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

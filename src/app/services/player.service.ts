@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot, DocumentData } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Player } from '../entity/player';
@@ -13,14 +13,15 @@ export class PlayerService {
     private players: Observable<Player[]>;
 
     constructor(db: AngularFirestore) {
-        this.playersCollection = db.collection<Player>('players');
+        this.playersCollection = db.collection<Player>('players', ref => ref.orderBy('name'));
 
         this.players = this.playersCollection.snapshotChanges().pipe(
             map(actions => {
                 return actions.map(a => {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
-                    console.log({ id, ...data });
+                    data.birthdate = new Date(data.birthdate);
+                    // console.log({ id, ...data });
                     return { id, ...data };
                 });
             })
@@ -29,6 +30,10 @@ export class PlayerService {
 
     getPlayers() {
         return this.players;
+    }
+
+    getPlayersByCategory(categoryId): Promise<QuerySnapshot<DocumentData>> {
+        return this.playersCollection.ref.where('category.id', '==', categoryId).get();
     }
 
     getPlayer(id) {

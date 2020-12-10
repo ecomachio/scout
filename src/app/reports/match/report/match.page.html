@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Partida</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="match">
+  <div class="title">
+    <h1>{{match.description}}</h1>
+  </div>
+
+  <div *ngIf="match" class="matchSummary">
+    <ion-list class="scoreList">
+
+      <ion-item class="scoreItem">
+        <h5 class="scoreText">
+          <span>{{match.score.home}}</span> Gols <span>{{match.score.away}}</span>
+        </h5>
+      </ion-item>
+      <ion-item class="scoreItem">
+        <h5 class="scoreText">
+          <span>{{match.homeTeamBallPossessionRate}}%</span> Posse de bola <span>{{match.awayTeamBallPossessionRate}}%</span>
+        </h5>
+      </ion-item>
+      <ion-item class="scoreItem">
+        <h5 class="scoreText">
+          <span>{{match.homeTeamballPossessionTime}}</span> Tempo com a bola <span>{{match.awayTeamballPossessionTime}}</span>
+        </h5>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card class="otherStats ion-no-margin">
+            <ion-img class="cardImg" src="assets/campeao.png"></ion-img>
+            <div class="wrapper">
+              <ion-card-header>
+                <ion-card-title>Destaque</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <h1>{{stats.playerOfTheMatch}}</h1>
+              </ion-card-content>
+            </div>
+          </ion-card>
+          <ion-card class="otherStats ion-no-margin">
+            <ion-img class="cardImg" src="assets/016-reporter.png"></ion-img>
+            <div class="wrapper">
+              <ion-card-header>
+                <ion-card-title>Notas</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                {{match.notes}}
+              </ion-card-content>
+            </div>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card class="stats ion-no-margin">
+            <ion-list>
+              <ion-item>
+                <ion-label>Finalizaçoes</ion-label>
+                <ion-label>{{stats.finishes}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Passes Errados</ion-label>
+                <ion-label>{{stats.passes}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Desarme</ion-label>
+                <ion-label>{{stats.tackles}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Faltas</ion-label>
+                <ion-label>{{stats.fouls}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Defesas do Goleiro</ion-label>
+                <ion-label>{{stats.goalkeeperSaves}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Cartoes Vermelhos</ion-label>
+                <ion-label>{{stats.redCard}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label>Cartoes Amarelos</ion-label>
+                <ion-label>{{stats.yellowCard}}</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

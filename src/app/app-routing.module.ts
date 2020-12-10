@@ -4,20 +4,24 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'menu',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    path: 'game',
+    loadChildren: () => import('./game/in-game/game.module').then(m => m.GamePageModule)
   },
   {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: 'game/:matchId',
+    loadChildren: () => import('./game/in-game/game.module').then(m => m.GamePageModule)
   },
   {
     path: 'choose-players',
-    loadChildren: './choose-players/choose-players.module#ChoosePlayersPageModule'
+    loadChildren: './game/choose-players/choose-players.module#ChoosePlayersPageModule'
+  },
+  {
+    path: 'choose-players/:categoryId',
+    loadChildren: './game/choose-players/choose-players.module#ChoosePlayersPageModule'
   },
   {
     path: 'statistics',
@@ -79,16 +83,18 @@ const routes: Routes = [
     path: 'team',
     loadChildren: './forms/team/team.module#TeamPageModule'
   },
-  {
-    path: 'team/:id',
-    loadChildren: './forms/team/team.module#TeamPageModule'
-  },
-  {
-    path: 'teams',
-    loadChildren: './list/teams/teams.module#TeamsPageModule'
-  },
+  { path: 'team/:id', loadChildren: './forms/team/team.module#TeamPageModule' },
+  { path: 'teams', loadChildren: './list/teams/teams.module#TeamsPageModule' },
   { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule' },
-
+  { path: 'before-game', loadChildren: './game/before-game/before-game.module#BeforeGamePageModule' },
+  { path: 'after-game', loadChildren: './game/after-game/after-game.module#AfterGamePageModule' },
+  { path: 'after-game/:matchId', loadChildren: './game/after-game/after-game.module#AfterGamePageModule' },
+  { path: 'reports', loadChildren: './reports/reports.module#ReportsPageModule' },
+  { path: 'report/competition/list', loadChildren: './reports/competition/list/competitions.module#CompetitionsPageModule' },
+  { path: 'report/competition/report/:id', loadChildren: './reports/competition/report/competition.module#CompetitionPageModule' },
+  { path: 'report/match/report/:id', loadChildren: './reports/match/report/match.module#MatchPageModule' },
+  { path: 'report/player/list', loadChildren: './reports/player/list/player.module#PlayerPageModule' },
+  { path: 'report/player/report/:id', loadChildren: './reports/player/report/player.module#PlayerPageModule' },
 ];
 
 @NgModule({

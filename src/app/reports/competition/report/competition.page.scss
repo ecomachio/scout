@@ -1,0 +1,36 @@
+.title {
+    padding: 1rem;
+    h1 {
+        font-size: 4em;
+        font-weight: bolder;
+    }
+    h2{
+        font-size: 2em;
+        font-weight: bold;    
+    }
+}
+
+.cardWrapper {
+    margin: 2% 5%;
+    overflow: auto;    
+}
+
+.moduleContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardImg {
+    width: 6em;
+    padding: 1em;
+}
+
+.noRecords {
+    text-align: center;
+    color: var(--ion-color-step-550, #737373);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15vh;
+}

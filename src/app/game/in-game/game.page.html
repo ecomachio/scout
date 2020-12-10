@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Jogo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="gameReady">
+    <ion-row>
+      <ion-col>
+        <ion-card class="ballPossessionCard" button="true" (click)="setBallPossession('home')">
+          <ion-card-header class="ballPossessionCardHeader">
+            <div>
+              <ion-card-title>
+                {{homeTeam.name}}
+              </ion-card-title>
+              <ion-card-subtitle>Posse de bola</ion-card-subtitle>
+            </div>
+            <div class="ballPossessionImgContainer">
+              <ion-img class="ballPossessionImg" src="assets/027-football.png"></ion-img>
+            </div>
+          </ion-card-header>
+          <ion-card-content class="ballPossessionCardContent">
+            <div class="gameStatsContainer">
+              <div class="gameStats">
+                <ion-img class="gameTimeImg" src="assets/clock.png"></ion-img>
+                <h2>{{homeTeam.ballPossessionTime}}</h2>
+              </div>
+              <div class="gameStats">
+                <ion-img class="gameTimeImg" src="assets/018-football-1.png"></ion-img>
+                <h2>{{homeTeam.ballPossessionRate}}%</h2>
+              </div>
+            </div>
+            <ion-chip *ngIf="homeTeam.hasPossession" color="success">
+              <ion-label color="success">Está com a bola</ion-label>
+            </ion-chip>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="ballPossessionCard" button="true" (click)="setBallPossession('away')">
+          <ion-card-header class="ballPossessionCardHeader">
+            <div>
+
+              <ion-card-title>{{awayTeam.name}}</ion-card-title>
+              <ion-card-subtitle>Posse de bola</ion-card-subtitle>
+            </div>
+            <div class="ballPossessionImgContainer">
+              <ion-img class="ballPossessionImg" src="assets/027-football.png"></ion-img>
+
+            </div>
+          </ion-card-header>
+          <ion-card-content class="ballPossessionCardContent">
+            <div class="gameStatsContainer">
+              <div class="gameStats">
+                <ion-img class="gameTimeImg" src="assets/clock.png"></ion-img>
+                <h2>{{awayTeam.ballPossessionTime}}</h2>
+              </div>
+              <div class="gameStats">
+                <ion-img class="gameTimeImg" src="assets/018-football-1.png"></ion-img>
+                <h2>{{awayTeam.ballPossessionRate}}%</h2>
+              </div>
+            </div>
+            <ion-chip *ngIf="awayTeam.hasPossession" color="success">
+              <ion-label color="success">Está com a bola</ion-label>
+            </ion-chip>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col ion-item no-lines no-padding text-center>
+        <div class="gameBarContainer">
+          <div class="gameStat gameTimeContainer">
+            <ion-img class="gameTimeImg" src="assets/clock.png"></ion-img>
+            <h2>{{gameTime}}</h2>
+          </div>
+          <div class="gameStat  gameTimeContainer">
+            <ion-img class="gameTimeImg" src="assets/017-football-2.png"></ion-img>
+            <h2>{{match.score.home}} x {{match.score.away}}</h2>
+          </div>
+        </div>
+        <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>
+        <div class="gameButtonBar">
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && !game.isPaused" color="light"
+            size="large" (click)="pauseGame()">
+            Pausar
+          </ion-button>
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && game.isPaused" color="light"
+            size="large" (click)="unpauseGame()">
+            Continuar
+          </ion-button>
+
+        </div>
+        <ion-button *ngIf="game.hasStarted && game.hasFinished" disabled expand="block" size="large">Jogo Encerrado
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="module" button="true" color="secondary" (click)="choosePlayers(actionEnum.TACKLE)">
+          <ion-card-header>
+            <ion-card-subtitle>Desarme</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/018-football-1.png"></ion-img>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="module" button="true" color="primary" (click)="choosePlayers(actionEnum.FINISH)">
+          <ion-card-header>
+            <ion-card-subtitle>Finalização</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/045-goal.png"></ion-img>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="module" button="true" color="success" (click)="choosePlayers(actionEnum.PASS)">
+          <ion-card-header>
+            <ion-card-subtitle>Passe Errado</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/043-strategy.png"></ion-img>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="module" button="true" color="warning" (click)="choosePlayers(actionEnum.FOUL)">
+          <ion-card-header>
+            <ion-card-subtitle>Faltas</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/011-amonestation-1.png"></ion-img>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="module" button="true" color="danger" (click)="choosePlayers(actionEnum.GOALKEEPERSAVE)">
+          <ion-card-header>
+            <ion-card-subtitle>Defesas do Goleiro</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/002-goalie.png"></ion-img>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+      <ion-col>
+        <ion-card class="module" button="true" color="medium" (click)="otherModules()">
+          <ion-card-header>
+            <ion-card-subtitle>Outros</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content class="moduleContent">
+            <ion-img class="cardImg" src="assets/021-strategy-1.png"></ion-img>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

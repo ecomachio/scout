@@ -13,14 +13,17 @@ export class CompetitionService {
     private competitions: Observable<Competition[]>;
 
     constructor(db: AngularFirestore) {
-        this.competitionsCollection = db.collection<Competition>('competitions');
+        this.competitionsCollection = db.collection<Competition>('competitions', ref => ref.orderBy('name'));
 
         this.competitions = this.competitionsCollection.snapshotChanges().pipe(
             map(actions => {
                 return actions.map(a => {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
-                    console.log({ id, ...data });
+
+                    data.start = new Date(data.start);
+                    data.end = new Date(data.start);
+
                     return { id, ...data };
                 });
             })

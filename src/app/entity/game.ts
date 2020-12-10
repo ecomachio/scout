@@ -3,9 +3,11 @@ import Timer from 'easytimer.js';
 
 export class Game {
 
-    public time: number;
+    public c: number;
     public hasStarted: boolean;
+    public hasFinished: boolean;
     public timer: Timer;
+    public isPaused: boolean;
 
     constructor() { }
 
@@ -13,6 +15,10 @@ export class Game {
         this.hasStarted = true;
         this.timer = new Timer();
         this.timer.start({ precision: 'secondTenths' });
+    }
+
+    stopGame() {
+        this.hasFinished = true;
     }
 
     currentTime(): string {
@@ -26,4 +32,13 @@ export class Game {
     totalSecondTenths() {
         return this.timer.getTotalTimeValues().secondTenths;
     }
+
+    pause() {
+        this.isPaused = true;
+    }
+
+    unpause() {
+        this.isPaused = false;
+    }
+
 }

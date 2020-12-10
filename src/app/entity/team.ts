@@ -4,5 +4,8 @@ export class Team {
     name: string;
     description: string;
     city: string;
+    isMainTeam: boolean;
+
+    constructor() { }
 
 }
