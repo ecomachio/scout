@@ -38,8 +38,8 @@ export class MatchPage implements OnInit {
 
     this.actions = await this.actionService.getActionsByMatch(id).then((res: any) => {
       return res.docs.map((a: QueryDocumentSnapshot<Action>) => {
-        const id = a.id;
-        return { id, ...a.data() } as Action;
+        const snapId = a.id;
+        return { snapId, ...a.data() } as Action;
       });
     });
 
