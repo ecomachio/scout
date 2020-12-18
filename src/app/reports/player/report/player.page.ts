@@ -125,22 +125,20 @@ export class PlayerPage implements OnInit {
 
       this.totalMatchesPlayed = await this.getTotalMatchesPlayed();
 
-      this.totalCompetition = await this.getTotalCompetitions();
-
       this.stats = this.getPlayerStats(this.actions);
     });
   }
 
   getPlayerStats(actions) {
-    const tackles = actions.filter(n => n.description === ActionEnum.TACKLE).length;
-    const finishes = actions.filter(n => n.description === ActionEnum.FINISH).length;
-    const passes = actions.filter(n => n.description === ActionEnum.PASS).length;
-    const fouls = actions.filter(n => n.description === ActionEnum.FOUL).length;
-    const goalkeeperSaves = actions.filter(n => n.description === ActionEnum.GOALKEEPERSAVE).length;
-    const goal = actions.filter(n => n.description === ActionEnum.GOAL).length;
-    const redCard = actions.filter(n => n.description === ActionEnum.REDCARD).length;
-    const yellowCard = actions.filter(n => n.description === ActionEnum.YELLOWCARD).length;
-    const playerOfTheMatchAction = actions.filter(n => n.description === ActionEnum.PLAYEROFTHEMATCH)[0];
+    const tackles = actions.filter((n: Action) => n.description === ActionEnum.TACKLE).length;
+    const finishes = actions.filter((n: Action) => n.description === ActionEnum.FINISH).length;
+    const passes = actions.filter((n: Action) => n.description === ActionEnum.PASS).length;
+    const fouls = actions.filter((n: Action) => n.description === ActionEnum.FOUL).length;
+    const goalkeeperSaves = actions.filter((n: Action) => n.description === ActionEnum.GOALKEEPERSAVE).length;
+    const goal = actions.filter((n: Action) => n.description === ActionEnum.GOAL).length;
+    const redCard = actions.filter((n: Action) => n.description === ActionEnum.REDCARD).length;
+    const yellowCard = actions.filter((n: Action) => n.description === ActionEnum.YELLOWCARD).length;
+    const playerOfTheMatchAction = actions.filter((n: Action) => n.description === ActionEnum.PLAYEROFTHEMATCH)[0];
     let playerOfTheMatch = {};
 
     if (!isUndefined(playerOfTheMatchAction)) {
