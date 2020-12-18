@@ -47,7 +47,7 @@ export class ChoosePlayersPage implements OnInit {
     const categoryId = this.route.snapshot.params.categoryId;
 
     const qpAction = this.route.snapshot.queryParamMap.get('action');
-    this.steps = parseInt(this.route.snapshot.queryParamMap.get('step'));
+    this.steps = Number(this.route.snapshot.queryParamMap.get('step'));
 
     this.choosePlayerStep = true;
 
