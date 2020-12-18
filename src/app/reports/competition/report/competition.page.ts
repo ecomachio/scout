@@ -63,8 +63,8 @@ export class CompetitionPage implements OnInit {
       Promise.all(playersByCatPromises).then((playersQuerySnapshot) => {
         const allPLayers = [];
 
-        playersQuerySnapshot.forEach((p: QuerySnapshot<firebase.firestore.DocumentData>) => {
-          p.docs.forEach((p: QueryDocumentSnapshot<Player>) => {
+        playersQuerySnapshot.forEach((pp: QuerySnapshot<firebase.firestore.DocumentData>) => {
+          pp.docs.forEach((p: QueryDocumentSnapshot<Player>) => {
             const id = p.id;
             allPLayers.push({ id, ...p.data() } as Player);
           });
