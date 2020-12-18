@@ -47,7 +47,7 @@ export class ChoosePlayersPage implements OnInit {
     const categoryId = this.route.snapshot.params.categoryId;
 
     const qpAction = this.route.snapshot.queryParamMap.get('action');
-    this.steps = parseInt(this.route.snapshot.queryParamMap.get('step'));
+    this.steps = Number(this.route.snapshot.queryParamMap.get('step'));
 
     this.choosePlayerStep = true;
 
@@ -74,7 +74,7 @@ export class ChoosePlayersPage implements OnInit {
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
-    if (this.steps == 2) {
+    if (this.steps === 2) {
       this.showConfirmationStep();
     } else {
       this.done(true);
@@ -116,7 +116,7 @@ export class ChoosePlayersPage implements OnInit {
   }
 
   setGoal(team: Team): void {
-    if (team.id == this.homeTeam.id) {
+    if (team.id === this.homeTeam.id) {
       this.match.score.home++;
 
       // every goal is also a shot on target
