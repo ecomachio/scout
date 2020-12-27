@@ -85,14 +85,16 @@
             <h4>{{match.score.home}} x {{match.score.away}}</h4>
           </div>
         </div>
-        <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo</ion-button>
+
         <div class="gameButtonBar">
-          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && !game.isPaused" color="light"
-            size="large" (click)="pauseGame()">
+          <ion-button *ngIf="!game.hasStarted" expand="block" size="large" (click)="startGame()">Começar jogo
+          </ion-button>
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && !game.isPaused" color="light" size="large"
+            (click)="pauseGame()">
             Pausar
           </ion-button>
-          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && game.isPaused" color="light"
-            size="large" (click)="unpauseGame()">
+          <ion-button strong *ngIf="game.hasStarted && !game.hasFinished && game.isPaused" color="light" size="large"
+            (click)="unpauseGame()">
             Continuar
           </ion-button>
 
