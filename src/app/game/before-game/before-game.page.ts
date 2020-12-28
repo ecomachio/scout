@@ -58,7 +58,7 @@ export class BeforeGamePage implements OnInit, OnDestroy {
           return 1;
         } else if (isNaN(+b.start)) {
           return -1;
- }
+        }
         return +a.start - +b.start;
       });
 
@@ -122,11 +122,15 @@ export class BeforeGamePage implements OnInit, OnDestroy {
         return 1;
       } else if (isNaN(+b.date)) {
         return -1;
- }
+      }
       return +a.date - +b.date;
     });
 
     return matches.filter((m: Match) => {
+      if (m.isFinished) {
+        return false;
+      }
+
       if (m.category) {
         return m.category.id === category.id;
       } else {
