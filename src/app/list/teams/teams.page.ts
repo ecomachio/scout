@@ -27,7 +27,7 @@ export class TeamsPage implements OnInit {
   async remove(item) {
     try {
       await this.teamService.removeTeam(item.id);
-      this.utilsService.showToast('Categoria excluída');
+      this.utilsService.showToast('Time excluído');
     } catch (error) {
       this.utilsService.showToast(`Opa! algo de errado ${error}`);
     }
