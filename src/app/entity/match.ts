@@ -3,6 +3,17 @@ import { Category } from './category';
 import { Team } from './team';
 import { Action } from './action';
 
+class Score {
+
+    home: number;
+    away: number;
+
+    constructor() {
+        this.home = 0;
+        this.away = 0;
+    }
+}
+
 export class Match {
 
     id: string;
@@ -30,13 +41,3 @@ export class Match {
 
 }
 
-class Score {
-
-    home: number;
-    away: number;
-
-    constructor() {
-        this.home = 0;
-        this.away = 0;
-    }
-}

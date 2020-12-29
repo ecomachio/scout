@@ -41,8 +41,8 @@ export class GameService {
 
     /* maps the QueryDocumentSnapshot array to players */
     this.players = ps.docs.map((p: QueryDocumentSnapshot<Player>) => {
-      const id = p.id;
-      return { id, ...p.data() } as Player;
+      const pId = p.id;
+      return { id: pId, ...p.data() } as Player;
     });
     this.gameActions = [];
     this.game = new Game();
