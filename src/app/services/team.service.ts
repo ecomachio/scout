@@ -45,19 +45,17 @@ export class TeamService {
     }
 
     async updateTeam(team: Team, id: string) {
-        let allMatchs;
-        let matchsContainingTheTeam: Array<Match>;
         (await this.matchService.getAllMatchs()).docs
             .map((m: QueryDocumentSnapshot<Match>) => {
                 const id = m.id;
                 return { id, ...m.data() } as Match;
             })
-            .filter(m => (m.homeTeam.id == id) || (m.awayTeam.id == id))
+            .filter(m => (m.homeTeam.id === id) || (m.awayTeam.id === id))
             .forEach(m => {
-                if (id == m.awayTeam.id) {
+                if (id === m.awayTeam.id) {
                     m.awayTeam = team;
                 }
-                if (id == m.homeTeam.id) {
+                if (id === m.homeTeam.id) {
                     m.homeTeam = team;
                 }
                 this.matchService.updateMatch(m, m.id).then((res) => console.log('times atualizados dentro das partidas'));
