@@ -60,7 +60,7 @@ export class TeamPage implements OnInit {
   }
 
   async done() {
-    const loading = await this.loadingController.create({message: 'Salvando..' });
+    const loading = await this.loadingController.create({ message: 'Salvando..' });
     await loading.present();
 
     if (this.team.id) {

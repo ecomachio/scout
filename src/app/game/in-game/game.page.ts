@@ -48,8 +48,7 @@ export class GamePage implements OnInit, OnDestroy {
   async ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
 
-    this.gameReady = await this.setupMatch(matchId);    
-
+    this.gameReady = await this.setupMatch(matchId);
   }
 
   async setupMatch(matchId) {

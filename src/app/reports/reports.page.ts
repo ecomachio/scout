@@ -115,7 +115,7 @@ export class ReportsPage implements OnInit {
   private getMatchGoals(allGoalsActions: Action[]) {
     this.matchStats = this.matchs.map((m: Match) => {
 
-      const amg = allGoalsActions.filter(a => (a.match.id == m.id));
+      const amg = allGoalsActions.filter(a => (a.match.id === m.id));
       const goalsScored = amg.filter(a => a.decision).length;
       const goalsConceded = amg.filter(a => !a.decision).length;
 
@@ -126,7 +126,7 @@ export class ReportsPage implements OnInit {
   private getMatchShots(allShotsActions: Action[]) {
     this.matchStats = this.matchStats.map((m: Match) => {
 
-      const amg = allShotsActions.filter(a => (a.match.id == m.id));
+      const amg = allShotsActions.filter(a => (a.match.id === m.id));
       const shotsOnTarget = amg.filter(a => a.decision).length;
       const shotsOffTarget = amg.filter(a => !a.decision).length;
       console.log({ ...m, shotsOnTarget, shotsOffTarget });

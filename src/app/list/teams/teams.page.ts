@@ -42,13 +42,13 @@ export class TeamsPage implements OnInit {
   async deleteTeamMatches(id) {
     const docm = await this.matchService.getAllMatchs();
     const matches = docm.docs.map((m: QueryDocumentSnapshot<Match>) => {
-      const id = m.id;
-      return { id, ...m.data() } as Match;
+      const mId = m.id;
+      return { mId, ...m.data() } as Match;
     });
     const teamMatches = matches.filter((m: Match) => ((m.awayTeam.id === id) || (m.homeTeam.id === id)));
     const matchIdsToRmovePromises = teamMatches.map((m: Match) => this.matchService.removeMatch(m.id));
     Promise.all(matchIdsToRmovePromises).then(console.log);
-    
+
   }
 
 }
