@@ -60,11 +60,15 @@ export class TeamPage implements OnInit {
   }
 
   async done() {
+    const loading = await this.loadingController.create({message: 'Salvando..' });
+    await loading.present();
+
     if (this.team.id) {
       await this.teamService.updateTeam(this.team, this.team.id);
     } else {
       await this.teamService.addTeam(this.team);
     }
+    loading.dismiss();
     this.utilsService.showToast('Pronto');
     this.router.navigateByUrl(`/teams`);
   }
