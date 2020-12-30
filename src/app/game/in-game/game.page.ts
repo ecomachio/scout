@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Game } from '../../entity/game';
 import { GameTeam } from '../../entity/gameTeam';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { GameService } from 'src/app/services/game.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
-import { ModalController } from '@ionic/angular';
+import { AlertController, IonBackButtonDelegate, ModalController, NavController } from '@ionic/angular';
 import { OtherModulesComponent } from 'src/app/compenents/other-modules/other-modules.component';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -18,6 +18,8 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['game.page.scss'],
 })
 export class GamePage implements OnInit, OnDestroy {
+
+  @ViewChild(IonBackButtonDelegate, { static: false }) backButton: IonBackButtonDelegate;
 
   unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -41,6 +43,8 @@ export class GamePage implements OnInit, OnDestroy {
     private gameService: GameService,
     private modalController: ModalController,
     private utilsService: UtilsService,
+    private alertController: AlertController,
+    private navCtrl: NavController
   ) {
 
   }
@@ -49,6 +53,8 @@ export class GamePage implements OnInit, OnDestroy {
     const matchId = this.route.snapshot.params.matchId;
 
     this.gameReady = await this.setupMatch(matchId);
+
+    this.setUIBackButtonAction();
   }
 
   async setupMatch(matchId) {
@@ -230,5 +236,33 @@ export class GamePage implements OnInit, OnDestroy {
     this.game.unpause();
   }
 
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Sair da partida?',
+      message: 'Os dados não serão salvos!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',          
+        }, {
+          cssClass: 'primary',     
+          text: 'Sair',
+          handler: () => {
+            this.navCtrl.back();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  setUIBackButtonAction() {
+    this.backButton.onClick = async () => {
+      await this.presentAlertConfirm();
+    };
+  }
 
 }
