@@ -25,7 +25,7 @@ jobs:
       - run: npm ci
       - run: ionic cordova build android      
       - name: Create the new Release
-      - uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1
         with:
           artifacts: "/home/runner/work/scout/scout/platforms/android/app/build/outputs/apk/debug/app-debug.apk"
           body: "Scout release"
