@@ -1,0 +1,24 @@
+name: Super-Linter
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  build:
+    name: build the app
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use coturiv/setup-ionic
+        uses: coturiv/setup-ionic@v1
+        with:
+          cordova-version: 8
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Checkout code
+        uses: actions/checkout@v2   
+      -
+      - run: npm ci
+      - run: ionic cordova build android
