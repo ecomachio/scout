@@ -1,7 +1,5 @@
-import { Statistic } from './statistic';
 import { Class } from './class';
 import { Category } from './category';
-import { PositionEnum } from '../enum/Position.enum';
 
 export class Player {
 

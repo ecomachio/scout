@@ -1,18 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { GameTeam } from '../../entity/gameTeam';
-import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
-import { PlayerService } from 'src/app/services/player.service';
 import { Player } from 'src/app/entity/player';
-import { MatchService } from 'src/app/services/match.service';
 import { Match } from 'src/app/entity/match';
-import { QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { GameService } from 'src/app/services/game.service';
 import { Location } from '@angular/common';
 import { Action } from 'src/app/entity/action';
 import { ActionService } from 'src/app/services/action.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
-import { ThrowStmt } from '@angular/compiler';
-import { PositionEnum } from 'src/app/enum/Position.enum';
+import { PositionEnum } from 'src/app/enum/position.enum';
 import { Team } from 'src/app/entity/team';
 
 @Component({
