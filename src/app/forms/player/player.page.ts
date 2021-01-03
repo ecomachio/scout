@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/entity/player';
 import { PickerController, NavController, LoadingController, ToastController } from '@ionic/angular';
 import { PickerOptions, PickerColumnOption } from '@ionic/core';
-import { PositionEnum } from 'src/app/enum/Position.enum';
+import { PositionEnum } from 'src/app/enum/position.enum';
 import { PreferredFootEnum } from 'src/app/enum/preferredFoot.enum';
 import { PlayerService } from 'src/app/services/player.service';
 import { ActivatedRoute, Router } from '@angular/router';

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use coturiv/setup-ionic
+      - name: setup ionic and cordova
         uses: coturiv/setup-ionic@v1
         with:
           cordova-version: 8
