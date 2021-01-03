@@ -8,6 +8,7 @@ import { ActionService } from 'src/app/services/action.service';
 import { ActionEnum } from 'src/app/enum/action.enum';
 import { PositionEnum } from 'src/app/enum/position.enum';
 import { Team } from 'src/app/entity/team';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-choose-players',
