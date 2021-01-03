@@ -23,8 +23,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2   
       - run: npm ci
-      - run: ionic cordova build android
-      - name: setup ionic and cordova
+      - run: ionic cordova build android      
       - name: Create the new Release
       - uses: ncipollo/release-action@v1
         with:
