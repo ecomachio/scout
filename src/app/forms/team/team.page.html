@@ -9,44 +9,49 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="5">
-        <div class="formface">
-          <!-- todo -->
-          <div class="formfaceContent">
-            <img src="assets/034-pennant.png" alt="">
-            <div class="formfaceText">
-              <h1>Time</h1>
-            </div>
-            <div class="formfaceButtons">
-              <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
+  <form [formGroup]="form">
+    <ion-grid>
+
+      <ion-row>
+        <ion-col size="5">
+          <div class="formface">
+            <!-- todo -->
+            <div class="formfaceContent">
+              <img src="assets/034-pennant.png" alt="">
+              <div class="formfaceText">
+                <h1>Time</h1>
+              </div>
+              <div class="formfaceButtons">
+                <ion-button type="submit" (click)="done()" class="formfaceButton">Pronto</ion-button>
+              </div>
             </div>
           </div>
-        </div>
-      </ion-col>
-      <ion-col size="7" align-self-center>
-        <ion-row>
-          <div class="fields">
-            <ion-item>
-              <ion-label position="floating">Nome</ion-label>
-              <ion-input [(ngModel)]="team.name" inputmode="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Descrição</ion-label>
-              <ion-input [(ngModel)]="team.description" inputmode="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Cidade</ion-label>
-              <ion-input [(ngModel)]="team.city" inputmode="text"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Principal</ion-label>
-              <ion-toggle [(ngModel)]="team.isMainTeam"></ion-toggle>
-            </ion-item>
-          </div>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </ion-col>
+        <ion-col size="7" align-self-center>
+          <ion-row>
+            <div class="fields">
+              <ion-item>
+                <ion-label position="floating">Nome</ion-label>
+                <ion-input formControlName="name" [(ngModel)]="team.name" required inputmode="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Descrição</ion-label>
+                <ion-input formControlName="description" [(ngModel)]="team.description" required inputmode="text">
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Cidade</ion-label>
+                <ion-input formControlName="city" [(ngModel)]="team.city" required inputmode="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Principal</ion-label>
+                <ion-toggle formControlName="isMainTeam" [(ngModel)]="team.isMainTeam"></ion-toggle>
+              </ion-item>
+            </div>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
 </ion-content>

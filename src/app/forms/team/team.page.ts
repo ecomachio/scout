@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CompetitionService } from 'src/app/services/competition.service';
 import { Competition } from 'src/app/entity/competition';
+import { ValidateFieldService } from 'src/app/utils/forms/validate-fields';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-team',
@@ -14,22 +16,30 @@ import { Competition } from 'src/app/entity/competition';
 })
 export class TeamPage implements OnInit {
 
+  form: FormGroup;
+
   team: Team;
   competition: Competition;
   competitionId: string;
 
   constructor(
-    private pickerController: PickerController,
     private teamService: TeamService,
-    private competitionService: CompetitionService,
     private route: ActivatedRoute,
-    private nav: NavController,
     private loadingController: LoadingController,
     private utilsService: UtilsService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+
+    this.form = this.formBuilder.group({
+      name: [null, Validators.required],
+      description: [null, Validators.required],
+      city: [null, Validators.required],
+      isMainTeam: [null]
+    });
+
     this.team = new Team();
     const teamId = this.route.snapshot.params.id;
     if (teamId) {
@@ -60,17 +70,23 @@ export class TeamPage implements OnInit {
   }
 
   async done() {
-    const loading = await this.loadingController.create({ message: 'Salvando..' });
-    await loading.present();
 
-    if (this.team.id) {
-      await this.teamService.updateTeam(this.team, this.team.id);
+    if (this.form.valid) {
+
+      const loading = await this.loadingController.create({ message: 'Salvando..' });
+      await loading.present();
+
+      if (this.team.id) {
+        await this.teamService.updateTeam(this.team, this.team.id);
+      } else {
+        await this.teamService.addTeam(this.team);
+      }
+      loading.dismiss();
+      this.utilsService.showToast('Pronto');
+      this.router.navigateByUrl(`/teams`);
     } else {
-      await this.teamService.addTeam(this.team);
+      this.utilsService.showToast('Verifique os campos informados');
     }
-    loading.dismiss();
-    this.utilsService.showToast('Pronto');
-    this.router.navigateByUrl(`/teams`);
-  }
 
+  }
 }
