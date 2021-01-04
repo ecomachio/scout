@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import { CompetitionService } from 'src/app/services/competition.service';
 import { Competition } from 'src/app/entity/competition';
-import { ValidateFieldService } from 'src/app/utils/forms/validate-fields';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
