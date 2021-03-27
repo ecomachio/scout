@@ -33,6 +33,7 @@ export class PlayerPage implements OnInit {
   competitions: Array<Competition> = [];
 
   totalGoalsScored: number;
+  totalPlayerOfTheMatch: number;
   totalMatchesPlayed: number;
   totalCompetition: number;
 
@@ -97,6 +98,11 @@ export class PlayerPage implements OnInit {
     return tgs;
   }
 
+  async getTotalPlayerOfTheMatch() {
+    const tgs = this.actions.filter(action => action.description === ActionEnum.PLAYEROFTHEMATCH).length;
+    return tgs;
+  }
+
   async getTotalMatchesPlayed() {
     return this.matches.length;
   }
@@ -121,7 +127,8 @@ export class PlayerPage implements OnInit {
       this.competitionService.getCompetitions().subscribe(r => this.allCompetitions = r);
 
       this.totalGoalsScored = await this.getTotalGoalsScored();
-      console.log(this.totalGoalsScored);
+
+      this.totalPlayerOfTheMatch = await this.getTotalPlayerOfTheMatch();
 
       this.totalMatchesPlayed = await this.getTotalMatchesPlayed();
 
