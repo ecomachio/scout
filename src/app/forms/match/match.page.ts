@@ -14,6 +14,7 @@ import { CategoryService } from "src/app/services/category.service";
 import { Category } from "src/app/entity/category";
 import { TeamService } from "src/app/services/team.service";
 import { Team } from "src/app/entity/team";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-match",
@@ -21,6 +22,8 @@ import { Team } from "src/app/entity/team";
   styleUrls: ["./match.page.scss"],
 })
 export class MatchPage implements OnInit {
+  form: FormGroup;
+
   categories: Array<Category>;
   match: Match;
   competition: Competition;
@@ -37,10 +40,20 @@ export class MatchPage implements OnInit {
     private nav: NavController,
     private loadingController: LoadingController,
     private utilsService: UtilsService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      category: [null, Validators.required],
+      homeTeam: [null, Validators.required],
+      awayTeam: [null, Validators.required],
+      location: [null, Validators.required],
+      end: [null, Validators.required],
+      notes: [null],
+    });
+
     this.match = new Match();
 
     this.categoryService
@@ -80,6 +93,11 @@ export class MatchPage implements OnInit {
   }
 
   async done() {
+    if (!this.form.valid) {
+      this.utilsService.showToast("Verifique os campos informados");
+      return;
+    }
+    
     this.match.description = `${this.match.homeTeam.name} vs ${this.match.awayTeam.name}`;
 
     if (this.match.id) {
