@@ -5,78 +5,135 @@
     </ion-buttons>
     <ion-title>Jogador</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="5">
-        <div class="formface">
-          <!-- todo -->
-          <div class="formfaceContent">
-            <img src="assets/avatar.png" alt="">
-            <div class="formfaceText">
-              <h1>&nbsp;{{player.name}}&nbsp;</h1>
-              <p *ngIf="!player.id">Descreva o próximo astro do futebol</p>
-            </div>
-            <div class="formfaceButtons">
-              <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5">
+          <div class="formface">
+            <!-- todo -->
+            <div class="formfaceContent">
+              <img src="assets/avatar.png" alt="" />
+              <div class="formfaceText">
+                <h1>&nbsp;{{player.name}}&nbsp;</h1>
+                <p *ngIf="!player.id">Descreva o próximo astro do futebol</p>
+              </div>
+              <div class="formfaceButtons">
+                <ion-button class="formfaceButton" (click)="done()"
+                  >Pronto</ion-button
+                >
+              </div>
             </div>
           </div>
-        </div>
-      </ion-col>
-      <ion-col size="7">
-        <div class="fields">
-          <ion-item>
-            <ion-label position="floating">Nome</ion-label>
-            <ion-input [(ngModel)]="player.name" required inputmode="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Endereço</ion-label>
-            <ion-input [(ngModel)]="player.address"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Documento identificação</ion-label>
-            <ion-input [(ngModel)]="player.document" inputmode="number"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Data de nascimento</ion-label>
-            <ion-datetime [(ngModel)]="player.birthdate" displayFormat="DD/MM/YYYY"></ion-datetime>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Responsável</ion-label>
-            <ion-input [(ngModel)]="player.responsible"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Telefone</ion-label>
-            <ion-input [(ngModel)]="player.phone"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Telefone Residencial</ion-label>
-            <ion-input [(ngModel)]="player.homePhone"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Categoria</ion-label>
-            <ion-select name="category" [value]="player.category" [(ngModel)]="player.category" required cancelText="Cancelar"
-              [okText]="Pronto"  [compareWith]="compareWith">
-              <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Número da camisa</ion-label>
-            <ion-input [(ngModel)]="player.shirtNumber" inputmode="number" type="number" max="999" min="0"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Posição</ion-label>
-            <ion-input readonly [(ngModel)]="player.position" (click)='showPositionPicker()'></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Pé preferencial</ion-label>
-            <ion-input readonly [(ngModel)]="player.preferredFoot" (click)='showPreferredFootPicker()'></ion-input>
-          </ion-item>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </ion-col>
+        <ion-col size="7">
+          <div class="fields">
+            <ion-item>
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input
+                formControlName="name"
+                [(ngModel)]="player.name"
+                required
+                inputmode="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Endereço</ion-label>
+              <ion-input
+                formControlName="address"
+                [(ngModel)]="player.address"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Documento identificação</ion-label>
+              <ion-input
+                formControlName="document"
+                [(ngModel)]="player.document"
+                inputmode="number"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Data de nascimento</ion-label>
+              <ion-datetime
+                formControlName="birthdate"
+                [(ngModel)]="player.birthdate"
+                displayFormat="DD/MM/YYYY"
+              ></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Responsável</ion-label>
+              <ion-input
+                formControlName="responsible"
+                [(ngModel)]="player.responsible"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Telefone</ion-label>
+              <ion-input
+                formControlName="phone"
+                [(ngModel)]="player.phone"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Telefone Residencial</ion-label>
+              <ion-input
+                formControlName="homePhone"
+                [(ngModel)]="player.homePhone"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Categoria</ion-label>
+              <ion-select
+                name="category"
+                [value]="player.category"
+                formControlName="category"
+                [(ngModel)]="player.category"
+                required
+                cancelText="Cancelar"
+                [okText]="Pronto"
+                [compareWith]="compareWith"
+              >
+                <ion-select-option
+                  [value]="category"
+                  *ngFor="let category of categories"
+                  >{{category.name}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Número da camisa</ion-label>
+              <ion-input
+                formControlName="shirtNumber"
+                [(ngModel)]="player.shirtNumber"
+                inputmode="number"
+                type="number"
+                max="999"
+                min="0"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Posição</ion-label>
+              <ion-input
+                readonly
+                formControlName="position"
+                [(ngModel)]="player.position"
+                (click)="showPositionPicker()"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Pé preferencial</ion-label>
+              <ion-input
+                readonly
+                formControlName="preferredFoot"
+                [(ngModel)]="player.preferredFoot"
+                (click)="showPreferredFootPicker()"
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
