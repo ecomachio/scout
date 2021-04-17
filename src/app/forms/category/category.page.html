@@ -5,39 +5,49 @@
     </ion-buttons>
     <ion-title>Categorias</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="5">
-        <div class="formface">
-          <!-- todo -->
-          <div class="formfaceContent">
-            <img src="assets/boneca.png" alt="">
-            <div class="formfaceText">
-              <h1>&nbsp;{{category.name}}&nbsp;</h1>
-            </div>
-            <div class="formfaceButtons">
-              <ion-button class="formfaceButton" (click)="done()">Pronto</ion-button>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5">
+          <div class="formface">
+            <!-- todo -->
+            <div class="formfaceContent">
+              <img src="assets/boneca.png" alt="" />
+              <div class="formfaceText">
+                <h1>&nbsp;{{category.name}}&nbsp;</h1>
+              </div>
+              <div class="formfaceButtons">
+                <ion-button class="formfaceButton" (click)="done()"
+                  >Pronto</ion-button
+                >
+              </div>
             </div>
           </div>
-        </div>
-      </ion-col>
-      <ion-col size="7" align-self-center>
-        <div class="fields">
-          <ion-item>
-            <ion-label position="floating">Nome</ion-label>
-            <ion-input [(ngModel)]="category.name" inputmode="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Descrição</ion-label>
-            <ion-input [(ngModel)]="category.description" inputmode="text"></ion-input>
-          </ion-item>
-        </div>        
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+        </ion-col>
+        <ion-col size="7" align-self-center>
+          <div class="fields">
+            <ion-item>
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input
+                formControlName="name"
+                [(ngModel)]="category.name"
+                inputmode="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Descrição</ion-label>
+              <ion-input
+                formControlName="description"
+                [(ngModel)]="category.description"
+                inputmode="text"
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
