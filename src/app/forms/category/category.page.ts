@@ -76,15 +76,26 @@ export class CategoryPage implements OnInit {
       this.utilsService.showToast("Verifique os campos informados");
       return;
     }
-    if (this.category.id) {
-      await this.categoryService.updateCategory(
-        this.category,
-        this.category.id
-      );
-    } else {
-      await this.categoryService.addCategory(this.category);
+
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    try {
+      if (this.category.id) {
+        await this.categoryService.updateCategory(
+          this.category,
+          this.category.id
+        );
+      } else {
+        await this.categoryService.addCategory(this.category);
+      }
+      loading.dismiss();
+      this.utilsService.showToast("Pronto");
+      this.router.navigateByUrl(`/categories`);
+    } catch (error) {
+      console.error(error);
+      this.utilsService.showToast("Erro ao salvar");
+      loading.dismiss();
     }
-    this.utilsService.showToast("Pronto");
-    this.router.navigateByUrl(`/categories`);
   }
 }

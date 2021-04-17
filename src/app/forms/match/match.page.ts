@@ -97,16 +97,26 @@ export class MatchPage implements OnInit {
       this.utilsService.showToast("Verifique os campos informados");
       return;
     }
-    
-    this.match.description = `${this.match.homeTeam.name} vs ${this.match.awayTeam.name}`;
 
-    if (this.match.id) {
-      await this.matchService.updateMatch(this.match, this.match.id);
-    } else {
-      await this.matchService.addMatch(this.match);
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    try {
+      this.match.description = `${this.match.homeTeam.name} vs ${this.match.awayTeam.name}`;
+
+      if (this.match.id) {
+        await this.matchService.updateMatch(this.match, this.match.id);
+      } else {
+        await this.matchService.addMatch(this.match);
+      }
+      loading.dismiss();
+      this.utilsService.showToast("Pronto");
+      this.router.navigateByUrl(`/matches/${this.match.competitionId}`);
+    } catch (error) {
+      console.error(error);
+      this.utilsService.showToast("Erro ao salvar");
+      loading.dismiss();
     }
-    this.utilsService.showToast("Pronto");
-    this.router.navigateByUrl(`/matches/${this.match.competitionId}`);
   }
 
   compareWithFn = (o1, o2) => {

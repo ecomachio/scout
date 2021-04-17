@@ -67,9 +67,7 @@ export class PlayerPage implements OnInit {
   }
 
   async loadPlayer(playerId) {
-    const loading = await this.loadingController.create({
-      message: "Loading Player..",
-    });
+    const loading = await this.loadingController.create();
     await loading.present();
 
     this.playerService.getPlayer(playerId).subscribe((res) => {
@@ -85,13 +83,24 @@ export class PlayerPage implements OnInit {
       this.utilsService.showToast("Verifique os campos informados");
       return;
     }
-    if (this.player.id) {
-      await this.playerService.updatePlayer(this.player, this.player.id);
-    } else {
-      await this.playerService.addPlayer(this.player);
+
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    try {
+      if (this.player.id) {
+        await this.playerService.updatePlayer(this.player, this.player.id);
+      } else {
+        await this.playerService.addPlayer(this.player);
+      }
+      loading.dismiss();
+      this.utilsService.showToast("Pronto");
+      this.router.navigateByUrl("/players");
+    } catch (error) {
+      console.error(error);
+      this.utilsService.showToast("Erro ao salvar");
+      loading.dismiss();
     }
-    this.utilsService.showToast("Pronto");
-    this.router.navigateByUrl("/players");
   }
 
   async showPreferredFootPicker() {

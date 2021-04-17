@@ -75,8 +75,18 @@ export class CompetitionPage implements OnInit {
       this.utilsService.showToast("Verifique os campos informados");
       return;
     }
-    this.save();
-    this.router.navigateByUrl("/competitions");
+    const loading = await this.loadingController.create();
+    await loading.present();
+
+    try {
+      this.save();
+      loading.dismiss();
+      this.router.navigateByUrl("/competitions");
+    } catch (error) {
+      console.error(error);
+      this.utilsService.showToast("Erro ao salvar");
+      loading.dismiss();
+    }
   }
 
   async save() {
