@@ -10,6 +10,7 @@ import { MatchService } from "src/app/services/match.service";
 import { CompetitionService } from "src/app/services/competition.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UtilsService } from "src/app/services/utils.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-competition",
@@ -17,6 +18,7 @@ import { UtilsService } from "src/app/services/utils.service";
   styleUrls: ["./competition.page.scss"],
 })
 export class CompetitionPage implements OnInit {
+  form: FormGroup;
   competition: Competition;
 
   constructor(
@@ -27,10 +29,19 @@ export class CompetitionPage implements OnInit {
     private nav: NavController,
     private loadingController: LoadingController,
     private utilsService: UtilsService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.form = this.formBuilder.group({
+      name: [null, Validators.required],
+      description: [null, Validators.required],
+      city: [null, Validators.required],
+      start: [null, Validators.required],
+      end: [null, Validators.required],
+    });
+
     this.competition = new Competition();
     const competitionId = this.route.snapshot.params.id;
     if (competitionId) {
@@ -60,6 +71,10 @@ export class CompetitionPage implements OnInit {
   }
 
   async done() {
+    if (!this.form.valid) {
+      this.utilsService.showToast("Verifique os campos informados");
+      return;
+    }
     this.save();
     this.router.navigateByUrl("/competitions");
   }

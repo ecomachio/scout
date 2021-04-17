@@ -8,67 +8,76 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="5">
-        <div class="formface">
-          <!-- todo -->
-          <div class="formfaceContent">
-            <img src="assets/premio.png" alt="" />
-            <div class="formfaceText">
-              <h1>&nbsp;{{competition.name}}&nbsp;</h1>
-              <p *ngIf="!competition.id">Descreva o próximo astro do futebol</p>
-            </div>
-            <div class="formfaceButtons">
-              <ion-button class="formfaceButton" (click)="done()"
-                >Pronto</ion-button
-              >
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5">
+          <div class="formface">
+            <!-- todo -->
+            <div class="formfaceContent">
+              <img src="assets/premio.png" alt="" />
+              <div class="formfaceText">
+                <h1>&nbsp;{{competition.name}}&nbsp;</h1>
+                <p *ngIf="!competition.id">
+                  Descreva o próximo astro do futebol
+                </p>
+              </div>
+              <div class="formfaceButtons">
+                <ion-button class="formfaceButton" (click)="done()"
+                  >Pronto</ion-button
+                >
+              </div>
             </div>
           </div>
-        </div>
-      </ion-col>
-      <ion-col size="7" align-self-center>
-        <div class="fields">
-          <ion-item>
-            <ion-label position="floating">Nome</ion-label>
-            <ion-input
-              [(ngModel)]="competition.name"
-              inputmode="text"
-            ></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Descrição</ion-label>
-            <ion-input
-              [(ngModel)]="competition.description"
-              inputmode="text"
-            ></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Cidade</ion-label>
-            <ion-input
-              [(ngModel)]="competition.city"
-              inputmode="text"
-            ></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Início</ion-label>
-            <ion-datetime
-              [(ngModel)]="competition.start"
-              displayFormat="DD/MM/YYYY"
-            ></ion-datetime>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Fim</ion-label>
-            <ion-datetime
-              [(ngModel)]="competition.end"
-              displayFormat="DD/MM/YYYY"
-            ></ion-datetime>
-          </ion-item>
-          <ion-button class="matchesButton" (click)="navToMatchs()"
-            >Partidas</ion-button
-          >
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </ion-col>
+        <ion-col size="7" align-self-center>
+          <div class="fields">
+            <ion-item>
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input
+                formControlName="name"
+                [(ngModel)]="competition.name"
+                inputmode="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Descrição</ion-label>
+              <ion-input
+                formControlName="description"
+                [(ngModel)]="competition.description"
+                inputmode="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Cidade</ion-label>
+              <ion-input
+                formControlName="city"
+                [(ngModel)]="competition.city"
+                inputmode="text"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Início</ion-label>
+              <ion-datetime
+                formControlName="start"
+                [(ngModel)]="competition.start"
+                displayFormat="DD/MM/YYYY"
+              ></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Fim</ion-label>
+              <ion-datetime
+                formControlName="end"
+                [(ngModel)]="competition.end"
+                displayFormat="DD/MM/YYYY"
+              ></ion-datetime>
+            </ion-item>
+            <ion-button class="matchesButton" (click)="navToMatchs()"
+              >Partidas</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
