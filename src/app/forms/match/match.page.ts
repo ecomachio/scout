@@ -30,6 +30,7 @@ export class MatchPage implements OnInit {
   competitionId: string;
   compareWith;
   teams: Array<Team>;
+  refreshed: boolean = true;
 
   constructor(
     private pickerController: PickerController,
@@ -95,6 +96,11 @@ export class MatchPage implements OnInit {
   async done() {
     if (!this.form.valid) {
       this.utilsService.showToast("Verifique os campos informados");
+      return;
+    }
+
+    if (this.form.value.homeTeam == this.form.value.awayTeam) {
+      this.utilsService.showToast("Os times devem ser diferentes");
       return;
     }
 
