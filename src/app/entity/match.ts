@@ -31,6 +31,7 @@ export class Match {
     homeTeamBallPossessionRate: number;
     awayTeamballPossessionTime: string;
     homeTeamballPossessionTime: string;
+    passCount: number;
 
     category: Category;
 

@@ -19,16 +19,27 @@
         {{player.shirtNumber}}
       </ion-card-content>
     </ion-card>
-  </div>  
+  </div>
   <div *ngIf="step === 2" class="statisticsCardContainer">
     <ion-card>
       <ion-list lines="full">
-        <ion-item>         
-          <ion-textarea [(ngModel)]="notes" rows="15" ></ion-textarea>
+        <ion-item>
+          <ion-textarea [(ngModel)]="notes" rows="15"></ion-textarea>
         </ion-item>
       </ion-list>
     </ion-card>
     <ion-card button="true" color="primary" (click)="onNoteConfirmed()">
+      <ion-card-content class="statisticsCardContent">
+        <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="step === 3" class="statisticsCardContainer">
+    <ion-card>
+      <ion-input [(ngModel)]="passCount" inputmode="number" type="number" min="0"
+        inputmode="numeric" pattern="[0-9]*"></ion-input>
+    </ion-card>
+    <ion-card button="true" color="primary" (click)="onPassCountConfirmed()">
       <ion-card-content class="statisticsCardContent">
         <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
       </ion-card-content>

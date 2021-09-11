@@ -56,6 +56,17 @@
               </ion-card-content>
             </div>
           </ion-card>
+          <ion-card class="otherStats ion-no-margin" (click)="onClickPassCount()">
+            <ion-img class="cardImg" src="assets/016-reporter.png"></ion-img>
+            <div class="wrapper">
+              <ion-card-header>
+                <ion-card-title>Total de passes</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                {{match.passCount}}
+              </ion-card-content>
+            </div>
+          </ion-card>
         </ion-col>
         <ion-col>
           <ion-card class="stats ion-no-margin">
