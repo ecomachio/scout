@@ -1,25 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { Player } from 'src/app/entity/player';
-import { Match } from 'src/app/entity/match';
-import { GameService } from 'src/app/services/game.service';
-import { Location } from '@angular/common';
-import { Action } from 'src/app/entity/action';
-import { ActionService } from 'src/app/services/action.service';
-import { ActionEnum } from 'src/app/enum/action.enum';
-import { PositionEnum } from 'src/app/enum/position.enum';
-import { Team } from 'src/app/entity/team';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Player } from "src/app/entity/player";
+import { Match } from "src/app/entity/match";
+import { GameService } from "src/app/services/game.service";
+import { Location } from "@angular/common";
+import { Action } from "src/app/entity/action";
+import { ActionService } from "src/app/services/action.service";
+import { ActionEnum } from "src/app/enum/action.enum";
+import { PositionEnum } from "src/app/enum/position.enum";
+import { Team } from "src/app/entity/team";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-choose-players',
-  templateUrl: './choose-players.page.html',
-  styleUrls: ['./choose-players.page.scss'],
+  selector: "app-choose-players",
+  templateUrl: "./choose-players.page.html",
+  styleUrls: ["./choose-players.page.scss"],
 })
 export class ChoosePlayersPage implements OnInit {
-
   choosePlayerStep: boolean;
   confirmationStep: boolean;
-  goalStep: boolean;
+  teamSelectorStep: boolean;
 
   players: Array<Player>;
   selectedPlayer: Player;
@@ -36,13 +35,13 @@ export class ChoosePlayersPage implements OnInit {
     private gameService: GameService,
     private actionService: ActionService,
     private location: Location
-  ) { }
+  ) {}
 
   async ngOnInit() {
     const categoryId = this.route.snapshot.params.categoryId;
 
-    const qpAction = this.route.snapshot.queryParamMap.get('action');
-    this.steps = Number(this.route.snapshot.queryParamMap.get('step'));
+    const qpAction = this.route.snapshot.queryParamMap.get("action");
+    this.steps = Number(this.route.snapshot.queryParamMap.get("step"));
 
     this.choosePlayerStep = true;
 
@@ -56,10 +55,15 @@ export class ChoosePlayersPage implements OnInit {
 
     switch (this.selectedAction.description) {
       case ActionEnum.GOALKEEPERSAVE:
-        this.players = this.players.filter(p => p.position === PositionEnum.GK);
+        this.players = this.players.filter(
+          (p) => p.position === PositionEnum.GK
+        );
         break;
       case ActionEnum.GOAL:
-        this.showGoalStep();
+        this.showTeamSelectorStep();
+        break;
+      case ActionEnum.FOUL:
+        this.showTeamSelectorStep();
         break;
       case ActionEnum.NOTES:
         this.showNoteStep();
@@ -92,22 +96,24 @@ export class ChoosePlayersPage implements OnInit {
     this.location.back();
   }
 
-  showGoalStep() {
+  showTeamSelectorStep() {
     this.choosePlayerStep = false;
-    this.goalStep = true;
+    this.teamSelectorStep = true;
     this.confirmationStep = false;
   }
 
-  onGoalConfirmed(team: Team) {
-    this.hideGoalStep();
-    this.setGoal(team);
+  onTeamConfirmed(team: Team) {
+    this.hideTeamSelectorStep();
+
+    if (this.selectedAction.description === ActionEnum.GOAL) {
+      this.setGoal(team);
+    }
 
     if (team.isMainTeam) {
       this.choosePlayerStep = true;
     } else {
       this.done(false);
     }
-
   }
 
   setGoal(team: Team): void {
@@ -120,26 +126,26 @@ export class ChoosePlayersPage implements OnInit {
       shotAction.description = ActionEnum.FINISH;
       shotAction.decision = true;
       this.gameService.addAction(shotAction);
-
     } else {
       this.match.score.away++;
     }
   }
 
-  hideGoalStep() {
-    this.goalStep = false;
+
+  hideTeamSelectorStep() {
+    this.teamSelectorStep = false;
   }
 
   showConfirmationStep() {
     this.choosePlayerStep = false;
-    this.goalStep = false;
+    this.teamSelectorStep = false;
     this.noteStep = false;
     this.confirmationStep = true;
   }
 
   showNoteStep() {
     this.choosePlayerStep = false;
-    this.goalStep = false;
+    this.teamSelectorStep = false;
     this.noteStep = true;
     this.confirmationStep = false;
   }
@@ -152,5 +158,4 @@ export class ChoosePlayersPage implements OnInit {
     this.match.notes = this.notes;
     this.location.back();
   }
-
 }

@@ -34,15 +34,14 @@
       </ion-card-content>
     </ion-card>
   </div>
-  <div *ngIf="goalStep" class="statisticsCardContainer">
-    <h1>Gol</h1>
-    <ion-card button="true" [color]="homeTeam.isMainTeam ? 'success' : 'medium'" (click)="onGoalConfirmed(homeTeam)">
+  <div *ngIf="teamSelectorStep" class="statisticsCardContainer">
+    <ion-card button="true" [color]="homeTeam.isMainTeam ? 'success' : 'medium'" (click)="onTeamConfirmed(homeTeam)">
       <ion-card-content class="statisticsCardContent">
         <ion-img *ngIf="homeTeam.isMainTeam" class="mainTeamImg" src="assets/027-football.png"></ion-img>
         <h1>{{homeTeam.name}}</h1>
       </ion-card-content>
     </ion-card>
-    <ion-card button="true" [color]="awayTeam.isMainTeam ? 'success' : 'medium'" (click)="onGoalConfirmed(awayTeam)">
+    <ion-card button="true" [color]="awayTeam.isMainTeam ? 'success' : 'medium'" (click)="onTeamConfirmed(awayTeam)">
       <ion-card-content class="statisticsCardContent">
         <ion-img *ngIf="awayTeam.isMainTeam" class="mainTeamImg" src="assets/027-football.png"></ion-img>
         <h1>{{awayTeam.name}}</h1>

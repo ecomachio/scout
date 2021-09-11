@@ -165,7 +165,7 @@ export class GamePage implements OnInit, OnDestroy {
         this.setBallPossession('away');
         break;
       case ActionEnum.FOUL:
-        step = 2;
+        step = 1;
         if (this.homeTeam.hasPossession) {
           this.setBallPossession('away');
         } else {
