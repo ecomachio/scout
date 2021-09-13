@@ -99,6 +99,7 @@
               <ion-item>
                 <ion-label position="floating">Data</ion-label>
                 <ion-datetime
+                  max="2099-12-31"
                   formControlName="end"
                   [(ngModel)]="match.end"
                   displayFormat="DD/MM/YYYY"

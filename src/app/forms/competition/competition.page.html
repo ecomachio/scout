@@ -59,6 +59,7 @@
             <ion-item>
               <ion-label position="floating">Início</ion-label>
               <ion-datetime
+                max="2099-12-31"
                 formControlName="start"
                 [(ngModel)]="competition.start"
                 displayFormat="DD/MM/YYYY"
@@ -67,6 +68,7 @@
             <ion-item>
               <ion-label position="floating">Fim</ion-label>
               <ion-datetime
+                max="2099-12-31"
                 formControlName="end"
                 [(ngModel)]="competition.end"
                 displayFormat="DD/MM/YYYY"
