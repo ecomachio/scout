@@ -16,7 +16,7 @@ interface FrequencyPlayer extends Player {
 @Component({
   selector: "app-action-detail",
   templateUrl: "./action-detail.page.html",
-  styleUrls: ['../match.page.scss', '../../../reports.page.scss'],
+  styleUrls: ["../match.page.scss", "../../../reports.page.scss"],
 })
 export class ActionDetailPage implements OnInit {
   match: Match = new Match();
@@ -35,7 +35,9 @@ export class ActionDetailPage implements OnInit {
     const actionName = this.route.snapshot.params.actionName.toUpperCase();
     this.match = (await this.matchService.getMatchPromise(id)).data() as Match;
 
-    this.title = ActionEnum[actionName]
+    if (actionName == "GOALKEEPERSAVE") {
+      this.title = "Defesas do Goleiro";
+    } else this.title = ActionEnum[actionName];
 
     this.actions = await this.actionService
       .getActionsByMatch(id)
