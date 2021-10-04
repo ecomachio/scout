@@ -129,6 +129,11 @@ const routes: Routes = [
       "./reports/match/report/action-detail/action-detail.module#ActionDetailPageModule",
   },
   {
+    path: "after-game/:id/action-detail/:actionName",
+    loadChildren:
+      "./reports/match/report/action-detail/action-detail.module#ActionDetailPageModule",
+  },
+  {
     path: "report/player/list",
     loadChildren: "./reports/player/list/player.module#PlayerPageModule",
   },

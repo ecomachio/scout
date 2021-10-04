@@ -22,12 +22,14 @@
       </ion-item>
       <ion-item class="scoreItem">
         <h5 class="scoreText">
-          <span>{{match.homeTeamBallPossessionRate}}%</span> Posse de bola <span>{{match.awayTeamBallPossessionRate}}%</span>
+          <span>{{match.homeTeamBallPossessionRate}}%</span> Posse de bola
+          <span>{{match.awayTeamBallPossessionRate}}%</span>
         </h5>
       </ion-item>
       <ion-item class="scoreItem">
         <h5 class="scoreText">
-          <span>{{match.homeTeamballPossessionTime}}</span> Tempo com a bola <span>{{match.awayTeamballPossessionTime}}</span>
+          <span>{{match.homeTeamballPossessionTime}}</span> Tempo com a bola
+          <span>{{match.awayTeamballPossessionTime}}</span>
         </h5>
       </ion-item>
     </ion-list>
@@ -71,31 +73,31 @@
         <ion-col>
           <ion-card class="stats ion-no-margin">
             <ion-list>
-              <ion-item>
+              <ion-item [routerLink]="['action-detail/finish']">
                 <ion-label>Finalizaçoes</ion-label>
                 <ion-label>{{stats.finishes}}</ion-label>
               </ion-item>
-              <ion-item>
+              <ion-item [routerLink]="['action-detail/pass']">
                 <ion-label>Passes Errados</ion-label>
                 <ion-label>{{stats.passes}}</ion-label>
               </ion-item>
-              <ion-item>
+              <ion-item [routerLink]="['action-detail/tackle']">
                 <ion-label>Desarme</ion-label>
                 <ion-label>{{stats.tackles}}</ion-label>
               </ion-item>
-              <ion-item>
+              <ion-item [routerLink]="['action-detail/foul']">
                 <ion-label>Faltas</ion-label>
                 <ion-label>{{stats.fouls}}</ion-label>
               </ion-item>
-              <ion-item>
+              <ion-item [routerLink]="['action-detail/goalkeepersave']">
                 <ion-label>Defesas do Goleiro</ion-label>
                 <ion-label>{{stats.goalkeeperSaves}}</ion-label>
               </ion-item>
-              <ion-item>
+              <ion-item [routerLink]="['action-detail/redcard']">
                 <ion-label>Cartoes Vermelhos</ion-label>
                 <ion-label>{{stats.redCard}}</ion-label>
               </ion-item>
-              <ion-item>
+              <ion-item [routerLink]="['action-detail/yellowcard']">
                 <ion-label>Cartoes Amarelos</ion-label>
                 <ion-label>{{stats.yellowCard}}</ion-label>
               </ion-item>
