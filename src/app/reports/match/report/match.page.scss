@@ -43,8 +43,19 @@
 
 .stats {
     ion-list {
+        ion-list-header {
+            ion-label {
+                width: 100%;
+            }
+            ion-label:not(:first-child) {
+                justify-self: right;
+                text-align: right;
+                padding-right: 10px;
+                
+            }
+        }
         ion-item {
-            ion-label:nth-child(even) {
+            ion-label:not(:first-child) {
                 text-align: right;
             }
             display: flex;

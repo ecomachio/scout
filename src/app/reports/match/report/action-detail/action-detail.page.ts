@@ -7,10 +7,11 @@ import { Player } from "src/app/entity/player";
 import { ActionEnum } from "src/app/enum/action.enum";
 import { ActionService } from "src/app/services/action.service";
 import { MatchService } from "src/app/services/match.service";
-import { PlayerService } from "src/app/services/player.service";
 
 interface FrequencyPlayer extends Player {
   frequency?: number;
+  correctFrequency?: number;
+  incorrectFrequency?: number;
 }
 
 @Component({
@@ -23,6 +24,7 @@ export class ActionDetailPage implements OnInit {
   actions: Array<Action> = [];
   players: Array<FrequencyPlayer>;
   title: string;
+  listHeader: string[];
 
   constructor(
     private route: ActivatedRoute,
@@ -35,8 +37,13 @@ export class ActionDetailPage implements OnInit {
     const actionName = this.route.snapshot.params.actionName.toUpperCase();
     this.match = (await this.matchService.getMatchPromise(id)).data() as Match;
 
+    if (ActionEnum[actionName] == ActionEnum.FINISH) {
+      this.listHeader = ["Jogador", "Acertos", "Erros"];
+    } else this.listHeader = ["Jogador", ActionEnum[actionName]];
+
     if (actionName == "GOALKEEPERSAVE") {
       this.title = "Defesas do Goleiro";
+      this.listHeader = ["Jogador", "Defesas"];
     } else this.title = ActionEnum[actionName];
 
     this.actions = await this.actionService
@@ -52,22 +59,37 @@ export class ActionDetailPage implements OnInit {
       (a) => a.description === ActionEnum[actionName]
     );
 
-    this.players = this.actions.map((a) => a.player).filter(Boolean);
+    console.log(`action`, this.actions);
 
-    const frequency = this.players.reduce((acc, curr) => {
-      console.log(acc, curr);
-      if (acc[curr.id]) {
-        acc[curr.id]++;
-      } else {
-        acc[curr.id] = 1;
-      }
-      return acc;
-    }, {});
+    this.players = this.actions
+      .filter((a) => a.player)
+      .reduce((acc, curr) => {
+        const player = curr.player as FrequencyPlayer;
+        const action = curr;
 
-    this.players = this.players
-      .filter((v, i, a) => a.findIndex((t) => t.id === v.id) === i)
-      .sort((a, b) => frequency[b.id] - frequency[a.id]);
+        player.correctFrequency = player.correctFrequency || 0;
+        player.incorrectFrequency = player.incorrectFrequency || 0;
 
-    this.players.forEach((p) => (p.frequency = frequency[p.id]));
+        if (acc.find((p) => p.id === player.id)) {
+          const index = acc.findIndex((p) => p.id === player.id);
+          acc[index].frequency++;
+          action.decision
+            ? acc[index].correctFrequency++
+            : acc[index].incorrectFrequency++;
+        } else {
+          if (!player.name) {
+            player.name = "[Adversario]";
+          }
+
+          player.frequency = 1;
+          action.decision
+            ? player.correctFrequency++
+            : player.incorrectFrequency++;
+
+          acc.push(player);
+        }
+
+        return acc;
+      }, []);
   }
 }
