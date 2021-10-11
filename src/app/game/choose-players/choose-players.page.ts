@@ -90,6 +90,17 @@ export class ChoosePlayersPage implements OnInit {
     this.selectedAction.matchTime = this.gameService.getGameTime();
     console.log(this.gameService.getGameTime());
     console.log(this.gameService.getGame());
+
+    if (this.selectedAction.description === ActionEnum.GOAL) {
+      // every goal is also a shot on target
+      let shotAction: Action = new Action();
+      shotAction = { ...this.selectedAction };
+      shotAction.description = ActionEnum.FINISH;
+      shotAction.decision = true;
+      shotAction.player = this.selectedPlayer || { ...new Player() };
+      this.gameService.addAction(shotAction);
+    }
+
     this.selectedAction.player = this.selectedPlayer || { ...new Player() };
     this.gameService.addAction(this.selectedAction);
 
@@ -119,13 +130,6 @@ export class ChoosePlayersPage implements OnInit {
   setGoal(team: Team): void {
     if (team.id === this.homeTeam.id) {
       this.match.score.home++;
-
-      // every goal is also a shot on target
-      let shotAction: Action = new Action();
-      shotAction = { ...this.selectedAction };
-      shotAction.description = ActionEnum.FINISH;
-      shotAction.decision = true;
-      this.gameService.addAction(shotAction);
     } else {
       this.match.score.away++;
     }

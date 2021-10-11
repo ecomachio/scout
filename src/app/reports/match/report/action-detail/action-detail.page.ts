@@ -66,7 +66,7 @@ export class ActionDetailPage implements OnInit {
       .reduce((acc, curr) => {
         const player = curr.player as FrequencyPlayer;
         const action = curr;
-
+        
         player.correctFrequency = player.correctFrequency || 0;
         player.incorrectFrequency = player.incorrectFrequency || 0;
 
