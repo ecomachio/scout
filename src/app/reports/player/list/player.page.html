@@ -12,17 +12,17 @@
     <div class="title">
       <h1>Jogadores</h1>
     </div>
-
-    <ion-item-sliding *ngFor="let player of players">
+    <ion-searchbar placeholder="Nome do jogador" [(ngModel)]="searchTerm" animated></ion-searchbar>
+    <ion-item-sliding *ngFor="let player of players | filter:searchTerm">
       <ion-item class="listItem" lines="inset" button [routerLink]="['../report', player.id]">
         <ion-avatar slot="start">
           <img src="assets/avatar.png">
         </ion-avatar>
         <ion-label>
-          <h2>{{player.name}}</h2>
-          <h3>{{player.position}}</h3>
-          <p>{{player.responsable}}</p>
-        </ion-label>    
+          <h2>{{player.name}} - <i>{{player.position}}</i></h2>
+          <h3>Categoria: {{player.category.name}}</h3>
+
+        </ion-label>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
