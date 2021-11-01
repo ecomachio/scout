@@ -1,31 +1,36 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Game } from '../../entity/game';
-import { GameTeam } from '../../entity/gameTeam';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatchService } from 'src/app/services/match.service';
-import { Match } from 'src/app/entity/match';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { GameService } from 'src/app/services/game.service';
-import { ActionEnum } from 'src/app/enum/action.enum';
-import { AlertController, IonBackButtonDelegate, ModalController, NavController } from '@ionic/angular';
-import { OtherModulesComponent } from 'src/app/compenents/other-modules/other-modules.component';
-import { UtilsService } from 'src/app/services/utils.service';
+import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
+import { Game } from "../../entity/game";
+import { GameTeam } from "../../entity/gameTeam";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatchService } from "src/app/services/match.service";
+import { Match } from "src/app/entity/match";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { GameService } from "src/app/services/game.service";
+import { ActionEnum } from "src/app/enum/action.enum";
+import {
+  AlertController,
+  IonBackButtonDelegate,
+  ModalController,
+  NavController,
+} from "@ionic/angular";
+import { OtherModulesComponent } from "src/app/compenents/other-modules/other-modules.component";
+import { UtilsService } from "src/app/services/utils.service";
 
 @Component({
-  selector: 'app-game',
-  templateUrl: 'game.page.html',
-  styleUrls: ['game.page.scss'],
+  selector: "app-game",
+  templateUrl: "game.page.html",
+  styleUrls: ["game.page.scss"],
 })
 export class GamePage implements OnInit, OnDestroy {
-
-  @ViewChild(IonBackButtonDelegate, { static: false }) backButton: IonBackButtonDelegate;
+  @ViewChild(IonBackButtonDelegate, { static: false })
+  backButton: IonBackButtonDelegate;
 
   unsubscribe$: Subject<void> = new Subject<void>();
 
   match: Match = new Match();
 
-  gameTime = '00:00:00';
+  gameTime = "00:00:00";
 
   homeTeam: GameTeam;
   awayTeam: GameTeam;
@@ -34,7 +39,9 @@ export class GamePage implements OnInit, OnDestroy {
   game: Game;
   gameReady = false;
 
-  get actionEnum() { return ActionEnum; }
+  get actionEnum() {
+    return ActionEnum;
+  }
 
   constructor(
     private router: Router,
@@ -45,9 +52,7 @@ export class GamePage implements OnInit, OnDestroy {
     private utilsService: UtilsService,
     private alertController: AlertController,
     private navCtrl: NavController
-  ) {
-
-  }
+  ) {}
 
   async ngOnInit() {
     const matchId = this.route.snapshot.params.matchId;
@@ -79,8 +84,8 @@ export class GamePage implements OnInit, OnDestroy {
 
   startGame() {
     this.game.startGame();
-    this.gameTime = '00:00:00';
-    this.homeTeam.ballPossessionTimer.start({ precision: 'secondTenths' });
+    this.gameTime = "00:00:00";
+    this.homeTeam.ballPossessionTimer.start({ precision: "secondTenths" });
     this.homeTeam.hasPossession = true;
 
     this.gameIntervalId = setInterval(() => {
@@ -88,10 +93,9 @@ export class GamePage implements OnInit, OnDestroy {
 
       this.homeTeam.refresh(this.game);
       this.awayTeam.refresh(this.game);
-
     }, 10);
 
-    console.log('startGame', this.gameTime);
+    console.log("startGame", this.gameTime);
   }
 
   stopGame() {
@@ -121,10 +125,10 @@ export class GamePage implements OnInit, OnDestroy {
     }*/
 
     if (!this.game.hasStarted) {
-      throw new Error('gameNotStartedException');
+      throw new Error("gameNotStartedException");
     }
     if (this.game.hasFinished) {
-      throw new Error('gameHasFinishedException');
+      throw new Error("gameHasFinishedException");
     }
   }
 
@@ -137,18 +141,17 @@ export class GamePage implements OnInit, OnDestroy {
     console.log(this.gameService.players);
 
     if (this.game.isPaused) {
-      this.utilsService.showToast('Partida pausada');
-      throw new Error('gameisPausedException');
+      this.utilsService.showToast("Partida pausada");
+      throw new Error("gameisPausedException");
     }
 
-    if (team === 'home') {
+    if (team === "home") {
       this.homeTeam.toogleBallPossession();
       this.awayTeam.pauseBallPossession();
-    } else if (team === 'away') {
+    } else if (team === "away") {
       this.awayTeam.toogleBallPossession();
       this.homeTeam.pauseBallPossession();
     }
-
   }
 
   choosePlayers(action) {
@@ -158,19 +161,14 @@ export class GamePage implements OnInit, OnDestroy {
     switch (action) {
       case ActionEnum.TACKLE:
         step = 1;
-        this.setBallPossession('home');
+        this.setBallPossession("home");
         break;
       case ActionEnum.PASS:
         step = 1;
-        this.setBallPossession('away');
+        this.setBallPossession("away");
         break;
       case ActionEnum.FOUL:
         step = 1;
-        if (this.homeTeam.hasPossession) {
-          this.setBallPossession('away');
-        } else {
-          this.setBallPossession('home');
-        }
         break;
       case ActionEnum.GOALKEEPERSAVE:
         step = 1;
@@ -180,11 +178,12 @@ export class GamePage implements OnInit, OnDestroy {
         break;
     }
 
-    this.router.navigate([`choose-players/${this.match.category.id}`], { queryParams: { action, step } });
+    this.router.navigate([`choose-players/${this.match.category.id}`], {
+      queryParams: { action, step },
+    });
   }
 
   async otherModules() {
-
     this.validateAction();
 
     const modal = await this.modalController.create({
@@ -193,7 +192,7 @@ export class GamePage implements OnInit, OnDestroy {
         match: this.match,
         game: this.game,
       },
-      animated: true
+      animated: true,
     });
     await modal.present();
 
@@ -202,7 +201,6 @@ export class GamePage implements OnInit, OnDestroy {
     if (data.isGameStoped) {
       this.stopGame();
     }
-
   }
 
   ngOnDestroy() {
@@ -236,24 +234,24 @@ export class GamePage implements OnInit, OnDestroy {
     this.game.unpause();
   }
 
-
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Sair da partida?',
-      message: 'Os dados não serão salvos!',
+      header: "Sair da partida?",
+      message: "Os dados não serão salvos!",
       buttons: [
         {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',          
-        }, {
-          cssClass: 'primary',     
-          text: 'Sair',
+          text: "Cancelar",
+          role: "cancel",
+          cssClass: "secondary",
+        },
+        {
+          cssClass: "primary",
+          text: "Sair",
           handler: () => {
             this.navCtrl.back();
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
@@ -264,5 +262,4 @@ export class GamePage implements OnInit, OnDestroy {
       await this.presentAlertConfirm();
     };
   }
-
 }
