@@ -4,7 +4,7 @@ export class Team {
     name: string;
     description: string;
     city: string;
-    isMainTeam: boolean;
+    isMainTeam: boolean = false;
 
     constructor() { }
 
