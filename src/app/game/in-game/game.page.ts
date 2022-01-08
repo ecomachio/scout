@@ -198,7 +198,7 @@ export class GamePage implements OnInit, OnDestroy {
 
     const { data } = await modal.onWillDismiss();
 
-    if (data.isGameStoped) {
+    if (data.isGameStopped) {
       this.stopGame();
     }
   }

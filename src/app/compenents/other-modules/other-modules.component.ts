@@ -20,7 +20,7 @@ export class OtherModulesComponent implements OnInit {
   }
 
   private backbuttonSubscription: Subscription;
-  private isGameStoped = false;
+  private isGameStopped = false;
 
   constructor(
     private modalController: ModalController,
@@ -38,12 +38,12 @@ export class OtherModulesComponent implements OnInit {
 
   dismiss() {
     this.modalController.dismiss({
-      isGameStoped: this.isGameStoped,
+      isGameStopped: this.isGameStopped,
     });
   }
 
   stopGame() {
-    this.isGameStoped = true;
+    this.isGameStopped = true;
     this.dismiss();
   }
 }
