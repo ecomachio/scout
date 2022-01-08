@@ -1,11 +1,9 @@
 export class Team {
+  id: string;
+  name: string;
+  description: string;
+  city: string;
+  isMainTeam = false;
 
-    id: string;
-    name: string;
-    description: string;
-    city: string;
-    isMainTeam: boolean = false;
-
-    constructor() { }
-
+  constructor() {}
 }

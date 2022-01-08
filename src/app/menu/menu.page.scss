@@ -1,38 +1,36 @@
 .mainTitle {
-    font-family: Keypass, Courier, monospace;
-    text-align: center;
-    font-size: 7em;
-    padding: 6% 4%;    
+  font-family: Keypass, Courier, monospace;
+  text-align: center;
+  font-size: 7em;
+  padding: 6% 4%;
 }
 
 .moduleContent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
-    font-size: 2.3em;
+  font-size: 2.3em;
 }
 
-.cardImg{
+.cardImg {
+  height: 30%;
+  width: 10em;
+  padding: 2em;
+}
+
+ion-grid ion-row:first-child ion-card {
+  padding: 2% 0;
+
+  .cardImg {
     height: 30%;
-    width: 10em;    
+    width: 12em;
     padding: 2em;
   }
 
-ion-grid ion-row:first-child ion-card{
-    padding:2% 0;
-    
-    .cardImg{
-        height: 30%;
-        width: 12em;    
-        padding: 2em;
-    }
-
-    h1 {
-        font-size: 2.7em;
-    }
+  h1 {
+    font-size: 2.7em;
+  }
 }
-

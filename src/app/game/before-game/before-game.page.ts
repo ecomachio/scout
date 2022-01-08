@@ -1,27 +1,26 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Competition } from 'src/app/entity/competition';
-import { UtilsService } from 'src/app/services/utils.service';
-import { CompetitionService } from 'src/app/services/competition.service';
-import { IonSlides, LoadingController } from '@ionic/angular';
-import { Category } from 'src/app/entity/category';
-import { CategoryService } from 'src/app/services/category.service';
-import { Match } from 'src/app/entity/match';
-import { MatchService } from 'src/app/services/match.service';
-import { QueryDocumentSnapshot } from 'angularfire2/firestore';
-import { Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
+import { Competition } from "src/app/entity/competition";
+import { UtilsService } from "src/app/services/utils.service";
+import { CompetitionService } from "src/app/services/competition.service";
+import { IonSlides, LoadingController } from "@ionic/angular";
+import { Category } from "src/app/entity/category";
+import { CategoryService } from "src/app/services/category.service";
+import { Match } from "src/app/entity/match";
+import { MatchService } from "src/app/services/match.service";
+import { QueryDocumentSnapshot } from "angularfire2/firestore";
+import { Router } from "@angular/router";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 
 @Component({
-  selector: 'app-before-game',
-  templateUrl: './before-game.page.html',
-  styleUrls: ['./before-game.page.scss'],
+  selector: "app-before-game",
+  templateUrl: "./before-game.page.html",
+  styleUrls: ["./before-game.page.scss"],
 })
 export class BeforeGamePage implements OnInit, OnDestroy {
-
   unsubscribe$: Subject<void> = new Subject<void>();
 
-  @ViewChild('beforeGameSlider', { static: true }) slides: IonSlides;
+  @ViewChild("beforeGameSlider", { static: true }) slides: IonSlides;
 
   competitions: Array<Competition> = new Array();
   categories: Array<Category> = new Array();
@@ -45,30 +44,34 @@ export class BeforeGamePage implements OnInit, OnDestroy {
     private loadingController: LoadingController,
     private utilsService: UtilsService,
     private router: Router
-  ) { }
+  ) {}
 
   async ngOnInit() {
-
     const loading = await this.loadingController.create();
     await loading.present();
 
-    this.competitionsService.getCompetitions().pipe(takeUntil(this.unsubscribe$)).subscribe(comp => {
-      this.competitions = comp.sort((a, b) => {
-        if (isNaN(+a.start)) {
-          return 1;
-        } else if (isNaN(+b.start)) {
-          return -1;
-        }
-        return +a.start - +b.start;
+    this.competitionsService
+      .getCompetitions()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((comp) => {
+        this.competitions = comp.sort((a, b) => {
+          if (isNaN(+a.start)) {
+            return 1;
+          } else if (isNaN(+b.start)) {
+            return -1;
+          }
+          return +a.start - +b.start;
+        });
+
+        this.categoryService
+          .getCategories()
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe((cat) => (this.categories = cat));
+
+        this.slides.lockSwipeToNext(true);
+
+        loading.dismiss();
       });
-
-      this.categoryService.getCategories().pipe(takeUntil(this.unsubscribe$)).subscribe(cat => this.categories = cat);
-
-      this.slides.lockSwipeToNext(true);
-
-      loading.dismiss();
-
-    });
   }
 
   ionSlideWillChange(e) {
@@ -76,7 +79,6 @@ export class BeforeGamePage implements OnInit, OnDestroy {
   }
 
   async nextSlide(selectedEntity) {
-
     switch (await this.slides.getActiveIndex()) {
       case 0:
         this.selectedCompetition = selectedEntity as Competition;
@@ -85,7 +87,10 @@ export class BeforeGamePage implements OnInit, OnDestroy {
         this.selectedCategory = selectedEntity as Category;
 
         if (this.selectedCompetition && this.selectedCategory) {
-          this.matches = await this.filterMatches(this.selectedCompetition, this.selectedCategory);
+          this.matches = await this.filterMatches(
+            this.selectedCompetition,
+            this.selectedCategory
+          );
         }
 
         break;
@@ -97,7 +102,7 @@ export class BeforeGamePage implements OnInit, OnDestroy {
     }
 
     /* Vai para a pagina de game e começa a partida */
-    if (await this.slides.isEnd() && this.selectedMatch) {
+    if ((await this.slides.isEnd()) && this.selectedMatch) {
       this.router.navigateByUrl(`/game/${this.selectedMatch.id}`);
     }
 
@@ -107,15 +112,17 @@ export class BeforeGamePage implements OnInit, OnDestroy {
 
   async filterMatches(competition, category) {
     let matches: Array<Match>;
-    matches = await this.matchService.getMatchesByCompetition(competition.id).then((res: any) => {
-      if (!res) {
-        this.matches = [];
-      }
-      return matches = res.docs.map((m: QueryDocumentSnapshot<Match>) => {
-        const id = m.id;
-        return { id, ...m.data() } as Match;
+    matches = await this.matchService
+      .getMatchesByCompetition(competition.id)
+      .then((res: any) => {
+        if (!res) {
+          this.matches = [];
+        }
+        return (matches = res.docs.map((m: QueryDocumentSnapshot<Match>) => {
+          const id = m.id;
+          return { id, ...m.data() } as Match;
+        }));
       });
-    });
 
     matches.sort((a, b) => {
       if (isNaN(+a.date)) {
@@ -143,5 +150,4 @@ export class BeforeGamePage implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }

@@ -9,14 +9,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      Partidas
-    </ion-list-header>
+    <ion-list-header> Partidas </ion-list-header>
 
     <ion-item-sliding *ngFor="let match of matches">
-      <ion-item class="listItem" lines="inset" button [routerLink]="['/match', match.competitionId ,match.id]">
+      <ion-item
+        class="listItem"
+        lines="inset"
+        button
+        [routerLink]="['/match', match.competitionId ,match.id]"
+      >
         <ion-avatar slot="start">
-          <img src="assets/pague.png">
+          <img src="assets/pague.png" />
         </ion-avatar>
         <ion-label>
           <h2>{{match.homeTeam.name}} vs {{match.awayTeam.name}}</h2>
@@ -26,7 +29,11 @@
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option (click)="remove(match)" slot="icon-only" color="danger">
+        <ion-item-option
+          (click)="remove(match)"
+          slot="icon-only"
+          color="danger"
+        >
           <ion-icon class="deleteIcon" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -34,8 +41,10 @@
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button>
-      <ion-icon name="add" [routerLink]="['/match', competitionId, '']"></ion-icon>
+      <ion-icon
+        name="add"
+        [routerLink]="['/match', competitionId, '']"
+      ></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

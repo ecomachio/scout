@@ -1,32 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { ActionService } from '../services/action.service';
-import { ActionEnum } from '../enum/action.enum';
-import { QueryDocumentSnapshot } from 'angularfire2/firestore';
-import { Action } from '../entity/action';
-import { Player } from '../entity/player';
-import { async } from '@angular/core/testing';
-import { CompetitionService } from '../services/competition.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { Competition } from '../entity/competition';
-import { PlayerService } from '../services/player.service';
-import { Category } from '../entity/category';
-import { CategoryService } from '../services/category.service';
-import { Team } from '../entity/team';
-import { TeamService } from '../services/team.service';
-import { MatchService } from '../services/match.service';
-import { Match } from '../entity/match';
-import { isUndefined } from 'util';
-import { ChartOptions, ChartType, ChartDataSets, ChartColor } from 'chart.js';
-import { Label, Color } from 'ng2-charts';
+import { Component, OnInit } from "@angular/core";
+import { ActionService } from "../services/action.service";
+import { ActionEnum } from "../enum/action.enum";
+import { QueryDocumentSnapshot } from "angularfire2/firestore";
+import { Action } from "../entity/action";
+import { Player } from "../entity/player";
+import { async } from "@angular/core/testing";
+import { CompetitionService } from "../services/competition.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { Competition } from "../entity/competition";
+import { PlayerService } from "../services/player.service";
+import { Category } from "../entity/category";
+import { CategoryService } from "../services/category.service";
+import { Team } from "../entity/team";
+import { TeamService } from "../services/team.service";
+import { MatchService } from "../services/match.service";
+import { Match } from "../entity/match";
+import { isUndefined } from "util";
+import { ChartOptions, ChartType, ChartDataSets, ChartColor } from "chart.js";
+import { Label, Color } from "ng2-charts";
 
 @Component({
-  selector: 'app-reports',
-  templateUrl: './reports.page.html',
-  styleUrls: ['./reports.page.scss'],
+  selector: "app-reports",
+  templateUrl: "./reports.page.html",
+  styleUrls: ["./reports.page.scss"],
 })
 export class ReportsPage implements OnInit {
-
   unsubscribe$: Subject<void> = new Subject<void>();
   topScorers: Array<TopScorer> = [];
   topScorer: TopScorer;
@@ -46,45 +45,53 @@ export class ReportsPage implements OnInit {
   goalsScoredShotsRatio: number;
 
   goalsScoredShotsRatioChartLabels: Label[] = [];
-  goalsScoredShotsRatioChartData: ChartDataSets[] = [{ data: [], label: 'Gols marcados' }, { data: [], label: 'Chutes a gol' }];
+  goalsScoredShotsRatioChartData: ChartDataSets[] = [
+    { data: [], label: "Gols marcados" },
+    { data: [], label: "Chutes a gol" },
+  ];
 
-  goalsScoredShotsRatioChartType: ChartType = 'bar';
+  goalsScoredShotsRatioChartType: ChartType = "bar";
   goalsScoredShotsRatioChartColors: Color[] = [];
   goalsScoredShotsRatioChartOptions: ChartOptions = {
     responsive: true,
     scales: {
-      yAxes: [{
-        ticks: {
-          min: 0,
-        }
-      }]
-    }
+      yAxes: [
+        {
+          ticks: {
+            min: 0,
+          },
+        },
+      ],
+    },
   };
 
   topScorersChartLabels: Label[] = [];
-  topScorersChartData: ChartDataSets[] = [{ data: [], label: 'Marcadores' }];
-  topScorersChartType: ChartType = 'pie';
+  topScorersChartData: ChartDataSets[] = [{ data: [], label: "Marcadores" }];
+  topScorersChartType: ChartType = "pie";
   topScorersChartLegend = false;
   topScorersChartOptions: ChartOptions = {
     responsive: true,
   };
 
   topScoredMatchsChartLabels: Label[] = [];
-  topScoredMatchsChartData: ChartDataSets[] = [{ data: [], label: 'Partidas com mais gols' }];
-  topScoredMatchsChartType: ChartType = 'pie';
+  topScoredMatchsChartData: ChartDataSets[] = [
+    { data: [], label: "Partidas com mais gols" },
+  ];
+  topScoredMatchsChartType: ChartType = "pie";
   topScoredMatchsChartLegend = false;
   topScoredMatchsChartOptions: ChartOptions = {
     responsive: true,
   };
 
   topConcededMatchsChartLabels: Label[] = [];
-  topConcededMatchsChartData: ChartDataSets[] = [{ data: [], label: 'Partidas com mais gols sofridos' }];
-  topConcededMatchsChartType: ChartType = 'pie';
+  topConcededMatchsChartData: ChartDataSets[] = [
+    { data: [], label: "Partidas com mais gols sofridos" },
+  ];
+  topConcededMatchsChartType: ChartType = "pie";
   topConcededMatchsChartLegend = false;
   topConcededMatchsChartOptions: ChartOptions = {
     responsive: true,
   };
-
 
   constructor(
     private actionService: ActionService,
@@ -92,13 +99,15 @@ export class ReportsPage implements OnInit {
     private playerService: PlayerService,
     private teamService: TeamService,
     private matchService: MatchService,
-    private categoryService: CategoryService,
-  ) { }
+    private categoryService: CategoryService
+  ) {}
 
   async ngOnInit() {
-    const allGoalsActions: Array<Action> = await this.getActions(ActionEnum.GOAL);
+    const allGoalsActions: Array<Action> = await this.getActions(
+      ActionEnum.GOAL
+    );
     const allShots: Array<Action> = await this.getActions(ActionEnum.FINISH);
-    this.getTopScorers(allGoalsActions.filter(goals => goals.decision));
+    this.getTopScorers(allGoalsActions.filter((goals) => goals.decision));
     this.getAllGoalsByMainTeam(allGoalsActions);
     this.getAllGoalsConceded(allGoalsActions);
     this.getCompetitions();
@@ -114,10 +123,9 @@ export class ReportsPage implements OnInit {
 
   private getMatchGoals(allGoalsActions: Action[]) {
     this.matchStats = this.matchs.map((m: Match) => {
-
-      const amg = allGoalsActions.filter(a => (a.match.id === m.id));
-      const goalsScored = amg.filter(a => a.decision).length;
-      const goalsConceded = amg.filter(a => !a.decision).length;
+      const amg = allGoalsActions.filter((a) => a.match.id === m.id);
+      const goalsScored = amg.filter((a) => a.decision).length;
+      const goalsConceded = amg.filter((a) => !a.decision).length;
 
       return { ...m, goalsScored, goalsConceded } as MatchStats;
     });
@@ -125,10 +133,9 @@ export class ReportsPage implements OnInit {
 
   private getMatchShots(allShotsActions: Action[]) {
     this.matchStats = this.matchStats.map((m: Match) => {
-
-      const amg = allShotsActions.filter(a => (a.match.id === m.id));
-      const shotsOnTarget = amg.filter(a => a.decision).length;
-      const shotsOffTarget = amg.filter(a => !a.decision).length;
+      const amg = allShotsActions.filter((a) => a.match.id === m.id);
+      const shotsOnTarget = amg.filter((a) => a.decision).length;
+      const shotsOffTarget = amg.filter((a) => !a.decision).length;
       console.log({ ...m, shotsOnTarget, shotsOffTarget });
 
       return { ...m, shotsOnTarget, shotsOffTarget } as MatchStats;
@@ -146,7 +153,6 @@ export class ReportsPage implements OnInit {
   }
 
   setupGoalsScoredShotsRatioChart() {
-
     this.goalsScoredShotsRatioChartData[0].data = [];
     this.goalsScoredShotsRatioChartData[1].data = [];
 
@@ -157,19 +163,20 @@ export class ReportsPage implements OnInit {
       this.goalsScoredShotsRatioChartData[1].data.push(mg.shotsOnTarget);
       this.goalsScoredShotsRatioChartLabels.push(mg.description);
     }
-
   }
 
   getAllGoalsConceded(allGoalsActions: Action[]) {
-    this.allGoalsConceded = allGoalsActions.filter(goals => !goals.decision);
+    this.allGoalsConceded = allGoalsActions.filter((goals) => !goals.decision);
   }
 
   getAllGoalsByMainTeam(allGoalsActions: Action[]) {
-    this.allGoalsByMainTeam = allGoalsActions.filter(goals => goals.decision);
+    this.allGoalsByMainTeam = allGoalsActions.filter((goals) => goals.decision);
   }
 
   async getActions(action: string) {
-    const actions = (await this.actionService.getActionsByActionDescription(action)).docs.map((m: QueryDocumentSnapshot<Action>) => {
+    const actions = (
+      await this.actionService.getActionsByActionDescription(action)
+    ).docs.map((m: QueryDocumentSnapshot<Action>) => {
       const id = m.id;
       return { id, ...m.data() } as Action;
     });
@@ -177,11 +184,17 @@ export class ReportsPage implements OnInit {
   }
 
   getCompetitions() {
-    this.competitionsService.getCompetitions().pipe(takeUntil(this.unsubscribe$)).subscribe(c => this.competitions = c);
+    this.competitionsService
+      .getCompetitions()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((c) => (this.competitions = c));
   }
 
   getPlayers() {
-    this.playerService.getPlayers().pipe(takeUntil(this.unsubscribe$)).subscribe(p => this.players = p);
+    this.playerService
+      .getPlayers()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((p) => (this.players = p));
   }
 
   async getMatchs(allGoalsActions: Array<Action>, allShots: Array<Action>) {
@@ -196,7 +209,6 @@ export class ReportsPage implements OnInit {
     this.getGoalsScoredShotsRatioByMatch();
     this.getBestMatchs();
     this.getWorstMatchs();
-
   }
 
   getWorstMatchs() {
@@ -240,22 +252,32 @@ export class ReportsPage implements OnInit {
   }
 
   getCategories() {
-    this.categoryService.getCategories().pipe(takeUntil(this.unsubscribe$)).subscribe(c => this.categories = c);
+    this.categoryService
+      .getCategories()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((c) => (this.categories = c));
   }
 
   getTopScorers(allGoalsActions: Array<Action>): void {
     let prev;
 
     allGoalsActions.sort((a, b) => {
-      if (a.player.id > b.player.id) { return 1; }
-      if (a.player.id < b.player.id) { return -1; }
+      if (a.player.id > b.player.id) {
+        return 1;
+      }
+      if (a.player.id < b.player.id) {
+        return -1;
+      }
       return 0;
     });
 
     console.log(allGoalsActions);
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < allGoalsActions.length; i++) {
-      if (isUndefined(prev) || (allGoalsActions[i].player.id !== prev.player.id)) {
+      if (
+        isUndefined(prev) ||
+        allGoalsActions[i].player.id !== prev.player.id
+      ) {
         this.topScorers.push({ ...allGoalsActions[i].player, goalsScored: 1 });
       } else {
         this.topScorers[this.topScorers.length - 1].goalsScored++;
@@ -278,9 +300,6 @@ interface MatchStats extends Match {
   shotsOnTarget: number;
 }
 
-
 interface TopScorer extends Player {
   goalsScored: number;
 }
-
-

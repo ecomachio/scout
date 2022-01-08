@@ -1,29 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { PlayerService } from 'src/app/services/player.service';
-import { Player } from 'src/app/entity/player';
-import { UtilsService } from 'src/app/services/utils.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PickerController, NavController, LoadingController } from '@ionic/angular';
-import { CategoryService } from 'src/app/services/category.service';
-import { Category } from 'src/app/entity/category';
-import { MatchService } from 'src/app/services/match.service';
-import { ActionService } from 'src/app/services/action.service';
-import { QueryDocumentSnapshot, QuerySnapshot } from 'angularfire2/firestore';
-import { Match } from 'src/app/entity/match';
-import { Action } from 'src/app/entity/action';
-import { ActionEnum } from 'src/app/enum/action.enum';
-import { isNullOrUndefined, isUndefined } from 'util';
-import { CompetitionService } from 'src/app/services/competition.service';
-import { Competition } from 'src/app/entity/competition';
-
+import { Component, OnInit } from "@angular/core";
+import { PlayerService } from "src/app/services/player.service";
+import { Player } from "src/app/entity/player";
+import { UtilsService } from "src/app/services/utils.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import {
+  PickerController,
+  NavController,
+  LoadingController,
+} from "@ionic/angular";
+import { CategoryService } from "src/app/services/category.service";
+import { Category } from "src/app/entity/category";
+import { MatchService } from "src/app/services/match.service";
+import { ActionService } from "src/app/services/action.service";
+import { QueryDocumentSnapshot, QuerySnapshot } from "angularfire2/firestore";
+import { Match } from "src/app/entity/match";
+import { Action } from "src/app/entity/action";
+import { ActionEnum } from "src/app/enum/action.enum";
+import { isNullOrUndefined, isUndefined } from "util";
+import { CompetitionService } from "src/app/services/competition.service";
+import { Competition } from "src/app/entity/competition";
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.page.html',
-  styleUrls: ['./player.page.scss'],
+  selector: "app-player",
+  templateUrl: "./player.page.html",
+  styleUrls: ["./player.page.scss"],
 })
 export class PlayerPage implements OnInit {
-
   players: Array<Player>;
   categories: Array<Category>;
   player: Player;
@@ -50,12 +52,14 @@ export class PlayerPage implements OnInit {
     private utilsService: UtilsService,
     private router: Router,
     private matchService: MatchService,
-    private actionService: ActionService,
-  ) { }
+    private actionService: ActionService
+  ) {}
 
   async ngOnInit() {
     this.player = new Player();
-    this.categoryService.getCategories().subscribe(cat => this.categories = cat);
+    this.categoryService
+      .getCategories()
+      .subscribe((cat) => (this.categories = cat));
     const playerId = this.route.snapshot.params.id;
     if (playerId) {
       await this.loadPlayer(playerId);
@@ -66,40 +70,52 @@ export class PlayerPage implements OnInit {
     const matches = this.matches;
     let actionPromises = [];
 
-    actionPromises = matches.map(m => {
+    actionPromises = matches.map((m) => {
       return this.actionService.getActionsByMatch(m.id);
     });
 
-    return await Promise.all(actionPromises).then((res: Array<QuerySnapshot<any>>) => {
-      return res.map((querySnapshot: QuerySnapshot<any>) => querySnapshot.docs)
-        .reduce((pre, cur) => pre.concat(cur), [])
-        .map((doc: QueryDocumentSnapshot<Action>) => {
-          const id = doc.id;
-          return { id, ...doc.data() } as Action;
-        })
-        .filter(action =>
-          ((!isNullOrUndefined(action.player)) && (this.player.id === action.player.id)));
-    });
+    return await Promise.all(actionPromises).then(
+      (res: Array<QuerySnapshot<any>>) => {
+        return res
+          .map((querySnapshot: QuerySnapshot<any>) => querySnapshot.docs)
+          .reduce((pre, cur) => pre.concat(cur), [])
+          .map((doc: QueryDocumentSnapshot<Action>) => {
+            const id = doc.id;
+            return { id, ...doc.data() } as Action;
+          })
+          .filter(
+            (action) =>
+              !isNullOrUndefined(action.player) &&
+              this.player.id === action.player.id
+          );
+      }
+    );
   }
 
   async getPlayerMatches() {
     const docm = await this.matchService.getAllClosedMatchs();
 
-    const matches = docm.docs.map((m: QueryDocumentSnapshot<Match>) => {
-      const id = m.id;
-      return { id, ...m.data() } as Match;
-    }).filter(m => ((m.category.id === this.player.category.id) && (m.isFinished)));
+    const matches = docm.docs
+      .map((m: QueryDocumentSnapshot<Match>) => {
+        const id = m.id;
+        return { id, ...m.data() } as Match;
+      })
+      .filter((m) => m.category.id === this.player.category.id && m.isFinished);
 
     return matches;
   }
 
   async getTotalGoalsScored() {
-    const tgs = this.actions.filter(action => action.description === ActionEnum.GOAL).length;
+    const tgs = this.actions.filter(
+      (action) => action.description === ActionEnum.GOAL
+    ).length;
     return tgs;
   }
 
   async getTotalPlayerOfTheMatch() {
-    const tgs = this.actions.filter(action => action.description === ActionEnum.PLAYEROFTHEMATCH).length;
+    const tgs = this.actions.filter(
+      (action) => action.description === ActionEnum.PLAYEROFTHEMATCH
+    ).length;
     return tgs;
   }
 
@@ -109,12 +125,11 @@ export class PlayerPage implements OnInit {
 
   async loadPlayer(playerId) {
     const loading = await this.loadingController.create({
-      message: 'Loading Player..'
+      message: "Loading Player..",
     });
     await loading.present();
 
-    this.playerService.getPlayer(playerId).subscribe(async res => {
-
+    this.playerService.getPlayer(playerId).subscribe(async (res) => {
       loading.dismiss();
 
       this.player = res;
@@ -124,7 +139,9 @@ export class PlayerPage implements OnInit {
 
       this.actions = await this.getPlayerActions();
 
-      this.competitionService.getCompetitions().subscribe(r => this.allCompetitions = r);
+      this.competitionService
+        .getCompetitions()
+        .subscribe((r) => (this.allCompetitions = r));
 
       this.totalGoalsScored = await this.getTotalGoalsScored();
 
@@ -137,15 +154,33 @@ export class PlayerPage implements OnInit {
   }
 
   getPlayerStats(actions) {
-    const tackles = actions.filter((n: Action) => n.description === ActionEnum.TACKLE).length;
-    const finishes = actions.filter((n: Action) => n.description === ActionEnum.FINISH).length;
-    const passes = actions.filter((n: Action) => n.description === ActionEnum.PASS).length;
-    const fouls = actions.filter((n: Action) => n.description === ActionEnum.FOUL).length;
-    const goalkeeperSaves = actions.filter((n: Action) => n.description === ActionEnum.GOALKEEPERSAVE).length;
-    const goal = actions.filter((n: Action) => n.description === ActionEnum.GOAL).length;
-    const redCard = actions.filter((n: Action) => n.description === ActionEnum.REDCARD).length;
-    const yellowCard = actions.filter((n: Action) => n.description === ActionEnum.YELLOWCARD).length;
-    const playerOfTheMatchAction = actions.filter((n: Action) => n.description === ActionEnum.PLAYEROFTHEMATCH)[0];
+    const tackles = actions.filter(
+      (n: Action) => n.description === ActionEnum.TACKLE
+    ).length;
+    const finishes = actions.filter(
+      (n: Action) => n.description === ActionEnum.FINISH
+    ).length;
+    const passes = actions.filter(
+      (n: Action) => n.description === ActionEnum.PASS
+    ).length;
+    const fouls = actions.filter(
+      (n: Action) => n.description === ActionEnum.FOUL
+    ).length;
+    const goalkeeperSaves = actions.filter(
+      (n: Action) => n.description === ActionEnum.GOALKEEPERSAVE
+    ).length;
+    const goal = actions.filter(
+      (n: Action) => n.description === ActionEnum.GOAL
+    ).length;
+    const redCard = actions.filter(
+      (n: Action) => n.description === ActionEnum.REDCARD
+    ).length;
+    const yellowCard = actions.filter(
+      (n: Action) => n.description === ActionEnum.YELLOWCARD
+    ).length;
+    const playerOfTheMatchAction = actions.filter(
+      (n: Action) => n.description === ActionEnum.PLAYEROFTHEMATCH
+    )[0];
     let playerOfTheMatch = {};
 
     if (!isUndefined(playerOfTheMatchAction)) {
@@ -166,5 +201,4 @@ export class PlayerPage implements OnInit {
 
     return stats;
   }
-
 }

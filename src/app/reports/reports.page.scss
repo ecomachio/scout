@@ -1,53 +1,53 @@
 .topCard {
-    ion-card-header {
-        ion-card-title {
-            font-size: 4em;
-            font-weight: bolder;
-        }
-        ion-card-subtitle {
-            font-size: 2em;
-            font-weight: bold;
-        }
+  ion-card-header {
+    ion-card-title {
+      font-size: 4em;
+      font-weight: bolder;
     }
+    ion-card-subtitle {
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
 }
 
 .chart {
-    padding: 1em;
+  padding: 1em;
 }
 
-ion-spinner{
-    margin: 0 auto;
-    width: 100%;
+ion-spinner {
+  margin: 0 auto;
+  width: 100%;
 }
 
 .mediumCard {
-    ion-card-header {
-        ion-card-title {
-            font-size: 3em;
-            font-weight: bold;
-        }
-        ion-card-subtitle {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
+  ion-card-header {
+    ion-card-title {
+      font-size: 3em;
+      font-weight: bold;
     }
+    ion-card-subtitle {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  }
 }
 
 // from menu page
 .moduleContent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .moduleContent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cardImg {
-    height: 30%;
-    width: 10em;
-    padding: 2em;
+  height: 30%;
+  width: 10em;
+  padding: 2em;
 }

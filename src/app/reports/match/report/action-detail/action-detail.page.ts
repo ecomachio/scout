@@ -39,12 +39,16 @@ export class ActionDetailPage implements OnInit {
 
     if (ActionEnum[actionName] == ActionEnum.FINISH) {
       this.listHeader = ["Jogador", "Acertos", "Erros"];
-    } else this.listHeader = ["Jogador", ActionEnum[actionName]];
+    } else {
+      this.listHeader = ["Jogador", ActionEnum[actionName]];
+    }
 
     if (actionName == "GOALKEEPERSAVE") {
       this.title = "Defesas do Goleiro";
       this.listHeader = ["Jogador", "Defesas"];
-    } else this.title = ActionEnum[actionName];
+    } else {
+      this.title = ActionEnum[actionName];
+    }
 
     this.actions = await this.actionService
       .getActionsByMatch(id)
@@ -66,7 +70,7 @@ export class ActionDetailPage implements OnInit {
       .reduce((acc, curr) => {
         const player = curr.player as FrequencyPlayer;
         const action = curr;
-        
+
         player.correctFrequency = player.correctFrequency || 0;
         player.incorrectFrequency = player.incorrectFrequency || 0;
 

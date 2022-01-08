@@ -135,7 +135,6 @@ export class ChoosePlayersPage implements OnInit {
     }
   }
 
-
   hideTeamSelectorStep() {
     this.teamSelectorStep = false;
   }

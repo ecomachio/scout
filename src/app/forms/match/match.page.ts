@@ -30,7 +30,7 @@ export class MatchPage implements OnInit {
   competitionId: string;
   compareWith;
   teams: Array<Team>;
-  refreshed: boolean = true;
+  refreshed = true;
 
   constructor(
     private pickerController: PickerController,

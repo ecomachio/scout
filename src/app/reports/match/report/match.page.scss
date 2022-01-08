@@ -1,132 +1,131 @@
 .title {
-    padding: 1rem;
-    h1 {
-        font-size: 4em;
-        font-weight: bolder;
-    }
-    h2{
-        font-size: 2em;
-        font-weight: bold;    
-    }
+  padding: 1rem;
+  h1 {
+    font-size: 4em;
+    font-weight: bolder;
+  }
+  h2 {
+    font-size: 2em;
+    font-weight: bold;
+  }
 }
 
 .cardWrapper {
-    margin: 2% 5%;
-    overflow: auto;    
+  margin: 2% 5%;
+  overflow: auto;
 }
 
 .moduleContent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cardImg {
-    width: 6em;
-    padding: 1em;
+  width: 6em;
+  padding: 1em;
 }
 
 .noRecords {
-    text-align: center;
-    color: var(--ion-color-step-550, #737373);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 15vh;
+  text-align: center;
+  color: var(--ion-color-step-550, #737373);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15vh;
 }
 
 .matchSummary {
-    h3 {
-        text-align: center;
-    }
+  h3 {
+    text-align: center;
+  }
 }
 
 .stats {
-    ion-list {
-        ion-list-header {
-            ion-label {
-                width: 100%;
-            }
-            ion-label:not(:first-child) {
-                justify-self: right;
-                text-align: right;
-                padding-right: 10px;
-                
-            }
-        }
-        ion-item {
-            ion-label:not(:first-child) {
-                text-align: right;
-            }
-            display: flex;
-            justify-content: stretch;
-        }
+  ion-list {
+    ion-list-header {
+      ion-label {
+        width: 100%;
+      }
+      ion-label:not(:first-child) {
+        justify-self: right;
+        text-align: right;
+        padding-right: 10px;
+      }
     }
+    ion-item {
+      ion-label:not(:first-child) {
+        text-align: right;
+      }
+      display: flex;
+      justify-content: stretch;
+    }
+  }
 }
 
 .scoreList {
-    margin: 15px auto 30px auto;
-    width: 80%;
+  margin: 15px auto 30px auto;
+  width: 80%;
 }
 
 .scoreItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .scoreText {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    .scoreText {
-        width: 100%;
-        display: flex;
-        span {
-            flex: 1;
-        }
-        span:first-of-type {
-            text-align: left;
-            padding-right: 5px;
-        }
-        span:last-of-type {
-            padding-left: 5px;
-            text-align: right;
-        }
+    span {
+      flex: 1;
     }
-    .scoreTextCenter {
-        width: 100%;
-        display: flex;
-        font-size: 2em;
-        margin: 10px 0 30px 0;
-        span {
-            flex: 1;
-        }
-        span:first-of-type {
-            text-align: right;
-            padding-right: 5px;
-        }
-        span:last-of-type {
-            padding-left: 5px;
-            text-align: left;
-        }
+    span:first-of-type {
+      text-align: left;
+      padding-right: 5px;
     }
+    span:last-of-type {
+      padding-left: 5px;
+      text-align: right;
+    }
+  }
+  .scoreTextCenter {
+    width: 100%;
+    display: flex;
+    font-size: 2em;
+    margin: 10px 0 30px 0;
+    span {
+      flex: 1;
+    }
+    span:first-of-type {
+      text-align: right;
+      padding-right: 5px;
+    }
+    span:last-of-type {
+      padding-left: 5px;
+      text-align: left;
+    }
+  }
 }
 
 .cardImg {
-    height: 30%;
-    width: 10em;
-    padding: 3%;
+  height: 30%;
+  width: 10em;
+  padding: 3%;
 }
 
 .otherStats {
-    display: flex;
-    padding: 5px;
-    .wrapper {
-        max-width: 75%;
-    }
+  display: flex;
+  padding: 5px;
+  .wrapper {
+    max-width: 75%;
+  }
 }
 
 ion-card-title {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 .doneButton {
-    position: absolute;
-    right: 2em;
-    bottom: 2em;
+  position: absolute;
+  right: 2em;
+  bottom: 2em;
 }

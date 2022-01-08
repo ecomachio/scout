@@ -8,15 +8,13 @@
 </ion-header>
 
 <ion-content>
-
-
   <ion-grid>
     <ion-row>
       <ion-col>
         <div class="formface">
           <!-- todo -->
           <div class="formfaceContent">
-            <img src="assets/avatar.png" alt="">
+            <img src="assets/avatar.png" alt="" />
             <div class="formfaceText">
               <h1>&nbsp;{{player.name}}&nbsp;</h1>
             </div>
@@ -28,18 +26,29 @@
       <ion-col>
         <ion-card class="mediumCard" color="tertiary">
           <ion-card-header>
-            <ion-spinner *ngIf="totalGoalsScored==undefined" name="crescent" color="primary"></ion-spinner>
-            <ion-card-title *ngIf="totalGoalsScored!==undefined">{{totalGoalsScored}}</ion-card-title>
+            <ion-spinner
+              *ngIf="totalGoalsScored==undefined"
+              name="crescent"
+              color="primary"
+            ></ion-spinner>
+            <ion-card-title *ngIf="totalGoalsScored!==undefined"
+              >{{totalGoalsScored}}</ion-card-title
+            >
             <ion-card-subtitle>Gols</ion-card-subtitle>
           </ion-card-header>
-
         </ion-card>
       </ion-col>
       <ion-col>
         <ion-card class="mediumCard" color="secondary">
           <ion-card-header>
-            <ion-spinner *ngIf="totalMatchesPlayed==undefined" name="crescent" color="primary"></ion-spinner>
-            <ion-card-title *ngIf="totalMatchesPlayed!==undefined">{{totalMatchesPlayed}}</ion-card-title>
+            <ion-spinner
+              *ngIf="totalMatchesPlayed==undefined"
+              name="crescent"
+              color="primary"
+            ></ion-spinner>
+            <ion-card-title *ngIf="totalMatchesPlayed!==undefined"
+              >{{totalMatchesPlayed}}</ion-card-title
+            >
             <ion-card-subtitle>Partidas</ion-card-subtitle>
           </ion-card-header>
         </ion-card>
@@ -47,13 +56,18 @@
       <ion-col>
         <ion-card class="mediumCard" color="tertiary">
           <ion-card-header>
-            <ion-spinner *ngIf="totalGoalsScored==undefined" name="crescent" color="primary"></ion-spinner>
-            <ion-card-title *ngIf="totalGoalsScored!==undefined">{{totalPlayerOfTheMatch}}</ion-card-title>
+            <ion-spinner
+              *ngIf="totalGoalsScored==undefined"
+              name="crescent"
+              color="primary"
+            ></ion-spinner>
+            <ion-card-title *ngIf="totalGoalsScored!==undefined"
+              >{{totalPlayerOfTheMatch}}</ion-card-title
+            >
             <ion-card-subtitle>Destaques</ion-card-subtitle>
           </ion-card-header>
         </ion-card>
       </ion-col>
-
     </ion-row>
     <ion-row>
       <ion-col>
@@ -93,5 +107,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>

@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { ReportsPage } from './reports.page';
-import { ChartsModule } from 'ng2-charts';
+import { ReportsPage } from "./reports.page";
+import { ChartsModule } from "ng2-charts";
 
 const routes: Routes = [
   {
-    path: '',
-    component: ReportsPage
-  }
+    path: "",
+    component: ReportsPage,
+  },
 ];
 
 @NgModule({
@@ -21,8 +21,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ChartsModule
+    ChartsModule,
   ],
-  declarations: [ReportsPage]
+  declarations: [ReportsPage],
 })
 export class ReportsPageModule {}

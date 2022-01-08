@@ -18,9 +18,15 @@
       </ion-list-header>
       <ion-item *ngFor="let player of players">
         <ion-label>{{player.name}}</ion-label>
-        <ion-label *ngIf="listHeader.length === 2">{{player.frequency}}</ion-label>
-        <ion-label *ngIf="listHeader.length > 2">{{player.correctFrequency}}</ion-label>
-        <ion-label *ngIf="listHeader.length > 2">{{player.incorrectFrequency}}</ion-label>
+        <ion-label *ngIf="listHeader.length === 2"
+          >{{player.frequency}}</ion-label
+        >
+        <ion-label *ngIf="listHeader.length > 2"
+          >{{player.correctFrequency}}</ion-label
+        >
+        <ion-label *ngIf="listHeader.length > 2"
+          >{{player.incorrectFrequency}}</ion-label
+        >
       </ion-item>
     </ion-list>
   </ion-card>

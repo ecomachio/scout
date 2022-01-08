@@ -9,14 +9,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      Competições
-    </ion-list-header>
+    <ion-list-header> Competições </ion-list-header>
 
     <ion-item-sliding *ngFor="let competition of competitions">
-      <ion-item class="listItem" lines="inset" button [routerLink]="['/competition', competition.id]">
+      <ion-item
+        class="listItem"
+        lines="inset"
+        button
+        [routerLink]="['/competition', competition.id]"
+      >
         <ion-avatar class="listItemAvatar" slot="start">
-          <img src="assets/premio.png">
+          <img src="assets/premio.png" />
         </ion-avatar>
         <ion-label>
           <h2>{{competition.name}}</h2>
@@ -27,7 +30,11 @@
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option (click)="remove(competition)" slot="icon-only" color="danger">
+        <ion-item-option
+          (click)="remove(competition)"
+          slot="icon-only"
+          color="danger"
+        >
           <ion-icon class="deleteIcon" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -38,5 +45,4 @@
       <ion-icon name="add" [routerLink]="['/competition']"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

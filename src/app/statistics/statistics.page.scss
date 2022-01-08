@@ -1,18 +1,18 @@
-.statisticsCardContent{
-    text-align: center
+.statisticsCardContent {
+  text-align: center;
 }
 
-.statisticsCardContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;    
-    height: 100%;
+.statisticsCardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-.statisticsCardContainer ion-card{
-    margin: 5px;
+.statisticsCardContainer ion-card {
+  margin: 5px;
 }
 
-.statisticsButton{
-    font-size: 17em;
+.statisticsButton {
+  font-size: 17em;
 }

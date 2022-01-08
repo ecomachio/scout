@@ -7,8 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <ion-slides #beforeGameSlider (ionSlideWillChange)="ionSlideWillChange($event)" [options]="slideOpts">
+<ion-content>
+  <ion-slides
+    #beforeGameSlider
+    (ionSlideWillChange)="ionSlideWillChange($event)"
+    [options]="slideOpts"
+  >
     <ion-slide>
       <div class="slideWrapper">
         <ion-text color="dark">
@@ -17,15 +21,22 @@
         <div class="noRecordsWrapper" *ngIf="competitions.length === 0">
           <ion-text color="dark">
             <div class="noRecords">
-              <ion-img class="cardImg" src="assets/049-yellow-card.png"></ion-img>
+              <ion-img
+                class="cardImg"
+                src="assets/049-yellow-card.png"
+              ></ion-img>
               <h2>Nenhuma competição encontrada :(</h2>
             </div>
           </ion-text>
         </div>
         <ion-list *ngIf="competitions.length !== 0" class="cardWrapper">
-          <ion-card button="true" (click)="nextSlide(competition)" *ngFor="let competition of competitions">
+          <ion-card
+            button="true"
+            (click)="nextSlide(competition)"
+            *ngFor="let competition of competitions"
+          >
             <ion-card-content class="moduleContent">
-              <img class="cardImg" src="assets/premio.png">
+              <img class="cardImg" src="assets/premio.png" />
               <h1>{{competition.name}}</h1>
             </ion-card-content>
           </ion-card>
@@ -40,13 +51,20 @@
         <div class="noRecordsWrapper" *ngIf="categories.length === 0">
           <ion-text color="dark">
             <div class="noRecords">
-              <ion-img class="cardImg" src="assets/049-yellow-card.png"></ion-img>
+              <ion-img
+                class="cardImg"
+                src="assets/049-yellow-card.png"
+              ></ion-img>
               <h2>Nenhuma categoria encontrada :(</h2>
             </div>
           </ion-text>
         </div>
         <ion-list *ngIf="categories.length !== 0" class="cardWrapper">
-          <ion-card button="true" (click)="nextSlide(category)" *ngFor="let category of categories">
+          <ion-card
+            button="true"
+            (click)="nextSlide(category)"
+            *ngFor="let category of categories"
+          >
             <ion-card-content class="moduleContent">
               <ion-img class="cardImg" src="assets/boneca.png"></ion-img>
               <h1>{{category.name}}</h1>
@@ -63,13 +81,20 @@
         <div class="noRecordsWrapper" *ngIf="matches.length === 0">
           <ion-text color="dark">
             <div class="noRecords">
-              <ion-img class="cardImg" src="assets/049-yellow-card.png"></ion-img>
+              <ion-img
+                class="cardImg"
+                src="assets/049-yellow-card.png"
+              ></ion-img>
               <h2>Nenhuma partida encontrada :(</h2>
             </div>
           </ion-text>
         </div>
         <ion-list *ngIf="matches.length !== 0" class="cardWrapper">
-          <ion-card button="true" (click)="nextSlide(match)" *ngFor="let match of matches">
+          <ion-card
+            button="true"
+            (click)="nextSlide(match)"
+            *ngFor="let match of matches"
+          >
             <ion-card-content class="moduleContent">
               <ion-img class="cardImg" src="assets/pague.png"></ion-img>
               <h1>{{match.description}}</h1>

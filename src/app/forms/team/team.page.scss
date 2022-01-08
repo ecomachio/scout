@@ -1,98 +1,98 @@
 form {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 
-    & > input {
-      flex: 1 1 10ch;
-      margin: .5rem;
+  & > input {
+    flex: 1 1 10ch;
+    margin: 0.5rem;
 
-      &[type="email"] {
-        flex: 3 1 30ch;
-      }
+    &[type="email"] {
+      flex: 3 1 30ch;
     }
   }
+}
 
 ion-content {
-    display: flex;
+  display: flex;
 }
 
-ion-grid, ion-row {
-    height: 90%;
+ion-grid,
+ion-row {
+  height: 90%;
 }
 
-.fields{
-    width:100%;
-    ion-toggle {
-        margin-top: 20px;
-        margin-left: -10px;
-    }
+.fields {
+  width: 100%;
+  ion-toggle {
+    margin-top: 20px;
+    margin-left: -10px;
+  }
 }
 
 .scoreWrapper {
-    display: block;
-    text-align: center;
-    height: 7em;
-    margin-top: 10px;
-    padding: 0 40px;
+  display: block;
+  text-align: center;
+  height: 7em;
+  margin-top: 10px;
+  padding: 0 40px;
 }
 
-.scoreWrapper { 
-     ion-item {
-        margin-top: 10px;
-    }   
+.scoreWrapper {
+  ion-item {
+    margin-top: 10px;
+  }
 }
 
 .score {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  text-align: center;
 }
 
 .homeTeam {
-    position: absolute;
-    left: 10%;    
-    width: 10em;
+  position: absolute;
+  left: 10%;
+  width: 10em;
 }
 
 .awayTeam {
-    position: absolute;
-    right: 10%;    
-    width: 10em;
+  position: absolute;
+  right: 10%;
+  width: 10em;
 }
 
-.fixedScore{
-    position: absolute;
+.fixedScore {
+  position: absolute;
 }
 
 .formface {
-    position: fixed;
-    top:0;
-    left:0;
-    width:40%;
-    height: 140%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 140%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .formfaceContent {
+    width: 100%;
+    padding-bottom: calc(55% * 1024 / 768);
+    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
 
-    .formfaceContent {        
-        width:100%;        
-        padding-bottom: calc(55%*1024/768);   
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-
-        img {
-            width: 50%;        ; 
-        }
-
-        img, .formfaceText, .formfaceButton {
-            margin: 7%;
-        }
+    img {
+      width: 50%;
     }
 
-    
+    img,
+    .formfaceText,
+    .formfaceButton {
+      margin: 7%;
+    }
+  }
 }

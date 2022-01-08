@@ -1,44 +1,43 @@
-import Timer from 'easytimer.js';
-
+import Timer from "easytimer.js";
 
 export class Game {
+  public c: number;
+  public hasStarted: boolean;
+  public hasFinished: boolean;
+  public timer: Timer;
+  public isPaused: boolean;
 
-    public c: number;
-    public hasStarted: boolean;
-    public hasFinished: boolean;
-    public timer: Timer;
-    public isPaused: boolean;
+  constructor() {}
 
-    constructor() { }
+  startGame() {
+    this.hasStarted = true;
+    this.timer = new Timer();
+    this.timer.start({ precision: "secondTenths" });
+  }
 
-    startGame() {
-        this.hasStarted = true;
-        this.timer = new Timer();
-        this.timer.start({ precision: 'secondTenths' });
-    }
+  stopGame() {
+    this.hasFinished = true;
+  }
 
-    stopGame() {
-        this.hasFinished = true;
-    }
+  currentTime(): string {
+    return this.timer
+      .getTimeValues()
+      .toString(["hours", "minutes", "seconds", "secondTenths"]);
+  }
 
-    currentTime(): string {
-        return this.timer.getTimeValues().toString(['hours', 'minutes', 'seconds', 'secondTenths']);
-    }
+  totalSeconds() {
+    return this.timer.getTotalTimeValues().seconds;
+  }
 
-    totalSeconds() {
-        return this.timer.getTotalTimeValues().seconds;
-    }
+  totalSecondTenths() {
+    return this.timer.getTotalTimeValues().secondTenths;
+  }
 
-    totalSecondTenths() {
-        return this.timer.getTotalTimeValues().secondTenths;
-    }
+  pause() {
+    this.isPaused = true;
+  }
 
-    pause() {
-        this.isPaused = true;
-    }
-
-    unpause() {
-        this.isPaused = false;
-    }
-
+  unpause() {
+    this.isPaused = false;
+  }
 }

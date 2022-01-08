@@ -9,14 +9,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      Categorias
-    </ion-list-header>
+    <ion-list-header> Categorias </ion-list-header>
 
     <ion-item-sliding *ngFor="let category of categories">
-      <ion-item class="listItem" lines="inset" button [routerLink]="['/category', category.id]">
+      <ion-item
+        class="listItem"
+        lines="inset"
+        button
+        [routerLink]="['/category', category.id]"
+      >
         <ion-avatar class="listItemAvatar" slot="start">
-          <img src="assets/boneca.png">
+          <img src="assets/boneca.png" />
         </ion-avatar>
         <ion-label>
           <h2>{{category.name}}</h2>
@@ -26,7 +29,11 @@
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option (click)="remove(category)" slot="icon-only" color="danger">
+        <ion-item-option
+          (click)="remove(category)"
+          slot="icon-only"
+          color="danger"
+        >
           <ion-icon class="deleteIcon" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -37,5 +44,4 @@
       <ion-icon name="add" [routerLink]="['/category']"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

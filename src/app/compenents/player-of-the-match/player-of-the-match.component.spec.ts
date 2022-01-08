@@ -1,18 +1,17 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PlayerOfTheMatchComponent } from './player-of-the-match.component';
+import { PlayerOfTheMatchComponent } from "./player-of-the-match.component";
 
-describe('PlayerOfTheMatchComponent', () => {
+describe("PlayerOfTheMatchComponent", () => {
   let component: PlayerOfTheMatchComponent;
   let fixture: ComponentFixture<PlayerOfTheMatchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerOfTheMatchComponent ],
+      declarations: [PlayerOfTheMatchComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,7 +20,7 @@ describe('PlayerOfTheMatchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

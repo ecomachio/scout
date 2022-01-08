@@ -9,14 +9,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      Times
-    </ion-list-header>
+    <ion-list-header> Times </ion-list-header>
 
     <ion-item-sliding *ngFor="let team of teams">
-      <ion-item class="listItem" lines="inset" button [routerLink]="['/team', team.id]">
+      <ion-item
+        class="listItem"
+        lines="inset"
+        button
+        [routerLink]="['/team', team.id]"
+      >
         <ion-avatar class="listItemAvatar" slot="start">
-          <img src="assets/034-pennant.png">
+          <img src="assets/034-pennant.png" />
         </ion-avatar>
         <ion-label>
           <h2>{{team.name}}</h2>

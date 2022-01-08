@@ -11,8 +11,8 @@ import { CategoryService } from "src/app/services/category.service";
 })
 export class PlayerPage implements OnInit {
   players: Array<Player>;
-  searchTerm: string = "";
-  
+  searchTerm = "";
+
   constructor(
     private playerService: PlayerService,
     private utilsService: UtilsService

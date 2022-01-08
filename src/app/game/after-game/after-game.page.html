@@ -12,12 +12,14 @@
     <ion-list class="scoreList">
       <ion-item class="scoreItem">
         <h2 class="scoreTextCenter">
-          <span>{{match.homeTeam.name}}</span> x <span>{{match.awayTeam.name}}</span>
+          <span>{{match.homeTeam.name}}</span> x
+          <span>{{match.awayTeam.name}}</span>
         </h2>
       </ion-item>
       <ion-item class="scoreItem">
         <h5 class="scoreText">
-          <span>{{match.score.home}}</span> Gols <span>{{match.score.away}}</span>
+          <span>{{match.score.home}}</span> Gols
+          <span>{{match.score.away}}</span>
         </h5>
       </ion-item>
       <ion-item class="scoreItem">
@@ -36,7 +38,10 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-card class="otherStats ion-no-margin" (click)="onClickPlayerOfTheMatch()">
+          <ion-card
+            class="otherStats ion-no-margin"
+            (click)="onClickPlayerOfTheMatch()"
+          >
             <ion-img class="cardImg" src="assets/campeao.png"></ion-img>
             <div class="wrapper">
               <ion-card-header>
@@ -53,20 +58,19 @@
               <ion-card-header>
                 <ion-card-title>Notas</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                {{match.notes}}
-              </ion-card-content>
+              <ion-card-content> {{match.notes}} </ion-card-content>
             </div>
           </ion-card>
-          <ion-card class="otherStats ion-no-margin" (click)="onClickPassCount()">
+          <ion-card
+            class="otherStats ion-no-margin"
+            (click)="onClickPassCount()"
+          >
             <ion-img class="cardImg" src="assets/022-football.png"></ion-img>
             <div class="wrapper">
               <ion-card-header>
                 <ion-card-title>Total de passes</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                {{match.passCount}}
-              </ion-card-content>
+              <ion-card-content> {{match.passCount}} </ion-card-content>
             </div>
           </ion-card>
         </ion-col>

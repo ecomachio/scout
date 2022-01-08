@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
-import { Match } from '../entity/match';
-import { Player } from '../entity/player';
-import { MatchService } from './match.service';
-import { PlayerService } from './player.service';
-import { QueryDocumentSnapshot, AngularFirestore } from 'angularfire2/firestore';
-import { Action } from '../entity/action';
-import { ActionService } from './action.service';
-import { ActionEnum } from '../enum/action.enum';
-import { Game } from '../entity/game';
+import { Injectable } from "@angular/core";
+import { Match } from "../entity/match";
+import { Player } from "../entity/player";
+import { MatchService } from "./match.service";
+import { PlayerService } from "./player.service";
+import {
+  QueryDocumentSnapshot,
+  AngularFirestore,
+} from "angularfire2/firestore";
+import { Action } from "../entity/action";
+import { ActionService } from "./action.service";
+import { ActionEnum } from "../enum/action.enum";
+import { Game } from "../entity/game";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class GameService {
-
   game: Game;
   match: Match;
   players: Array<Player>;
@@ -22,10 +24,8 @@ export class GameService {
   constructor(
     private matchService: MatchService,
     private playerService: PlayerService,
-    private actionService: ActionService,
-  ) {
-
-  }
+    private actionService: ActionService
+  ) {}
 
   /* todo unsubscribe when game is over */
   async initialize(matchId) {
@@ -34,10 +34,12 @@ export class GameService {
     const id = m.id;
     console.log(this.match, m.id, { id, ...m.data() });
 
-    this.match = { id, ...m.data() as Match } as Match;
+    this.match = { id, ...(m.data() as Match) } as Match;
 
     /* get QueryDocumentSnapshot of players from firebase by category */
-    const ps = await this.playerService.getPlayersByCategory(this.match.category.id);
+    const ps = await this.playerService.getPlayersByCategory(
+      this.match.category.id
+    );
 
     /* maps the QueryDocumentSnapshot array to players */
     this.players = ps.docs.map((p: QueryDocumentSnapshot<Player>) => {
@@ -84,12 +86,11 @@ export class GameService {
   }
 
   save(match: Match) {
-    console.log('gameactions', this.gameActions);
+    console.log("gameactions", this.gameActions);
 
-    this.gameActions.forEach(a => this.actionService.addAction(a));
+    this.gameActions.forEach((a) => this.actionService.addAction(a));
 
     match.isFinished = true;
     this.matchService.updateMatch(match, match.id);
   }
-
 }

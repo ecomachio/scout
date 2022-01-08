@@ -10,8 +10,8 @@ export const environment = {
     projectId: "scout-7faab",
     storageBucket: "scout-7faab.appspot.com",
     messagingSenderId: "229192106388",
-    appId: "1:229192106388:web:6b2ac4e529e950c0090f81"
-  }
+    appId: "1:229192106388:web:6b2ac4e529e950c0090f81",
+  },
 };
 
 /*

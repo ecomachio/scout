@@ -9,14 +9,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      Jogadores
-    </ion-list-header>
+    <ion-list-header> Jogadores </ion-list-header>
 
     <ion-item-sliding *ngFor="let player of players">
-      <ion-item class="listItem" lines="inset" button [routerLink]="['/player', player.id]">
+      <ion-item
+        class="listItem"
+        lines="inset"
+        button
+        [routerLink]="['/player', player.id]"
+      >
         <ion-avatar slot="start">
-          <img src="assets/avatar.png">
+          <img src="assets/avatar.png" />
         </ion-avatar>
         <ion-label>
           <h2>{{player.name}}</h2>
@@ -27,7 +30,11 @@
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option (click)="remove(player)" slot="icon-only" color="danger">
+        <ion-item-option
+          (click)="remove(player)"
+          slot="icon-only"
+          color="danger"
+        >
           <ion-icon class="deleteIcon" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -38,5 +45,4 @@
       <ion-icon name="add" [routerLink]="['/player']"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

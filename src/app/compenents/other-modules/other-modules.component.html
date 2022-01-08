@@ -10,7 +10,12 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card class="module" button="true" color="secondary" (click)="choosePlayers(actionEnum.GOAL)">
+        <ion-card
+          class="module"
+          button="true"
+          color="secondary"
+          (click)="choosePlayers(actionEnum.GOAL)"
+        >
           <ion-card-header>
             <ion-card-subtitle>Gol</ion-card-subtitle>
           </ion-card-header>
@@ -22,29 +27,50 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-card class="module" button="true" color="danger" (click)="choosePlayers(actionEnum.REDCARD)">
+        <ion-card
+          class="module"
+          button="true"
+          color="danger"
+          (click)="choosePlayers(actionEnum.REDCARD)"
+        >
           <ion-card-header>
             <ion-card-subtitle>Cartão vermelho</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="moduleContent">
-            <ion-img class="cardImg" src="assets/011-amonestation-1.png"></ion-img>
+            <ion-img
+              class="cardImg"
+              src="assets/011-amonestation-1.png"
+            ></ion-img>
           </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col>
-        <ion-card class="module" button="true" color="warning" (click)="choosePlayers(actionEnum.YELLOWCARD)">
+        <ion-card
+          class="module"
+          button="true"
+          color="warning"
+          (click)="choosePlayers(actionEnum.YELLOWCARD)"
+        >
           <ion-card-header>
             <ion-card-subtitle>Cartão amarelo</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="moduleContent">
-            <ion-img class="cardImg" src="assets/011-amonestation-1.png"></ion-img>
+            <ion-img
+              class="cardImg"
+              src="assets/011-amonestation-1.png"
+            ></ion-img>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-card class="module" button="true" color="success" (click)="choosePlayers(actionEnum.PLAYEROFTHEMATCH)">
+        <ion-card
+          class="module"
+          button="true"
+          color="success"
+          (click)="choosePlayers(actionEnum.PLAYEROFTHEMATCH)"
+        >
           <ion-card-header>
             <ion-card-subtitle>Destaque</ion-card-subtitle>
           </ion-card-header>
@@ -54,7 +80,12 @@
         </ion-card>
       </ion-col>
       <ion-col>
-        <ion-card class="module" button="true" color="primary" (click)="choosePlayers(actionEnum.NOTES)">
+        <ion-card
+          class="module"
+          button="true"
+          color="primary"
+          (click)="choosePlayers(actionEnum.NOTES)"
+        >
           <ion-card-header>
             <ion-card-subtitle>Notas</ion-card-subtitle>
           </ion-card-header>
@@ -66,8 +97,13 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" *ngIf="game.hasStarted && !game.hasFinished" color="danger" size="large"
-          (click)="stopGame()">
+        <ion-button
+          expand="block"
+          *ngIf="game.hasStarted && !game.hasFinished"
+          color="danger"
+          size="large"
+          (click)="stopGame()"
+        >
           Encerrar Partida
         </ion-button>
       </ion-col>

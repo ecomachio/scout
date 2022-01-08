@@ -10,7 +10,12 @@
 <ion-content>
   <div *ngIf="choosePlayerStep" class="playerCardContainer centerText">
     <h1 *ngIf="players.length === 0">Nenhum jogador encontrado</h1>
-    <ion-card class="playerCard" button="true" *ngFor="let player of players" (click)='onPlayerChoose(player)'>
+    <ion-card
+      class="playerCard"
+      button="true"
+      *ngFor="let player of players"
+      (click)="onPlayerChoose(player)"
+    >
       <ion-card-header>
         <div>
           <ion-card-title>{{player.name}}</ion-card-title>
@@ -35,15 +40,31 @@
     </ion-card>
   </div>
   <div *ngIf="teamSelectorStep" class="statisticsCardContainer">
-    <ion-card button="true" [color]="homeTeam.isMainTeam ? 'success' : 'medium'" (click)="onTeamConfirmed(homeTeam)">
+    <ion-card
+      button="true"
+      [color]="homeTeam.isMainTeam ? 'success' : 'medium'"
+      (click)="onTeamConfirmed(homeTeam)"
+    >
       <ion-card-content class="statisticsCardContent">
-        <ion-img *ngIf="homeTeam.isMainTeam" class="mainTeamImg" src="assets/027-football.png"></ion-img>
+        <ion-img
+          *ngIf="homeTeam.isMainTeam"
+          class="mainTeamImg"
+          src="assets/027-football.png"
+        ></ion-img>
         <h1>{{homeTeam.name}}</h1>
       </ion-card-content>
     </ion-card>
-    <ion-card button="true" [color]="awayTeam.isMainTeam ? 'success' : 'medium'" (click)="onTeamConfirmed(awayTeam)">
+    <ion-card
+      button="true"
+      [color]="awayTeam.isMainTeam ? 'success' : 'medium'"
+      (click)="onTeamConfirmed(awayTeam)"
+    >
       <ion-card-content class="statisticsCardContent">
-        <ion-img *ngIf="awayTeam.isMainTeam" class="mainTeamImg" src="assets/027-football.png"></ion-img>
+        <ion-img
+          *ngIf="awayTeam.isMainTeam"
+          class="mainTeamImg"
+          src="assets/027-football.png"
+        ></ion-img>
         <h1>{{awayTeam.name}}</h1>
       </ion-card-content>
     </ion-card>
@@ -51,8 +72,8 @@
   <div *ngIf="noteStep" class="statisticsCardContainer">
     <ion-card>
       <ion-list lines="full">
-        <ion-item>         
-          <ion-textarea [(ngModel)]="notes" rows="15" ></ion-textarea>
+        <ion-item>
+          <ion-textarea [(ngModel)]="notes" rows="15"></ion-textarea>
         </ion-item>
       </ion-list>
     </ion-card>

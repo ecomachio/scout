@@ -14,10 +14,10 @@
 
   <div *ngIf="match" class="matchSummary">
     <ion-list class="scoreList">
-
       <ion-item class="scoreItem">
         <h5 class="scoreText">
-          <span>{{match.score.home}}</span> Gols <span>{{match.score.away}}</span>
+          <span>{{match.score.home}}</span> Gols
+          <span>{{match.score.away}}</span>
         </h5>
       </ion-item>
       <ion-item class="scoreItem">
@@ -53,9 +53,7 @@
               <ion-card-header>
                 <ion-card-title>Notas</ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                {{match.notes}}
-              </ion-card-content>
+              <ion-card-content> {{match.notes}} </ion-card-content>
             </div>
           </ion-card>
         </ion-col>

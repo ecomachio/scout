@@ -9,14 +9,19 @@
 
 <ion-content>
   <div *ngIf="step === 1" class="playerCardContainer centerText">
-    <ion-card class="playerCard" button="true" *ngFor="let player of players" (click)='onPlayerChoose(player)'>
+    <ion-card
+      class="playerCard"
+      button="true"
+      *ngFor="let player of players"
+      (click)="onPlayerChoose(player)"
+    >
       <ion-card-header>
         <div>
-          <ion-card-title>{{player.name}}</ion-card-title>
+          <ion-card-title>{{ player.name }}</ion-card-title>
         </div>
       </ion-card-header>
       <ion-card-content class="playerNumber centerText">
-        {{player.shirtNumber}}
+        {{ player.shirtNumber }}
       </ion-card-content>
     </ion-card>
   </div>
@@ -36,8 +41,14 @@
   </div>
   <div *ngIf="step === 3" class="statisticsCardContainer">
     <ion-card>
-      <ion-input [(ngModel)]="passCount" inputmode="number" type="number" min="0"
-        inputmode="numeric" pattern="[0-9]*"></ion-input>
+      <ion-input
+        [(ngModel)]="passCount"
+        inputmode="number"
+        type="number"
+        min="0"
+        inputmode="numeric"
+        pattern="[0-9]*"
+      ></ion-input>
     </ion-card>
     <ion-card button="true" color="primary" (click)="onPassCountConfirmed()">
       <ion-card-content class="statisticsCardContent">

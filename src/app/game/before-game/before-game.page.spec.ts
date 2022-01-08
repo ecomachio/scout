@@ -1,18 +1,17 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BeforeGamePage } from './before-game.page';
+import { BeforeGamePage } from "./before-game.page";
 
-describe('BeforeGamePage', () => {
+describe("BeforeGamePage", () => {
   let component: BeforeGamePage;
   let fixture: ComponentFixture<BeforeGamePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BeforeGamePage ],
+      declarations: [BeforeGamePage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,7 +20,7 @@ describe('BeforeGamePage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

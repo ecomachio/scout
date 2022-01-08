@@ -18,9 +18,13 @@
       </ion-text>
     </div>
     <ion-list *ngIf="competitions.length !== 0" class="cardWrapper">
-      <ion-card button="true" [routerLink]="['/report/competition/report', competition.id]"  *ngFor="let competition of competitions">
+      <ion-card
+        button="true"
+        [routerLink]="['/report/competition/report', competition.id]"
+        *ngFor="let competition of competitions"
+      >
         <ion-card-content class="moduleContent">
-          <img class="cardImg" src="assets/premio.png">
+          <img class="cardImg" src="assets/premio.png" />
           <h1>{{competition.name}}</h1>
         </ion-card-content>
       </ion-card>
