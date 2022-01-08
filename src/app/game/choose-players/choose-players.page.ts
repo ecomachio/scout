@@ -51,7 +51,6 @@ export class ChoosePlayersPage implements OnInit {
     this.homeTeam = this.gameService.getMatch().homeTeam;
     this.awayTeam = this.gameService.getMatch().awayTeam;
     console.log(this.homeTeam);
-    console.log(this.awayTeam);
 
     switch (this.selectedAction.description) {
       case ActionEnum.GOALKEEPERSAVE:
