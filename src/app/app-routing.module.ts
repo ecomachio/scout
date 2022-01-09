@@ -28,6 +28,21 @@ const routes: Routes = [
       "./game/choose-players/choose-players.module#ChoosePlayersPageModule",
   },
   {
+    path: "choose-teams",
+    loadChildren:
+      "./game/choose-teams/choose-teams.module#ChooseTeamsPageModule",
+  },
+  {
+    path: "choose-teams/:categoryId",
+    loadChildren:
+      "./game/choose-teams/choose-teams.module#ChooseTeamsPageModule",
+  },
+  {
+    path: "confirmation-step",
+    loadChildren:
+      "./game/confirmation-step/confirmation-step.module#ConfirmationStepPageModule",
+  },
+  {
     path: "statistics",
     loadChildren: "./statistics/statistics.module#StatisticsPageModule",
   },
@@ -140,6 +155,20 @@ const routes: Routes = [
   {
     path: "report/player/report/:id",
     loadChildren: "./reports/player/report/player.module#PlayerPageModule",
+  },
+  {
+    path: "choose-teams",
+    loadChildren:
+      "./game/choose-teams/choose-teams.module#ChooseTeamsPageModule",
+  },
+  {
+    path: "choose-teams",
+    loadChildren: "./choose-teams/choose-teams.module#ChooseTeamsPageModule",
+  },
+  {
+    path: "confirmation-step",
+    loadChildren:
+      "./game/confirmation-step/confirmation-step.module#ConfirmationStepPageModule",
   },
 ];
 

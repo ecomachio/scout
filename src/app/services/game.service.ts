@@ -11,6 +11,7 @@ import { Action } from "../entity/action";
 import { ActionService } from "./action.service";
 import { ActionEnum } from "../enum/action.enum";
 import { Game } from "../entity/game";
+import { Category } from "../entity/category";
 
 @Injectable({
   providedIn: "root",
@@ -20,6 +21,8 @@ export class GameService {
   match: Match;
   players: Array<Player>;
   gameActions: Array<Action> = new Array();
+  action: Partial<Action>;
+  category: Category;
 
   constructor(
     private matchService: MatchService,
@@ -46,6 +49,8 @@ export class GameService {
       const pId = p.id;
       return { id: pId, ...p.data() } as Player;
     });
+
+    this.category = this.match.category;
     this.gameActions = [];
     this.game = new Game();
     return this.game;
@@ -77,12 +82,37 @@ export class GameService {
     this.gameActions.push(action);
   }
 
+  saveAction() {
+    const fullAction = new Action(this.action.description);
+    fullAction.player = this.action.player;
+    fullAction.match = this.match;
+    fullAction.steps = this.action.steps;
+    fullAction.matchTime = this.game.currentTime();
+    fullAction.decision = this.action.decision;
+    fullAction.id = this.action.id;
+
+    this.gameActions.push(fullAction);
+    console.log("gameactions", this.gameActions);
+  }
+
+  setAction(action: Partial<Action>) {
+    if (!this.action) {
+      this.action = new Action();
+    }
+
+    this.action = action;
+  }
+
   updatePlayerOfTheMatch(action: Action) {
     this.gameActions.forEach((element, index) => {
       if (element.description === ActionEnum.PLAYEROFTHEMATCH) {
         this.gameActions[index] = action;
       }
     });
+  }
+
+  getGameRoute() {
+    return `/game/${this.match.id}`;
   }
 
   save(match: Match) {

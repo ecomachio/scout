@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>confirmationStep</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="statisticsCardContainer">
+    <h1>{{selectedPlayer.name}}</h1>
+    <ion-card button="true" color="success" (click)="done(true)">
+      <ion-card-content class="statisticsCardContent">
+        <ion-icon class="statisticsButton" name="checkmark"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+    <ion-card button="true" color="danger" (click)="done(false)">
+      <ion-card-content class="statisticsCardContent">
+        <ion-icon class="statisticsButton" name="close"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

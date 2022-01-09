@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{selectedAction.description}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="statisticsCardContainer">
+    <ion-card
+      button="true"
+      [color]="homeTeam.isMainTeam ? 'success' : 'medium'"
+      (click)="done(homeTeam)"
+    >
+      <ion-card-content class="statisticsCardContent">
+        <ion-img
+          *ngIf="homeTeam.isMainTeam"
+          class="mainTeamImg"
+          src="assets/027-football.png"
+        ></ion-img>
+        <h1>{{homeTeam.name}}</h1>
+      </ion-card-content>
+    </ion-card>
+    <ion-card
+      button="true"
+      [color]="awayTeam.isMainTeam ? 'success' : 'medium'"
+      (click)="done(awayTeam)"
+    >
+      <ion-card-content class="statisticsCardContent">
+        <ion-img
+          *ngIf="awayTeam.isMainTeam"
+          class="mainTeamImg"
+          src="assets/027-football.png"
+        ></ion-img>
+        <h1>{{awayTeam.name}}</h1>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

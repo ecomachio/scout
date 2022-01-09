@@ -5,6 +5,9 @@ import { Router } from "@angular/router";
 import { ModalController } from "@ionic/angular";
 import { fromEvent, Subscription } from "rxjs";
 import { Game } from "src/app/entity/game";
+import { ACTION_STEP_CONFIG, Action } from "src/app/entity/action";
+import { GameService } from "src/app/services/game.service";
+import { StepsService } from "src/app/services/steps.service";
 
 @Component({
   selector: "app-other-modules",
@@ -24,15 +27,26 @@ export class OtherModulesComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private router: Router
+    private router: Router,
+    private gameService: GameService,
+    private stepsService: StepsService
   ) {}
 
   ngOnInit() {}
 
-  choosePlayers(action) {
-    this.router.navigate([`choose-players/${this.match.category.id}`], {
-      queryParams: { action, step: 1 },
-    });
+  choosePlayers(actionDescription) {
+    this.stepsService.initialize(ACTION_STEP_CONFIG[actionDescription].steps);
+
+    const action = new Action(actionDescription);
+    action.matchTime = this.gameService.getGameTime();
+
+    this.gameService.setAction(action);
+
+    const route = this.stepsService
+      .getCurrentStep()
+      .route(this.gameService.category.id);
+
+    this.router.navigate([route]);
     this.modalController.dismiss();
   }
 

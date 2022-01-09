@@ -9,6 +9,7 @@ import { ActionEnum } from "src/app/enum/action.enum";
 import { PositionEnum } from "src/app/enum/position.enum";
 import { Team } from "src/app/entity/team";
 import { ActivatedRoute } from "@angular/router";
+import { StepsService } from "src/app/services/steps.service";
 
 @Component({
   selector: "app-choose-players",
@@ -33,7 +34,7 @@ export class ChoosePlayersPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
-    private actionService: ActionService,
+    private stepsService: StepsService,
     private location: Location
   ) {}
 
@@ -72,11 +73,11 @@ export class ChoosePlayersPage implements OnInit {
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
-    if (this.steps === 2) {
-      this.showConfirmationStep();
-    } else {
-      this.done(true);
-    }
+    this.gameService.setAction({
+      ...this.gameService.action,
+      player: this.selectedPlayer,
+    });
+    this.stepsService.moveToNextStep();
   }
 
   onConfirmed(decision: boolean) {

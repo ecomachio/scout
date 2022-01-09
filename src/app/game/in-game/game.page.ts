@@ -7,7 +7,7 @@ import { Match } from "src/app/entity/match";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 import { GameService } from "src/app/services/game.service";
-import { ActionEnum } from "src/app/enum/action.enum";
+import { ActionEnum, STEP } from "src/app/enum/action.enum";
 import {
   AlertController,
   IonBackButtonDelegate,
@@ -16,6 +16,8 @@ import {
 } from "@ionic/angular";
 import { OtherModulesComponent } from "src/app/compenents/other-modules/other-modules.component";
 import { UtilsService } from "src/app/services/utils.service";
+import { StepsService } from "src/app/services/steps.service";
+import { Action, ACTION_STEP_CONFIG } from "src/app/entity/action";
 
 @Component({
   selector: "app-game",
@@ -51,6 +53,7 @@ export class GamePage implements OnInit, OnDestroy {
     private modalController: ModalController,
     private utilsService: UtilsService,
     private alertController: AlertController,
+    private stepsService: StepsService,
     private navCtrl: NavController
   ) {}
 
@@ -154,33 +157,38 @@ export class GamePage implements OnInit, OnDestroy {
     }
   }
 
-  choosePlayers(action) {
-    let step;
+  choosePlayers(actionDescription) {
     this.validateAction();
 
-    switch (action) {
-      case ActionEnum.TACKLE:
-        step = 1;
-        this.setBallPossession("home");
-        break;
-      case ActionEnum.PASS:
-        step = 1;
-        this.setBallPossession("away");
-        break;
-      case ActionEnum.FOUL:
-        step = 1;
-        break;
-      case ActionEnum.GOALKEEPERSAVE:
-        step = 1;
-        break;
-      default:
-        step = 2;
-        break;
-    }
+    this.stepsService.initialize(ACTION_STEP_CONFIG[actionDescription].steps);
+    const action = new Action(actionDescription);
+    action.matchTime = this.gameService.getGameTime();
+    this.gameService.setAction(action);
 
-    this.router.navigate([`choose-players/${this.match.category.id}`], {
-      queryParams: { action, step },
-    });
+    const route = this.stepsService
+      .getCurrentStep()
+      .route(this.gameService.category.id);
+    this.router.navigate([route]);
+
+    // switch (action) {
+    //   case ActionEnum.TACKLE:
+    //     step = 1;
+    //     this.setBallPossession("home");
+    //     break;
+    //   case ActionEnum.PASS:
+    //     step = 1;
+    //     this.setBallPossession("away");
+    //     break;
+    //   case ActionEnum.FOUL:
+    //     step = 1;
+    //     break;
+    //   case ActionEnum.GOALKEEPERSAVE:
+    //     step = 1;
+    //     break;
+    //   default:
+    //     step = 2;
+    //     break;
+    // }
   }
 
   async otherModules() {
