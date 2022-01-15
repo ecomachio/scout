@@ -73,10 +73,12 @@ export class ChoosePlayersPage implements OnInit {
 
   onPlayerChoose(e: Player) {
     this.selectedPlayer = this.players.find((p: Player) => p.id === e.id);
+
     this.gameService.setAction({
       ...this.gameService.action,
       player: this.selectedPlayer,
     });
+
     this.stepsService.moveToNextStep();
   }
 

@@ -163,7 +163,8 @@ const routes: Routes = [
   },
   {
     path: "choose-teams",
-    loadChildren: "./choose-teams/choose-teams.module#ChooseTeamsPageModule",
+    loadChildren:
+      "./game/choose-teams/choose-teams.module#ChooseTeamsPageModule",
   },
   {
     path: "confirmation-step",

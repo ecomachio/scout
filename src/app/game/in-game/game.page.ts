@@ -169,26 +169,6 @@ export class GamePage implements OnInit, OnDestroy {
       .getCurrentStep()
       .route(this.gameService.category.id);
     this.router.navigate([route]);
-
-    // switch (action) {
-    //   case ActionEnum.TACKLE:
-    //     step = 1;
-    //     this.setBallPossession("home");
-    //     break;
-    //   case ActionEnum.PASS:
-    //     step = 1;
-    //     this.setBallPossession("away");
-    //     break;
-    //   case ActionEnum.FOUL:
-    //     step = 1;
-    //     break;
-    //   case ActionEnum.GOALKEEPERSAVE:
-    //     step = 1;
-    //     break;
-    //   default:
-    //     step = 2;
-    //     break;
-    // }
   }
 
   async otherModules() {

@@ -43,6 +43,16 @@ export const ACTION_STEP_CONFIG: ActionStepConfig = {
       },
       {
         id: 3,
+        action: ActionEnum.FINISH,
+        route: null,
+        nextStep: 4,
+        isHidden: true,
+        metadata: {
+          decision: true,
+        },
+      },
+      {
+        id: 4,
         action: ActionEnum.ASSIST,
         route: (categoryId) => `choose-players/${categoryId}`,
         nextStep: null,

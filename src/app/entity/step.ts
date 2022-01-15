@@ -6,4 +6,8 @@ export class Step {
   route: (arg: string) => string;
   nextStep: number | null;
   isOptional?: boolean;
+  isHidden?: boolean;
+  metadata?: {
+    decision?: boolean;
+  };
 }
