@@ -82,7 +82,7 @@ export class GameService {
     this.gameActions.push(action);
   }
 
-  saveAction() {
+  fillActionInfo() {
     const fullAction = new Action(this.action.description);
     fullAction.player = this.action.player;
     fullAction.match = this.match;
@@ -90,8 +90,18 @@ export class GameService {
     fullAction.matchTime = this.game.currentTime();
     fullAction.decision = this.action.decision;
     fullAction.id = this.action.id;
+    return fullAction;
+  }
 
+  saveAction() {
+    const fullAction = this.fillActionInfo();
     this.gameActions.push(fullAction);
+
+    console.log("gameactions", this.gameActions);
+  }
+
+  saveActions(actions: Action[]) {
+    this.gameActions.push(...actions);
     console.log("gameactions", this.gameActions);
   }
 

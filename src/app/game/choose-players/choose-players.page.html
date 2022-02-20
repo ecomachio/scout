@@ -25,6 +25,19 @@
         {{player.shirtNumber}}
       </ion-card-content>
     </ion-card>
+    <ion-card
+      class="playerCard"
+      button="true"
+      *ngIf="isOptional"
+      (click)="onCancel()"
+    >
+      <ion-card-header>
+        <div>
+          <ion-card-title>Cancelar</ion-card-title>
+        </div>
+      </ion-card-header>
+      <ion-card-content class="playerNumber centerText"> X </ion-card-content>
+    </ion-card>
   </div>
   <div *ngIf="noteStep" class="statisticsCardContainer">
     <ion-card>

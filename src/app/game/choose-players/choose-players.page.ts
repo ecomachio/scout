@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Player } from "src/app/entity/player";
 import { Match } from "src/app/entity/match";
 import { GameService } from "src/app/services/game.service";
@@ -8,8 +8,9 @@ import { ActionService } from "src/app/services/action.service";
 import { ActionEnum } from "src/app/enum/action.enum";
 import { PositionEnum } from "src/app/enum/position.enum";
 import { Team } from "src/app/entity/team";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { StepsService } from "src/app/services/steps.service";
+import { IonBackButtonDelegate } from "@ionic/angular";
 
 @Component({
   selector: "app-choose-players",
@@ -30,17 +31,32 @@ export class ChoosePlayersPage implements OnInit {
   match: Match;
   noteStep: boolean;
   notes: string;
+  isOptional: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
     private stepsService: StepsService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
-  async ngOnInit() {
-    const categoryId = this.route.snapshot.params.categoryId;
+  @ViewChild(IonBackButtonDelegate, { static: false })
+  backButton: IonBackButtonDelegate;
 
+  ionViewDidEnter() {
+    console.log("ionViewDidEnter");
+    this.setUIBackButtonAction();
+  }
+
+  setUIBackButtonAction() {
+    this.backButton.onClick = () => {
+      this.stepsService.clearSteps();
+      this.router.navigate([this.gameService.getGameRoute()]);
+    };
+  }
+
+  async ngOnInit() {
     const qpAction = this.route.snapshot.queryParamMap.get("action");
     this.steps = Number(this.route.snapshot.queryParamMap.get("step"));
 
@@ -51,24 +67,12 @@ export class ChoosePlayersPage implements OnInit {
     this.match = this.gameService.getMatch();
     this.homeTeam = this.gameService.getMatch().homeTeam;
     this.awayTeam = this.gameService.getMatch().awayTeam;
-    console.log(this.homeTeam);
 
-    switch (this.selectedAction.description) {
-      case ActionEnum.GOALKEEPERSAVE:
-        this.players = this.players.filter(
-          (p) => p.position === PositionEnum.GK
-        );
-        break;
-      case ActionEnum.GOAL:
-        this.showTeamSelectorStep();
-        break;
-      case ActionEnum.FOUL:
-        this.showTeamSelectorStep();
-        break;
-      case ActionEnum.NOTES:
-        this.showNoteStep();
-        break;
-    }
+    this.stepsService
+      .getCurrentStepSubscription()
+      .subscribe(
+        (params) => (this.isOptional = params ? params.isOptional : false)
+      );
   }
 
   onPlayerChoose(e: Player) {
